@@ -121,6 +121,9 @@ const Home = () => {
           </form>
         </div>
       </div>
+      {/* feed */}
+      <div className="min-h-[50vh]"></div>
+      
     </div>
   );
 };
