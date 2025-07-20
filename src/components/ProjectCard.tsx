@@ -14,8 +14,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   tag,
 }) => {
   return (
-    <div className="w-fit rounded-lg overflow-hidden bg-primary">
-      <img src={projectImage} alt="" className="h-80 object-contain" />
+    <div className="w-fit rounded-lg overflow-hidden bg-primary border border-neutral-800">
+      <img src={projectImage} alt="" className="h-80 w-full object-contain" />
       <div className="w-[90%] mx-auto my-4 flex justify-between items-center gap-5">
         <div>
           <h2 className="text-lg font-semibold">{title}</h2>
