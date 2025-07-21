@@ -1,4 +1,4 @@
-import { Check, Copy, Newspaper } from "lucide-react";
+import { Check, CodeXml, Copy, LayoutDashboard, Newspaper } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { myWorkEmail } from "../constants/constants.ts";
@@ -7,6 +7,7 @@ import CardContainer from "../components/CardContainer.tsx";
 import Tooltip from "../components/Tooltip.tsx";
 import { myProjects } from "../data/ProjectsData.tsx";
 import { myArticles } from "../data/ArticlesData.tsx";
+import QuickAction from "../components/QuickAction.tsx";
 
 const Home = () => {
   const [copied, setCopied] = useState<boolean>(false);
@@ -26,10 +27,10 @@ const Home = () => {
       {/* introduction */}
       <div>
         <div>
-          <h2 className="text-5xl font-semibold leading-16 tracking-wide">
+          <h2 className="text-5xl font-semibold leading-16 tracking-wide text-shadow-lg/10">
             Hey, I'm Fahad,
           </h2>
-          <h2 className="text-5xl font-semibold leading-14 tracking-wide">
+          <h2 className="text-5xl font-semibold leading-14 tracking-wide text-shadow-lg/10">
             A Full-Stack <span className="text-neutral-500">Developer.</span>{" "}
           </h2>
           <div className="my-4 text-neutral-400/70 text-md ">
@@ -109,21 +110,47 @@ const Home = () => {
         <div className="bg-primary flex justify-between items-center px-5 py-6">
           <div>
             <h2 className="font-semibold">Join 500+ Readers</h2>
-            <p className="text-neutral-500 text-sm">Read about authentic insights and articles regarding tech.</p>
+            <p className="text-neutral-500 text-sm">
+              Read about authentic insights and articles regarding tech.
+            </p>
           </div>
           <form className="flex items-center gap-2">
-            <input type="email" name="" id="" 
-            className="border border-neutral-800 outline-none px-3 py-2 rounded-md"
-            placeholder="Your Email"
-            required
+            <input
+              type="email"
+              name=""
+              id=""
+              className="border border-neutral-800 outline-none px-3 py-2 rounded-md"
+              placeholder="Your Email"
+              required
             />
-            <button type="submit" className="px-12 py-2 rounded-md bg-neutral-800 cursor-pointer">Subscribe</button>
+            <button
+              type="submit"
+              className="px-12 py-2 rounded-md bg-neutral-800 cursor-pointer"
+            >
+              Subscribe
+            </button>
           </form>
         </div>
       </div>
-      {/* feed */}
-      <div className="min-h-[50vh]"></div>
-      
+      {/* quick actions */}
+      <div className="grid grid-cols-2 items-center gap-8">
+        <QuickAction
+          Icon={LayoutDashboard}
+          title="Feed"
+          brief="Dive into my quick thoughs"
+          actionText="View Feed"
+          to="#"
+          backgroundStyle="s"
+        />
+        <QuickAction
+          Icon={CodeXml}
+          title="Projects"
+          brief="Explore my latest full-stack builds and experiments"
+          actionText="Browse Projects"
+          to="#"
+          backgroundStyle="m"
+        />
+      </div>
     </div>
   );
 };
