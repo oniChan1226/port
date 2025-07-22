@@ -27,13 +27,13 @@ const Home = () => {
       {/* introduction */}
       <div>
         <div>
-          <h2 className="text-5xl font-semibold leading-16 tracking-wide text-shadow-lg/10">
+          <h2 className="text-4xl lg:text-5xl font-semibold leading-8 lg:leading-16 tracking-wide text-shadow-lg/10">
             Hey, I'm Fahad,
           </h2>
-          <h2 className="text-5xl font-semibold leading-14 tracking-wide text-shadow-lg/10">
+          <h2 className="text-4xl lg:text-5xl font-semibold leading-14 tracking-wide text-shadow-lg/10">
             A Full-Stack <span className="text-neutral-500">Developer.</span>{" "}
           </h2>
-          <div className="my-4 text-neutral-400/70 text-md ">
+          <div className="my-4 text-neutral-400/70 text-md leading-5">
             <h6>
               I enjoy building web applications that look good and scale well —
             </h6>
@@ -64,7 +64,7 @@ const Home = () => {
           </Tooltip>
         </div>
       </div>
-      {/* new drops */}
+      {/* new drops TODO: goto project section */}
       <div>
         <h4 className="text-lg font-semibold">New Drops</h4>
         <CardContainer>
@@ -88,18 +88,18 @@ const Home = () => {
               from my development journey.
             </p>
           </div>
-          <div className="flex items-center gap-2 py-2 mt-2">
+          <div className="flex flex-col lg:flex-row items-center gap-2 py-2 mt-2">
             {myArticles.slice(0, 2).map((article) => (
-              <div className="flex gap-3 items-center cursor-pointer border border-transparent hover:border hover:border-neutral-800 hover:bg-primary py-3 duration-300 rounded-lg pl-2">
-                <div className="bg-neutral-800 p-4 rounded">
+              <div className="flex gap-3 items-center cursor-pointer border border-transparent hover:border hover:border-neutral-800 hover:bg-primary py-1 lg:py-3 duration-300 rounded-lg pl-2">
+                <div className="bg-neutral-800 p-2 lg:p-4 rounded">
                   <Newspaper size={20} />
                 </div>
 
                 <div>
-                  <h2 className="line-clamp-1 font-semibold">
+                  <h2 className="line-clamp-1 text-sm lg:text-md font-semibold">
                     {article.title}
                   </h2>
-                  <p className="line-clamp-1 text-sm text-neutral-500">
+                  <p className="line-clamp-1 text-xs lg:text-sm text-neutral-500">
                     {article.brief}
                   </p>
                 </div>
@@ -107,25 +107,25 @@ const Home = () => {
             ))}
           </div>
         </div>
-        <div className="bg-primary flex justify-between items-center px-5 py-6">
+        <div className="bg-primary flex flex-col lg:flex-row lg:justify-between lg:items-center px-5 py-6 space-y-3 lg:space-y-0">
           <div>
-            <h2 className="font-semibold">Join 500+ Readers</h2>
-            <p className="text-neutral-500 text-sm">
-              Read about authentic insights and articles regarding tech.
+            <h2 className="font-semibold text-sm lg:text-md">Join 500+ Readers</h2>
+            <p className="text-neutral-500 text-xs lg:text-sm">
+              Read about authentic insights.
             </p>
           </div>
-          <form className="flex items-center gap-2">
+          <form className="flex flex-col lg:flex-row items-center gap-2 w-full lg:w-[60%]">
             <input
               type="email"
               name=""
               id=""
-              className="border border-neutral-800 outline-none px-3 py-2 rounded-md"
+              className="border border-neutral-800 outline-none px-3 py-2 rounded-md w-full text-sm lg:text-md"
               placeholder="Your Email"
               required
             />
             <button
               type="submit"
-              className="px-12 py-2 rounded-md bg-neutral-800 cursor-pointer"
+              className="px-12 py-2 rounded-md bg-neutral-800 cursor-pointer w-full text-sm lg:text-md"
             >
               Subscribe
             </button>
@@ -133,7 +133,7 @@ const Home = () => {
         </div>
       </div>
       {/* quick actions */}
-      <div className="grid grid-cols-2 items-center gap-8">
+      <div className="grid lg:grid-cols-2 items-center gap-8">
         <QuickAction
           Icon={LayoutDashboard}
           title="Feed"
@@ -151,6 +151,7 @@ const Home = () => {
           backgroundStyle="m"
         />
       </div>
+      {/* footer */}
     </div>
   );
 };
