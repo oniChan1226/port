@@ -1,8 +1,10 @@
-import React from 'react'
+import PageTitle from "../components/PageTitle"
 
 const Articles = () => {
   return (
-    <div>Articles</div>
+    <div>
+      <PageTitle title="Articles" brief="Documenting what I learn, build, and think about as a dev." />
+    </div>
   )
 }
 

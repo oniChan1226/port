@@ -14,7 +14,7 @@ interface QuickActionProps {
 
 const QuickAction: React.FC<QuickActionProps> = ({ Icon, title, brief, actionText, to, backgroundStyle = "m" }) => {
   return (
-    <div className='relative overflow-hidden border border-neutral-800 p-6 rounded-md bg-primary text-sm'>
+    <div className='h-full w-full relative overflow-hidden border border-neutral-800 p-6 rounded-md bg-primary text-sm'>
 
       {/* Sparkles in background */}
       {backgroundStyle === "m" ? <Meteors number={15} /> : (<div className="absolute inset-0 z-0 pointer-events-none">

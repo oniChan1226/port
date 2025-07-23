@@ -23,7 +23,11 @@ const Sidebar = () => {
       {/* Navigation Links */}
       <nav className="space-y-1 pt-10 font-semibold text-sm">
         {NavlinksData.map((link) => (
-          <NavLink
+          <>
+          {link.group !== "Main" && (
+            <h6 className="pl-4 text-neutral-500 mb-3 font-medium">{link.group}</h6>
+          )}
+          {link.links.map((link) => <NavLink
             key={link.number}
             to={link.href}
             className={({ isActive }) =>
@@ -41,7 +45,8 @@ const Sidebar = () => {
             <div className="flex items-center justify-between border px-2 py-1 text-[0.7rem] border-neutral-600 rounded">
               <p>{link.number}</p>
             </div>
-          </NavLink>
+          </NavLink>)}
+          </>
         ))}
       </nav>
     </div>

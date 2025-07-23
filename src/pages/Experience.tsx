@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { myExperience } from "../data/ExperienceData";
 import QuickAction from "../components/QuickAction";
 import { CodeXml, Layers } from "lucide-react";
+import PageTitle from "../components/PageTitle";
 
 const Experience = () => {
   const [loading, setLoading] = useState(true);
@@ -15,15 +16,11 @@ const Experience = () => {
   return (
     <div className="space-y-10">
       {/* header */}
-      <div>
-        <h2 className="text-3xl sm:text-5xl font-semibold tracking-wide leading-16">
-          Experience
-        </h2>
-        <h6 className="text-md lg:text-lg text-neutral-400/95 leading-5">
-          Summary of my professional work, the technologies I've grown with, and
-          the impact I've creared through code.
-        </h6>
-      </div>
+      <PageTitle
+        title="Experience"
+        brief="Summary of my professional work, the technologies I've grown with, and
+          the impact I've creared through code."
+      />
       {/* content */}
       <article className="space-y-8">
         {loading

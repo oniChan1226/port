@@ -45,12 +45,12 @@ const DashboardLayout = () => {
         <NavigationMobile />
       </div>
       <div className="flex-1 relative bg-neutral-900 lg:ml-64 pt-8 lg:pt-0 overflow-y-auto h-screen scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-neutral-900">
-        <main className="w-[95%] md:w-[90%] max-w-6xl mx-auto my-22">
+        <main className="w-[95%] md:w-[90%] pb-32 lg:pb-0 max-w-5xl mx-auto mt-22 flex flex-col justify-between min-h-[93vh]">
           <Outlet />
+          <footer className="hidden lg:block w-full max-w-6xl mx-auto mt-10 py-6 bg-primary border border-neutral-800 text-sm">
+            <Footer />
+          </footer>
         </main>
-        <footer className="hidden lg:block w-[95%] md:w-[90%] max-w-6xl mx-auto py-6 bg-primary text-sm">
-          <Footer />
-        </footer>
       </div>
     </div>
   );

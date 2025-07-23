@@ -15,10 +15,10 @@ const AppRoutes = () => {
       <Routes>
           <Route path="/" element={<DashboardLayout />}>
               <Route index element={<Home />} />
-              <Route path='/stack' element={<Stack />} />
               <Route path='/experience' element={<Experience />} />
-              <Route path='/about' element={<About />} />
               <Route path='/projects' element={<Projects />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/stack' element={<Stack />} />
               <Route path='/articles' element={<Articles />} />
           </Route>
       </Routes>
