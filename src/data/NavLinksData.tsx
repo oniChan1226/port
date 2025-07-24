@@ -2,6 +2,7 @@ import {
   BriefcaseBusiness,
   CodeXml,
   FolderPen,
+  Layers,
   LayoutDashboard,
   User,
 } from "lucide-react";
@@ -39,6 +40,12 @@ export const NavlinksData = [
         href: "/articles",
         icon: <FolderPen size={18} />,
         number: 5,
+      },
+      {
+        label: "Stack",
+        href: "/stack",
+        icon: <Layers size={18} />,
+        number: 6,
       },
     ],
   },

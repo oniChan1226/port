@@ -1,11 +1,26 @@
 @import "tailwindcss";
 /* @theme {
 } */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* -webkit-box-shadow: 0 0 0 30px transparent inset !important; */
+  -webkit-text-fill-color: white !important; /* optional: keep text color consistent */
+  transition: background-color 5000s ease-in-out 0s; /* chrome autofill workaround */
+}
+
+/* input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+} */
+
+
 @theme inline {
   --animate-meteor-effect: meteor 5s linear infinite;
-  --color-primary: #1C1C1C;
+  --color-primary: #1c1c1c;
 
-  
   @keyframes meteor {
     0% {
       transform: rotate(215deg) translateX(0);

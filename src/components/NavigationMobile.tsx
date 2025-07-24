@@ -5,9 +5,10 @@ const NavigationMobile = () => {
   return (
     <div className="flex gap-x-2 w-[95%] mx-auto overflow-y-auto scrollbar-none">
       {NavlinksData.map((navlink) => (
+        navlink.links.map((link) =>
         <NavLink
-          to={navlink.href}
-          key={navlink.number}
+          to={link.href}
+          key={link.number}
           className={({ isActive }) =>
             `flex items-center justify-center flex-col p-3 transition-all duration-300 rounded-lg text-xs ${
               isActive
@@ -16,9 +17,9 @@ const NavigationMobile = () => {
             }`
           }
         >
-          {navlink.icon}
-          {navlink.label}
-        </NavLink>
+          {link.icon}
+          {link.label}
+        </NavLink>)
       ))}
     </div>
   );

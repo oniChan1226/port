@@ -37,7 +37,7 @@ const Home = () => {
             <h6>
               I enjoy building web applications that look good and scale well —
             </h6>
-            <h6>Rare combo.I know</h6>
+            <h6>Rare combo.I know.</h6>
           </div>
         </div>
         <div className="flex items-center gap-3 font-semibold text-sm">

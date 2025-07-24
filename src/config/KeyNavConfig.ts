@@ -5,4 +5,5 @@ export const keyNavRoutes: { [key: string]: string } = {
   "3": "/projects",
   "4": "/about",
   "5": "/articles",
+  "6": "/stack",
 };

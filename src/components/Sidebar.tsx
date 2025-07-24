@@ -25,7 +25,7 @@ const Sidebar = () => {
         {NavlinksData.map((link) => (
           <>
           {link.group !== "Main" && (
-            <h6 className="pl-4 text-neutral-500 mb-3 font-medium">{link.group}</h6>
+            <h6 className="pl-4 text-neutral-500 my-4 font-medium">{link.group}</h6>
           )}
           {link.links.map((link) => <NavLink
             key={link.number}
@@ -42,7 +42,7 @@ const Sidebar = () => {
               {link.icon}
               <p>{link.label}</p>
             </div>
-            <div className="flex items-center justify-between border px-2 py-1 text-[0.7rem] border-neutral-600 rounded">
+            <div className="flex items-center justify-between border p-2 py-1 text-[0.7rem] border-neutral-600 rounded-md">
               <p>{link.number}</p>
             </div>
           </NavLink>)}
