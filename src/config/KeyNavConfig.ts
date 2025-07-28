@@ -1,9 +1,10 @@
 
 export const keyNavRoutes: { [key: string]: string } = {
   "1": "/",
-  "2": "/experience",
-  "3": "/projects",
-  "4": "/about",
-  "5": "/articles",
-  "6": "/stack",
+  "2": "/services",
+  "3": "/experience",
+  "4": "/projects",
+  "5": "/about",
+  "6": "/articles",
+  "7": "/stack",
 };

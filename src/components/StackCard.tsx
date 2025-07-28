@@ -12,7 +12,7 @@ const StackCard: React.FC<StackCardProps> = ({ title, stackArray }) => {
   return (
     <div className="border border-neutral-800 rounded-xl overflow-hidden">
       <h2 className="bg-primary text-lg font-bold p-5">{title}</h2>
-      <div className="grid grid-cols-2 gap-5 p-6">
+      <div className="grid md:grid-cols-2 gap-5 p-6">
         {stackArray.map((stack) => (
           <a
             href={stack.website}
@@ -28,7 +28,7 @@ const StackCard: React.FC<StackCardProps> = ({ title, stackArray }) => {
               <p className="text-sm text-neutral-500">{stack.description}</p>
               <div className="flex items-center justify-start space-x-2">
                 {stack.categories.map((cat: string) => (
-                  <Tag tag={cat} />
+                  <Tag tag={cat} key={cat} />
                 ))}
               </div>
             </div>

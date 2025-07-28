@@ -8,6 +8,7 @@ const Stack = lazy(() => import("../pages/Stack"))
 const About = lazy(() => import("../pages/About"))
 const Projects = lazy(() => import("../pages/Projects"))
 const Articles = lazy(() => import("../pages/Articles"))
+const Services = lazy(() => import("../pages/Services"))
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Routes>
           <Route path="/" element={<DashboardLayout />}>
               <Route index element={<Home />} />
+              <Route path='/services' element={<Services />} />
               <Route path='/experience' element={<Experience />} />
               <Route path='/projects' element={<Projects />} />
               <Route path='/about' element={<About />} />
