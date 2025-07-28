@@ -12,6 +12,7 @@ const DashboardLayout = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
+      console.log(e.key);
       if (
         target.tagName === "INPUT" ||
         target.tagName === "TEXTAREA" ||

@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Newspaper,
   Notebook,
+  Phone,
   User,
 } from "lucide-react";
 
@@ -73,18 +74,17 @@ export const NavlinksData = [
         icon: <Notebook size={18} />,
         number: "G",
       },
-      // {
-      //   label: "Stack",
-      //   href: "/stack",
-      //   icon: <Layers size={18} />,
-      //   number: 7,
-      // },
-      // {
-      //   label: "Feed",
-      //   href: "/feed",
-      //   icon: <Newspaper size={18} />,
-      //   number: 8,
-      // },
+    ],
+  },
+  {
+    group: "Connect",
+    links: [
+      {
+        label: "Contact",
+        href: "/contact",
+        icon: <Phone size={18} />,
+        number: "C",
+      },
     ],
   },
 ];

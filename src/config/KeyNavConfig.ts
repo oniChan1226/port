@@ -8,5 +8,6 @@ export const keyNavRoutes: { [key: string]: string } = {
   "6": "/articles",
   "7": "/stack",
   "8": "/feed",
-  "G": "/guest-book",
+  "g": "/guest-book",
+  "c": "/contact",
 };
