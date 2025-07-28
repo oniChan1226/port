@@ -9,6 +9,8 @@ const About = lazy(() => import("../pages/About"))
 const Projects = lazy(() => import("../pages/Projects"))
 const Articles = lazy(() => import("../pages/Articles"))
 const Services = lazy(() => import("../pages/Services"))
+const Feed = lazy(() => import("../pages/Feed"))
+const GuestBook = lazy(() => import("../pages/GuestBook"))
 
 const AppRoutes = () => {
   return (
@@ -22,6 +24,8 @@ const AppRoutes = () => {
               <Route path='/about' element={<About />} />
               <Route path='/stack' element={<Stack />} />
               <Route path='/articles' element={<Articles />} />
+              <Route path='/feed' element={<Feed />} />
+              <Route path='/guest-book' element={<GuestBook />} />
           </Route>
       </Routes>
     </Suspense>

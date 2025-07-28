@@ -7,4 +7,6 @@ export const keyNavRoutes: { [key: string]: string } = {
   "5": "/about",
   "6": "/articles",
   "7": "/stack",
+  "8": "/feed",
+  "G": "/guest-book",
 };

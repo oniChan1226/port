@@ -5,6 +5,8 @@ import {
   FolderPen,
   Layers,
   LayoutDashboard,
+  Newspaper,
+  Notebook,
   User,
 } from "lucide-react";
 
@@ -54,6 +56,35 @@ export const NavlinksData = [
         icon: <Layers size={18} />,
         number: 7,
       },
+      {
+        label: "Feed",
+        href: "/feed",
+        icon: <Newspaper size={18} />,
+        number: 8,
+      },
+    ],
+  },
+  {
+    group: "Extras",
+    links: [
+      {
+        label: "Guest Book",
+        href: "/guest-book",
+        icon: <Notebook size={18} />,
+        number: "G",
+      },
+      // {
+      //   label: "Stack",
+      //   href: "/stack",
+      //   icon: <Layers size={18} />,
+      //   number: 7,
+      // },
+      // {
+      //   label: "Feed",
+      //   href: "/feed",
+      //   icon: <Newspaper size={18} />,
+      //   number: 8,
+      // },
     ],
   },
 ];
