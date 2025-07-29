@@ -1,6 +1,17 @@
 import PageTitle from "../components/PageTitle";
 import ServiceCard from "../components/ServiceCard";
 import { myFreelanceProfile, myServices } from "../data/ServicesData";
+import {motion} from "motion/react";
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
 
 const Services = () => {
   return (
@@ -26,7 +37,11 @@ const Services = () => {
           </a>
         </h2>
       </div>
-      <div className="grid gap-y-5 mt-6">
+      <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      className="grid gap-y-5 mt-6">
         {myServices.map((service) => (
           <ServiceCard
             Icon={service.icon}
@@ -37,7 +52,7 @@ const Services = () => {
             tags={service.tags}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

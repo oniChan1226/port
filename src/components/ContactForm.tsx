@@ -1,15 +1,22 @@
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ContactFormSchema,
+  type ContactFormType,
+} from "../interfaces/ContactForm";
 
 const ContactForm = () => {
   const {
     handleSubmit,
     register,
     formState: { errors, isDirty },
-  } = useForm();
-  const sendMessage = async (data) => {
+  } = useForm<ContactFormType>({
+    resolver: zodResolver(ContactFormSchema),
+  });
+  const sendMessage = async (data: ContactFormType) => {
     console.log(data);
   };
-
+  console.log(isDirty);
   return (
     <div className="bg-primary border border-neutral-800 rounded-md p-5">
       <div>
@@ -24,8 +31,7 @@ const ContactForm = () => {
             <label htmlFor="name">Name</label>
             <input
               type="text"
-              name="name"
-              id="name"
+              {...register("name")}
               placeholder="Enter your name"
               required
               className="border border-neutral-800/80 w-full rounded-md px-3 py-1 text-sm focus:outline-none focus:border-neutral-800 focus:shadow-xs shadow-neutral-800 "
@@ -35,8 +41,7 @@ const ContactForm = () => {
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              name="email"
-              id="email"
+              {...register("email")}
               placeholder="Enter your email"
               required
               className="border border-neutral-800/80 w-full rounded-md px-3 py-1 text-sm focus:outline-none focus:border-neutral-800 focus:shadow-xs shadow-neutral-800 "
@@ -45,15 +50,18 @@ const ContactForm = () => {
           <div className="flex flex-col items-start space-y-1 lg:col-span-2">
             <label htmlFor="message">Message</label>
             <textarea
-              name="message"
-              id="message"
+              {...register("message")}
               placeholder="Enter your message"
               required
               className=" border border-neutral-800/80 w-full rounded-md px-3 py-1 text-sm focus:outline-none focus:border-neutral-800 focus:shadow-xs shadow-neutral-800 min-h-36 "
             ></textarea>
           </div>
         </div>
-        <button className="w-full bg-neutral-700/40 transition-colors duration-300 cursor-pointer hover:text-white/70 hover:bg-neutral-700/30 rounded-md py-2 font-semibold">
+        <button
+          type="submit"
+          disabled={!isDirty}
+          className="w-full bg-neutral-700/40 transition-colors duration-300 cursor-pointer hover:text-white/70 hover:bg-neutral-700/30 rounded-md py-2 font-semibold"
+        >
           Send Message
         </button>
       </form>
