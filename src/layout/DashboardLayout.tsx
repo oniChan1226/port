@@ -36,7 +36,7 @@ const DashboardLayout = () => {
       className="flex relative text-white/90 selection:bg-sky-900 selection:text-white 
 "
     >
-      <div className="hidden lg:block w-64 h-screen fixed bg-primary px-2 pt-8 border-r-1 border-r-neutral-800">
+      <div className="hidden lg:block w-64 h-screen fixed bg-primary px-2 pt-8 border-r-1 border-r-neutral-800 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-neutral-900 overflow-y-auto">
         <Sidebar />
       </div>
       <header className="absolute left-0 top-0 lg:hidden w-full py-4 z-[9999] bg-neutral-900 border-b border-neutral-800">
