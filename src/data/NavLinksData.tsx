@@ -10,6 +10,7 @@ import {
   Phone,
   User,
 } from "lucide-react";
+import { SiGithub, SiHashnode, SiLinkedin, SiPeerlist } from "react-icons/si";
 
 export const NavlinksData = [
   {
@@ -86,5 +87,28 @@ export const NavlinksData = [
         number: "C",
       },
     ],
+  },
+];
+
+export const ExternalLinksData = [
+  {
+    label: "Peerlist",
+    href: "https://peerlist.io/fahadkhan",
+    icon: <SiPeerlist size={18}/>,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/fahad-khan-72a639305/",
+    icon: <SiLinkedin size={18}/>,
+  },
+  {
+    label: "Hashnode",
+    href: "https://www.linkedin.com/in/fahad-khan-72a639305/",
+    icon: <SiHashnode size={18}/>,
+  },
+  {
+    label: "Github",
+    href: "https://github.com/oniChan1226",
+    icon: <SiGithub size={18}/>,
   },
 ];

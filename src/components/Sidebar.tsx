@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import pfp from "../assets/pfp.png";
-import { NavlinksData } from "../data/NavLinksData";
+import { ExternalLinksData, NavlinksData } from "../data/NavLinksData";
+import { ExternalLink } from "lucide-react";
 
 const Sidebar = () => {
   return (
@@ -24,29 +25,49 @@ const Sidebar = () => {
       <nav className="space-y-1 pt-10 font-semibold text-sm">
         {NavlinksData.map((link) => (
           <>
-          {link.group !== "Main" && (
-            <h6 className="pl-4 text-neutral-500 my-4 font-medium">{link.group}</h6>
-          )}
-          {link.links.map((link) => <NavLink
-            key={link.number}
-            to={link.href}
-            className={({ isActive }) =>
-              `flex items-center justify-between gap-2 px-4 py-3 rounded-md transition duration-400 ${
-                isActive
-                  ? "bg-neutral-800 "
-                  : "text-neutral-500 hover:text-white/90"
-              }`
-            }
+            {link.group !== "Main" && (
+              <h6 className="pl-4 text-neutral-500 my-4 font-medium">
+                {link.group}
+              </h6>
+            )}
+            {link.links.map((link) => (
+              <NavLink
+                key={link.number}
+                to={link.href}
+                className={({ isActive }) =>
+                  `flex items-center justify-between gap-2 px-4 py-3 rounded-md transition duration-400 ${
+                    isActive
+                      ? "bg-neutral-800 "
+                      : "text-neutral-500 hover:text-white/90"
+                  }`
+                }
+              >
+                <div className="flex items-center gap-2">
+                  {link.icon}
+                  <p>{link.label}</p>
+                </div>
+                <div className="flex items-center justify-between border p-2 py-1 text-[0.7rem] border-neutral-600 rounded-md">
+                  <p>{link.number}</p>
+                </div>
+              </NavLink>
+            ))}
+          </>
+        ))}
+        {ExternalLinksData.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            className={`flex items-center justify-between gap-2 px-4 py-3 rounded-md transition duration-400 text-neutral-500 hover:text-white/90`}
           >
             <div className="flex items-center gap-2">
               {link.icon}
               <p>{link.label}</p>
             </div>
-            <div className="flex items-center justify-between border p-2 py-1 text-[0.7rem] border-neutral-600 rounded-md">
-              <p>{link.number}</p>
-            </div>
-          </NavLink>)}
-          </>
+            <p>
+              <ExternalLink size={15} />
+            </p>
+          </a>
         ))}
       </nav>
     </div>
