@@ -68,8 +68,9 @@ const Home = () => {
       <div>
         <h4 className="text-lg font-semibold">New Drops</h4>
         <CardContainer>
-          {myProjects.slice(0, 2).map((project) => (
+          {myProjects.slice(0, 2).map((project, i) => (
             <ProjectCard
+            key={project.title + i}
               title={project.title}
               description={project.description}
               projectImage={project.img}
@@ -89,8 +90,8 @@ const Home = () => {
             </p>
           </div>
           <div className="flex flex-col lg:flex-row items-center gap-2 py-2 mt-2">
-            {myArticles.slice(0, 2).map((article) => (
-              <div className="w-full flex gap-3 items-center cursor-pointer border border-transparent hover:border hover:border-neutral-800 hover:bg-primary py-1 lg:py-3 duration-300 rounded-lg pl-2">
+            {myArticles.slice(0, 2).map((article, i) => (
+              <div key={article._id + i} className="w-full flex gap-3 items-center cursor-pointer border border-transparent hover:border hover:border-neutral-800 hover:bg-primary py-1 lg:py-3 duration-300 rounded-lg pl-2">
                 <div className="bg-neutral-800 p-2 lg:p-4 rounded">
                   <Newspaper size={20} />
                 </div>

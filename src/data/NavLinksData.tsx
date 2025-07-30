@@ -98,12 +98,12 @@ export const ExternalLinksData = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/fahad-khan-72a639305/",
+    href: "https://www.linkedin.com/in/fahad-khan-72a639305",
     icon: <SiLinkedin size={18}/>,
   },
   {
     label: "Hashnode",
-    href: "https://www.linkedin.com/in/fahad-khan-72a639305/",
+    href: "https://www.linkedin.com/in/fahad-khan-72a63930",
     icon: <SiHashnode size={18}/>,
   },
   {

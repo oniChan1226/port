@@ -23,8 +23,8 @@ const Sidebar = () => {
 
       {/* Navigation Links */}
       <nav className="space-y-1 pt-10 font-semibold text-sm">
-        {NavlinksData.map((link) => (
-          <>
+        {NavlinksData.map((link, i) => (
+          <div key={link.group + i}>
             {link.group !== "Main" && (
               <h6 className="pl-4 text-neutral-500 my-4 font-medium">
                 {link.group}
@@ -51,7 +51,7 @@ const Sidebar = () => {
                 </div>
               </NavLink>
             ))}
-          </>
+          </div>
         ))}
         {ExternalLinksData.map((link) => (
           <a

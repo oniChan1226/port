@@ -1,6 +1,7 @@
 import blog from "../assets/blog.jpg";
 export const myArticles = [
   {
+    _id: 1,
     title: "Best Coding Practices for Modern Web Development",
     brief:
       "A concise guide to clean, efficient, and scalable web development—covering naming conventions, folder structure, testing, and performance tips.",
@@ -10,6 +11,7 @@ export const myArticles = [
     tag: "Coding",
   },
   {
+    _id: 2,
     title: "Understanding React Hooks with Practical Examples",
     brief:
       "Dive into useState, useEffect, and custom hooks to simplify your components and enhance functionality in React projects.",
@@ -19,6 +21,7 @@ export const myArticles = [
     tag: "React",
   },
   {
+    _id: 3,
     title: "Tailwind CSS: Utility-First Styling Made Easy",
     brief:
       "Learn how Tailwind CSS accelerates development with utility classes and how to structure your styles for maximum reusability.",

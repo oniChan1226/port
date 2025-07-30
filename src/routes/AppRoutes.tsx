@@ -13,6 +13,7 @@ const Services = lazy(() => import("../pages/Services"));
 const Feed = lazy(() => import("../pages/Feed"));
 const GuestBook = lazy(() => import("../pages/GuestBook"));
 const Contact = lazy(() => import("../pages/Contact"));
+const ArticleDetails = lazy(() => import("../pages/ArticleDetails"));
 
 const AppRoutes = () => {
   return (
@@ -20,13 +21,23 @@ const AppRoutes = () => {
       <Route path="/" element={<DashboardLayout />}>
         <Route index element={<LazyWrapper Component={Home} />} />
         <Route path="services" element={<LazyWrapper Component={Services} />} />
-        <Route path="experience" element={<LazyWrapper Component={Experience} />} />
+        <Route
+          path="experience"
+          element={<LazyWrapper Component={Experience} />}
+        />
         <Route path="projects" element={<LazyWrapper Component={Projects} />} />
         <Route path="about" element={<LazyWrapper Component={About} />} />
         <Route path="stack" element={<LazyWrapper Component={Stack} />} />
         <Route path="articles" element={<LazyWrapper Component={Articles} />} />
+        <Route
+          path="articles/:id"
+          element={<LazyWrapper Component={ArticleDetails} />}
+        />
         <Route path="feed" element={<LazyWrapper Component={Feed} />} />
-        <Route path="guest-book" element={<LazyWrapper Component={GuestBook} />} />
+        <Route
+          path="guest-book"
+          element={<LazyWrapper Component={GuestBook} />}
+        />
         <Route path="contact" element={<LazyWrapper Component={Contact} />} />
       </Route>
     </Routes>
