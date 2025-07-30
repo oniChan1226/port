@@ -6,11 +6,11 @@ export interface IArticlePost {
     url: string;
     created_at: string;
     cover_image: string;
+    description: string;
 };
 export type ArticleList = IArticlePost[];
 
 export interface IArticle extends IArticlePost {
     body_markdown: string;
     reading_time_minutes: number;
-    description: string;
 };

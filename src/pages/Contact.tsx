@@ -5,6 +5,7 @@ import { myWorkEmail } from "../constants/constants";
 import { Calendar, Check, Copy } from "lucide-react";
 import CalendlyPopup from "../components/CalendlyPopup";
 import ContactForm from "../components/ContactForm";
+import JoinReader from "../components/JoinReader";
 
 const Contact = () => {
   const [copied, setCopied] = useState<boolean>(false);
@@ -54,35 +55,9 @@ const Contact = () => {
           </button>
         </Tooltip>
       </div>
-      <div className="mt-12">
+      <div className="mt-12 space-y-8">
         <ContactForm />
-
-        <div className="bg-primary flex flex-col lg:flex-row lg:justify-between lg:items-center px-5 py-6 space-y-3 lg:space-y-0 mt-8">
-          <div>
-            <h2 className="font-semibold text-sm lg:text-md">
-              Join 500+ Readers
-            </h2>
-            <p className="text-neutral-500 text-xs lg:text-sm">
-              Read about authentic insights.
-            </p>
-          </div>
-          <form className="flex flex-col lg:flex-row items-center gap-2 w-full lg:w-[60%]">
-            <input
-              type="email"
-              name=""
-              id=""
-              className="border border-neutral-800 outline-none px-3 py-2 rounded-md w-full text-sm lg:text-md"
-              placeholder="Your Email"
-              required
-            />
-            <button
-              type="submit"
-              className="px-12 py-2 rounded-md bg-neutral-800 cursor-pointer w-full text-sm lg:text-md"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
+        <JoinReader />
       </div>
     </div>
   );

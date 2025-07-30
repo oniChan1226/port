@@ -1,7 +1,7 @@
 import { Code, GraduationCap, HeartHandshake, Sparkles } from "lucide-react";
 
 export const aboutMe: string = 
-  "Hi, I’m Fahad Khan, a software engineer based in Pakistan. I build thoughtful, user-centric websites and web applications that solve real problems with a strong product-focused mindset and attention to detail — always with the end user in mind.";
+  "Hi, I’m Fahad Khan, a software engineer based in Pakistan. I build thoughtful, user-centric websites and web applications that solve real problems with a strong product-focused mindset and attention to detail,  always with the end user in mind.";
 
 
 export const myCards = [

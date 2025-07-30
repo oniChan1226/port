@@ -7,6 +7,7 @@ import type { IArticle } from "../interfaces/Article";
 import SomethingWentWrong from "./SomethingWentWrong";
 import { formatter } from "../lib/helpers";
 import { Dot } from "lucide-react";
+import JoinReader from "../components/JoinReader";
 
 const ArticleDetails = () => {
   const id = useParams().id;
@@ -68,6 +69,7 @@ const ArticleDetails = () => {
           </div>
         </article>
       )}
+      <JoinReader />
     </div>
   );
 };
