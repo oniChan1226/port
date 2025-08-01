@@ -14,6 +14,7 @@ const Feed = lazy(() => import("../pages/Feed"));
 const GuestBook = lazy(() => import("../pages/GuestBook"));
 const Contact = lazy(() => import("../pages/Contact"));
 const ArticleDetails = lazy(() => import("../pages/ArticleDetails"));
+const ProjectDetails = lazy(() => import("../pages/ProjectDetails"));
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
           element={<LazyWrapper Component={Experience} />}
         />
         <Route path="projects" element={<LazyWrapper Component={Projects} />} />
+        <Route path="projects/:slug" element={<LazyWrapper Component={ProjectDetails} />} />
         <Route path="about" element={<LazyWrapper Component={About} />} />
         <Route path="stack" element={<LazyWrapper Component={Stack} />} />
         <Route path="articles" element={<LazyWrapper Component={Articles} />} />

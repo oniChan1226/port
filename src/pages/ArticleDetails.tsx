@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { Link, replace, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchBlog } from "../api/fetchBlogs";
 import ReactMarkdown from "react-markdown";
 import type { IArticle } from "../interfaces/Article";
@@ -8,6 +8,7 @@ import SomethingWentWrong from "./SomethingWentWrong";
 import { formatter } from "../lib/helpers";
 import { Dot } from "lucide-react";
 import JoinReader from "../components/JoinReader";
+import BackTo from "../components/BackTo";
 
 const ArticleDetails = () => {
   const id = useParams().id;
@@ -26,13 +27,7 @@ const ArticleDetails = () => {
   console.log(data);
   return (
     <div className="space-y-8">
-      <Link
-        to={"/articles"}
-        className="flex items-center space-x-1 text-neutral-500 duration-300 hover:text-white/90 hover:pl-1"
-      >
-        <span className="text-sm">{"<--"}</span>
-        <span className="font-semibold">All Articles</span>
-      </Link>
+      <BackTo to="/articles" text="All Articles" />
       {isLoading || !data ? (
         <div>Loading...</div>
       ) : (

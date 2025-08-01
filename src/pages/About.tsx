@@ -103,7 +103,7 @@ const About = () => {
           title="Stack"
           brief="Technologies and tools I use"
           actionText="View Stack"
-          to="#"
+          to="/stack"
           backgroundStyle="s"
         />
         <QuickAction
@@ -111,7 +111,7 @@ const About = () => {
           title="Projects"
           brief="Explore my latest full-stack builds and experiments"
           actionText="Browse Projects"
-          to="#"
+          to="/projects"
           backgroundStyle="m"
         />
       </motion.div>

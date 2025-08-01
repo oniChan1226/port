@@ -83,10 +83,7 @@ const Home = () => {
           {myProjects.slice(0, 2).map((project, i) => (
             <ProjectCard
               key={project.title + i}
-              title={project.title}
-              description={project.description}
-              projectImage={project.img}
-              tag={project.tag}
+              project={project}
             />
           ))}
         </CardContainer>
@@ -137,7 +134,7 @@ const Home = () => {
           title="Feed"
           brief="Dive into my quick thoughs"
           actionText="View Feed"
-          to="#"
+          to="/feed"
           backgroundStyle="s"
         />
         <QuickAction
@@ -145,7 +142,7 @@ const Home = () => {
           title="Projects"
           brief="Explore my latest full-stack builds and experiments"
           actionText="Browse Projects"
-          to="#"
+          to="/projects"
           backgroundStyle="m"
         />
       </div>
