@@ -5,31 +5,39 @@ import Header from "../components/Header";
 import NavigationMobile from "../components/NavigationMobile";
 import { useEffect } from "react";
 import { keyNavRoutes } from "../config/KeyNavConfig";
+import SearchCommand from "../components/SearchCommand";
+import { useSearchCommand } from "../context/SearchCommandContext";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
+  const { toggle } = useSearchCommand();
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement;
-      console.log(e.key);
-      if (
-        target.tagName === "INPUT" ||
-        target.tagName === "TEXTAREA" ||
-        target.isContentEditable
-      )
-        return;
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      toggle();
+      return;
+    }
 
-      const route = keyNavRoutes[e.key];
-      if (route) {
-        e.preventDefault();
-        navigate(route);
-      }
-    };
+    const target = e.target as HTMLElement;
+    if (
+      target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA" ||
+      target.isContentEditable
+    )
+      return;
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [navigate]);
+    const route = keyNavRoutes[e.key];
+    if (route) {
+      e.preventDefault();
+      navigate(route);
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+  return () => window.removeEventListener("keydown", handleKeyDown);
+}, [navigate]);
 
   return (
     <div
@@ -53,6 +61,7 @@ const DashboardLayout = () => {
           </footer>
         </main>
       </div>
+        <SearchCommand />
     </div>
   );
 };

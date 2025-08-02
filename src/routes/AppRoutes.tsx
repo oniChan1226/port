@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import { lazy } from "react";
 import LazyWrapper from "./LazyWrapper";
+import { SearchCommandProvider } from "../context/SearchCommandContext";
 
 const Home = lazy(() => import("../pages/Home"));
 const Experience = lazy(() => import("../pages/Experience"));
@@ -19,7 +20,14 @@ const ProjectDetails = lazy(() => import("../pages/ProjectDetails"));
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<DashboardLayout />}>
+      <Route
+        path="/"
+        element={
+          <SearchCommandProvider>
+            <DashboardLayout />
+          </SearchCommandProvider>
+        }
+      >
         <Route index element={<LazyWrapper Component={Home} />} />
         <Route path="services" element={<LazyWrapper Component={Services} />} />
         <Route
@@ -27,7 +35,10 @@ const AppRoutes = () => {
           element={<LazyWrapper Component={Experience} />}
         />
         <Route path="projects" element={<LazyWrapper Component={Projects} />} />
-        <Route path="projects/:slug" element={<LazyWrapper Component={ProjectDetails} />} />
+        <Route
+          path="projects/:slug"
+          element={<LazyWrapper Component={ProjectDetails} />}
+        />
         <Route path="about" element={<LazyWrapper Component={About} />} />
         <Route path="stack" element={<LazyWrapper Component={Stack} />} />
         <Route path="articles" element={<LazyWrapper Component={Articles} />} />
