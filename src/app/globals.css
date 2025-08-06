@@ -16,6 +16,14 @@ input:-webkit-autofill:active {
   display: none;
 } */
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 
 @theme inline {
   --animate-meteor-effect: meteor 5s linear infinite;

@@ -63,6 +63,13 @@ export const myFrontEndTechStack: TechItem[] = [
     icon: SiTailwindcss,
   },
   {
+    name: "Aceternity UI",
+    description: "Re-usable components built with Tailwind and Framer motion",
+    categories: ["Components", "UI", "Animations"],
+    website: "https://ui.aceternity.com/",
+    icon: SiShadcnui,
+  },
+  {
     name: "shadcn/ui",
     description: "Re-usable components built with Radix UI and Tailwind",
     categories: ["Components", "UI", "Tailwind"],
