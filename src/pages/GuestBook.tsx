@@ -17,7 +17,7 @@ const GuestBook = () => {
         <h2 className="text-2xl lg:text-4xl font-semibold bg-gradient-to-b from-white/95 via-neutral-300 to-neutral-500 text-transparent bg-clip-text">
           Sign my Guestbook
         </h2>
-        <p className="text-neutral-500">
+        <p className="text-neutral-500 text-center text-sm lg:text-md  lg:text-start">
           Share your thoughts, feedback, or just say hi!
         </p>
       </div>

@@ -11,7 +11,7 @@ export const SearchCommandProvider = ({ children }: { children: React.ReactNode 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const toggle = () => setIsOpen(prev => !prev);
-    const closeModal = () => setIsOpen(prev => !prev);
+    const closeModal = () => setIsOpen(false);
 
     return (
         <SearchCommandContext.Provider value={{ isOpen, toggle, closeModal }}>

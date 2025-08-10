@@ -1,8 +1,11 @@
 import { Search } from "lucide-react";
 import pfp from "../assets/pfp.png";
 import { Link } from "react-router-dom";
+import { useSearchCommand } from "../context/SearchCommandContext";
 
 const Header = () => {
+  const { toggle } = useSearchCommand();
+
   return (
     <div className="w-[94%] mx-auto flex justify-between items-center">
       {/* pfp */}
@@ -20,7 +23,9 @@ const Header = () => {
         </div>
       </Link>
       {/* search */}
-      <div className="p-3 rounded-lg bg-primary cursor-pointer">
+      <div 
+      onClick={() => toggle()}
+      className="p-3 rounded-lg bg-primary cursor-pointer">
         <Search size={20}/>
       </div>
     </div>

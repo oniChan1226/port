@@ -1,6 +1,6 @@
 import PageTitle from "../components/PageTitle";
 import ServiceCard from "../components/ServiceCard";
-import { myFreelanceProfile, myServices } from "../data/ServicesData";
+import { myServices } from "../data/ServicesData";
 import {motion} from "motion/react";
 
 const containerVariants = {
@@ -41,7 +41,7 @@ const Services = () => {
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="grid gap-y-5 mt-6">
+      className="grid grid-cols-1 gap-y-5 mt-6">
         {myServices.map((service) => (
           <ServiceCard
             Icon={service.icon}

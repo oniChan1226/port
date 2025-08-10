@@ -3,7 +3,7 @@ import { NavlinksData } from "../data/NavLinksData";
 
 const NavigationMobile = () => {
   return (
-    <div className="flex gap-x-2 w-[95%] mx-auto overflow-y-auto scrollbar-none">
+    <div className="flex flex-nowrap gap-x-2 w-[95%] mx-auto overflow-x-auto scrollbar-none">
       {NavlinksData.map((navlink) => (
         navlink.links.map((link) =>
         <NavLink

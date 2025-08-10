@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchCommand } from "../context/SearchCommandContext";
 import { Search, X } from "lucide-react";
 import { NavlinksData } from "../data/NavLinksData";
@@ -19,18 +19,19 @@ const SearchCommand = () => {
   const clearText = () => setSearchQuery(() => "");
 
   useEffect(() => {
+    console.log("executed")
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [closeModal]);
 
   const navigate = useNavigate();
-  const navigateTo = (link: string) => {
+  const navigateTo = useCallback((link: string) => {
     closeModal();
     navigate(link);
-  };
+  }, [closeModal, navigate]);
   const filteredLinks = NavlinksData.flatMap((navLink) =>
     navLink.links.filter((link) =>
       link.label.toLowerCase().includes(searchQuery.toLowerCase())
@@ -39,7 +40,6 @@ const SearchCommand = () => {
   useEffect(() => {
     const handleEnter = (e: KeyboardEvent) => {
       if (e.key === "Enter" && filteredLinks.length > 0 && inputRef.current?.value !== "") {
-        console.log("executing");
         navigateTo(filteredLinks[0].href);
       }
     };
@@ -47,7 +47,7 @@ const SearchCommand = () => {
       window.addEventListener("keydown", handleEnter);
     }
     return () => window.removeEventListener("keydown", handleEnter);
-  }, [isOpen, filteredLinks]);
+  }, [isOpen, filteredLinks, navigateTo]);
 
   return (
     <AnimatePresence mode="wait">
