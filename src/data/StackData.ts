@@ -34,13 +34,13 @@ export interface TechItem {
 }
 
 export const myFrontEndTechStack: TechItem[] = [
-  {
-    name: "Next.js",
-    description: "React framework for production-grade applications",
-    categories: ["React", "SSR", "TypeScript"],
-    website: "https://nextjs.org/",
-    icon: SiNextdotjs,
-  },
+  // {
+  //   name: "Next.js",
+  //   description: "React framework for production-grade applications",
+  //   categories: ["React", "SSR", "TypeScript"],
+  //   website: "https://nextjs.org/",
+  //   icon: SiNextdotjs,
+  // },
   {
     name: "React",
     description: "Library for building user interfaces",
@@ -100,13 +100,13 @@ export const myBackendTechStack: TechItem[] = [
     website: "https://www.mongodb.com/",
     icon: SiMongodb,
   },
-  {
-    name: "PostgreSQL",
-    description: "Advanced open-source relational database",
-    categories: ["Database", "SQL"],
-    website: "https://www.postgresql.org/",
-    icon: SiPostgresql,
-  },
+  // {
+  //   name: "PostgreSQL",
+  //   description: "Advanced open-source relational database",
+  //   categories: ["Database", "SQL"],
+  //   website: "https://www.postgresql.org/",
+  //   icon: SiPostgresql,
+  // },
   {
     name: "GraphQL",
     description: "Advanced open-source relational database",

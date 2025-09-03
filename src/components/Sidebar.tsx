@@ -9,7 +9,7 @@ const Sidebar = () => {
   const { toggle } = useSearchCommand();
 
   return (
-    <div className="relative h-full flex flex-col">
+    <div className="relative h-full flex flex-col ">
       {/* Profile Badge */}
       <Link to={"/"} className="flex items-center gap-2">
         <img
@@ -26,7 +26,7 @@ const Sidebar = () => {
       </Link>
 
       {/* Navigation Links */}
-      <nav className="space-y-1 pt-10 font-semibold text-sm flex-1 overflow-y-auto">
+      <nav className="space-y-1 pt-10 font-semibold text-sm flex-1 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-neutral-900 overflow-y-auto">
         {NavlinksData.map((link, i) => (
           <div key={link.group + i}>
             {link.group !== "Main" && (
