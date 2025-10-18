@@ -1,11 +1,63 @@
 export const myExperience = [
   {
     _id: 1,
+    companyName: "Ragzon Solutions",
+    designation: "Software Engineer",
+    duration: {
+      from: "August 2025",
+      to: "Present",
+    },
+    location: "Lahore, Pakistan (Hybrid)",
+    brief:
+      "Leading backend architecture and iterative product development for KIPS Group’s AI-powered recruitment platform — enhancing HR efficiency and improving candidate experience scores by 55%.",
+    responsibilities: [
+      {
+        header: "Backend Architecture",
+        content: [
+          { text: "Designed and implemented scalable " },
+          { text: "backend architecture", highlight: true },
+          { text: " with modular APIs for the KIPS AI Recruitment System." },
+        ],
+      },
+      {
+        header: "Team Leadership & Collaboration",
+        content: [
+          { text: "Leading a " },
+          { text: "team of 5 developers", highlight: true },
+          { text: " and collaborating with " },
+          { text: "frontend designers", highlight: true },
+          { text: " to align UX and engineering goals." },
+        ],
+      },
+      {
+        header: "Product Iteration & Strategy",
+        content: [
+          { text: "Defined " },
+          { text: "user stories", highlight: true },
+          { text: " and iteratively shaped features, resulting in a " },
+          { text: "55% increase", highlight: true },
+          { text: " in user satisfaction and smoother HR workflows." },
+        ],
+      },
+    ],
+    techStack: [
+      "Node.js",
+      "Express",
+      "React.js",
+      "MongoDB",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redis",
+      "Docker",
+    ],
+  },
+  {
+    _id: 2,
     companyName: "My Digital Pixels",
     designation: "Full Stack MERN Developer",
     duration: {
       from: "January 2025",
-      to: "Present",
+      to: "August 2025",
     },
     location: "Remote",
     brief:
@@ -52,7 +104,7 @@ export const myExperience = [
     ],
   },
   {
-    _id: 2,
+    _id: 3,
     companyName: "Elevatr",
     designation: "Founder & Full Stack Developer",
     duration: {
