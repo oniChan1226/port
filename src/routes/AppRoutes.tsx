@@ -1,8 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import { lazy } from "react";
 import LazyWrapper from "./LazyWrapper";
 import { SearchCommandProvider } from "../context/SearchCommandContext";
+import { AnimatePresence } from "motion/react";
 
 const Home = lazy(() => import("../pages/Home"));
 const Experience = lazy(() => import("../pages/Experience"));
@@ -18,8 +19,10 @@ const ArticleDetails = lazy(() => import("../pages/ArticleDetails"));
 const ProjectDetails = lazy(() => import("../pages/ProjectDetails"));
 
 const AppRoutes = () => {
+  const location = useLocation();
   return (
-    <Routes>
+    <AnimatePresence mode="wait">
+    <Routes location={location} key={location.pathname}>
       <Route
         path="/"
         element={
@@ -54,6 +57,7 @@ const AppRoutes = () => {
         <Route path="contact" element={<LazyWrapper Component={Contact} />} />
       </Route>
     </Routes>
+    </AnimatePresence>
   );
 };
 

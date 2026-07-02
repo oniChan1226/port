@@ -1,8 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 @plugin 'tailwind-scrollbar';
 @plugin "@tailwindcss/typography";
 
 body {
     font-family: "Inter", sans-serif;
+}
+
+/* ── Cursor spotlight ── */
+.cursor-spotlight {
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(56, 189, 248, 0.04) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    transition: background 0.1s ease;
+}
+
+/* ── Ambient background blobs ── */
+@keyframes blob-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(30px, -40px) scale(1.05); }
+    66%       { transform: translate(-20px, 20px) scale(0.97); }
+}
+@keyframes blob-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(-35px, 25px) scale(1.04); }
+    66%       { transform: translate(20px, -30px) scale(0.98); }
+}
+@keyframes blob-drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%       { transform: translate(25px, 35px) scale(1.06); }
+}
+
+.ambient-blob-1 {
+    animation: blob-drift-1 18s ease-in-out infinite;
+}
+.ambient-blob-2 {
+    animation: blob-drift-2 22s ease-in-out infinite;
+}
+.ambient-blob-3 {
+    animation: blob-drift-3 26s ease-in-out infinite;
+}
+
+/* ── Animated gradient text ── */
+@keyframes gradient-shift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #7dd3fc 30%,
+        #818cf8 60%,
+        #ffffff 100%
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 6s ease infinite;
+}
+
+/* ── Availability pulse ── */
+@keyframes pulse-ring {
+    0%   { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+.pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: #22c55e;
+    animation: pulse-ring 1.8s ease-out infinite;
+}
+
+/* ── Gradient border on hover (cards) ── */
+@keyframes border-spin {
+    0%   { --border-angle: 0turn; }
+    100% { --border-angle: 1turn; }
+}
+
+/* ── Timeline draw-in ── */
+.timeline-line {
+    transform-origin: top center;
+}
+
+/* ── Count-up number shimmer ── */
+@keyframes count-shimmer {
+    0%   { opacity: 0.6; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.6; }
 }
