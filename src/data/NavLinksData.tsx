@@ -8,6 +8,7 @@ import {
   Newspaper,
   Notebook,
   Phone,
+  Swords,
   User,
 } from "lucide-react";
 import { SiGithub, SiHashnode, SiLinkedin, SiPeerlist } from "react-icons/si";
@@ -63,6 +64,12 @@ export const NavlinksData = [
         href: "/feed",
         icon: <Newspaper size={18} />,
         number: 8,
+      },
+      {
+        label: "Playground",
+        href: "/playground",
+        icon: <Swords size={18} />,
+        number: 9,
       },
     ],
   },

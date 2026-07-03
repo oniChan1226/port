@@ -17,6 +17,7 @@ const GuestBook = lazy(() => import("../pages/GuestBook"));
 const Contact = lazy(() => import("../pages/Contact"));
 const ArticleDetails = lazy(() => import("../pages/ArticleDetails"));
 const ProjectDetails = lazy(() => import("../pages/ProjectDetails"));
+const Playground = lazy(() => import("../pages/Playground"));
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -55,6 +56,7 @@ const AppRoutes = () => {
           element={<LazyWrapper Component={GuestBook} />}
         />
         <Route path="contact" element={<LazyWrapper Component={Contact} />} />
+        <Route path="playground" element={<LazyWrapper Component={Playground} />} />
       </Route>
     </Routes>
     </AnimatePresence>
