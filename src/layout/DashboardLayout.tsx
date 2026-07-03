@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { keyNavRoutes } from "../config/KeyNavConfig";
 import SearchCommand from "../components/SearchCommand";
 import { useSearchCommand } from "../context/SearchCommandContext";
+import PeekingCat from "../components/PeekingCat";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -90,6 +91,7 @@ const DashboardLayout = () => {
       </div>
 
       <SearchCommand />
+      <PeekingCat />
     </div>
   );
 };
