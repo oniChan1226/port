@@ -4,18 +4,12 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   FONT PACKAGES
-   --font-body drives body { font-family }, heading elements also override
-   when font-serif-pkg is active.
-   ═══════════════════════════════════════════════════════════════════════════ */
-body {
-  font-family: var(--font-body, 'Inter', sans-serif);
-}
+/* ── Font packages ──────────────────────────────────────────────────────── */
+body { font-family: var(--font-body, 'Inter', sans-serif); }
 
-html.font-inter-pkg  { --font-body: 'Inter', sans-serif; }
-html.font-mono-pkg   { --font-body: 'JetBrains Mono', monospace; }
-html.font-serif-pkg  { --font-body: 'Inter', sans-serif; }
+html.font-inter-pkg { --font-body: 'Inter', sans-serif; }
+html.font-mono-pkg  { --font-body: 'JetBrains Mono', monospace; }
+html.font-serif-pkg { --font-body: 'Inter', sans-serif; }
 
 html.font-serif-pkg h1,
 html.font-serif-pkg h2,
@@ -26,372 +20,289 @@ html.font-serif-pkg h5 {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   THEME TOKEN SYSTEM
-   ─────────────────────────────────────────────────────────────────────────
-   Cascade order (later = wins for same property):
-     :root              light defaults (neutral grays)
-     .dark              dark defaults  (neutral grays)
-     .theme-X           light variant  (hue-tinted surface scale)
-     .dark.theme-X      dark  variant  (hue-tinted surface scale, highest spec)
+   SURFACE TOKENS
+   Two-pass cascade:
+     Pass 1: :root / .dark — set the fully-neutral base
+     Pass 2: .theme-* / .dark.theme-* — apply a barely-perceptible oklch tint
+             (chroma 0.022–0.04; only visible when compared side-by-side)
 
-   Every --color-neutral-* override automatically propagates to ALL Tailwind
-   bg-neutral-*, border-neutral-*, text-neutral-* utilities sitewide.
+   Text, icon, and status colors are NOT changed per theme — they stay
+   on the pure neutral scale so readability never suffers.
+
+   Background personality comes from:
+     a) This faint hue shift on surfaces
+     b) The atmospheric glow layer (BackgroundGlows component)
+     c) Accent/gradient colors on interactive elements
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── DEFAULT LIGHT ──────────────────────────────────────────────────────── */
+/* ── Light base ── */
 :root {
-  /* Surface scale */
-  --color-neutral-900: #f8fafc;
-  --color-neutral-800: #f1f5f9;
-  --color-neutral-700: #e2e8f0;
-  --color-neutral-600: #64748b;
-  --color-neutral-500: #64748b;
-  --color-neutral-400: #475569;
-  --color-primary:     #ffffff;
-  --text-base:         #111827;
-
-  /* Gradient text stops */
-  --grad-a: #0f172a;
-  --grad-b: #0369a1;
-  --grad-c: #4338ca;
-
-  /* Accent (components use this for highlights) */
-  --accent-1: #0284c7;
-  --accent-2: #4338ca;
-
-  /* Cursor spotlight tint */
-  --spotlight-color: rgba(56, 189, 248, 0.04);
-
-  /* Ambient blob backgrounds */
-  --blob-1-bg: rgba(56,  189, 248, 0.18);
-  --blob-2-bg: rgba(99,  102, 241, 0.16);
-  --blob-3-bg: rgba(139,  92, 246, 0.12);
-
-  /* Text selection */
-  --selection-bg:   #bfdbfe;
-  --selection-text: #1e3a5f;
+  --color-neutral-900: oklch(0.975 0 0);
+  --color-neutral-800: oklch(0.96 0 0);
+  --color-neutral-700: oklch(0.89 0 0);
+  --color-neutral-600: oklch(0.64 0 0);
+  --color-neutral-500: oklch(0.56 0 0);
+  --color-neutral-400: oklch(0.48 0 0);
+  --color-primary:     oklch(1 0 0);
+  --text-base:         oklch(0.18 0 0);
 }
 
-/* ── DEFAULT DARK ───────────────────────────────────────────────────────── */
+/* ── Dark base ── */
 .dark {
   --color-neutral-900: oklch(0.205 0 0);
-  --color-neutral-800: oklch(0.269 0 0);
-  --color-neutral-700: oklch(0.371 0 0);
+  --color-neutral-800: oklch(0.265 0 0);
+  --color-neutral-700: oklch(0.365 0 0);
   --color-neutral-600: oklch(0.439 0 0);
   --color-neutral-500: oklch(0.509 0 0);
   --color-neutral-400: oklch(0.608 0 0);
-  --color-primary:     #1c1c1c;
-  --text-base:         rgba(255, 255, 255, 0.9);
-
-  --grad-a: #ffffff;
-  --grad-b: #7dd3fc;
-  --grad-c: #818cf8;
-
-  --accent-1: #38bdf8;
-  --accent-2: #818cf8;
-
-  --spotlight-color: rgba(56, 189, 248, 0.05);
-
-  --blob-1-bg: rgba(56,  189, 248, 0.07);
-  --blob-2-bg: rgba(99,  102, 241, 0.07);
-  --blob-3-bg: rgba(139,  92, 246, 0.05);
-
-  --selection-bg:   #1e40af;
-  --selection-text: #e0f2fe;
+  --color-primary:     oklch(0.155 0 0);
+  --text-base:         rgba(255, 255, 255, 0.90);
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   SAHARA  — warm desert, amber/orange palette
-   Surface hue: ~65 ° (warm brown / golden)
-   ══════════════════════════════════════════════════════════════════════════ */
-
-/* Light Sahara */
+/* ── Sahara light (H=75, warm amber hue) ── */
 .theme-sahara {
-  --color-neutral-900: #fffbf2;
-  --color-neutral-800: #fdf5e0;
-  --color-neutral-700: #e8d8a8;
-  --color-neutral-600: #8a6c3c;
-  --color-neutral-500: #6b5028;
-  --color-neutral-400: #4a3418;
-  --color-primary:     #fffbf2;
-  --text-base:         #2a1a06;
-
-  --grad-a: #1c0a00;
-  --grad-b: #b45309;
-  --grad-c: #c2410c;
-
-  --accent-1: #d97706;
-  --accent-2: #ea580c;
-
-  --spotlight-color: rgba(251, 191, 36, 0.06);
-
-  --blob-1-bg: rgba(251, 191,  36, 0.22);
-  --blob-2-bg: rgba(249, 115,  22, 0.18);
-  --blob-3-bg: rgba(239,  68,  68, 0.12);
-
-  --selection-bg:   #fde68a;
-  --selection-text: #451a03;
+  --color-neutral-900: oklch(0.975 0.010 80);
+  --color-neutral-800: oklch(0.960 0.012 78);
+  --color-neutral-700: oklch(0.895 0.014 75);
+  --color-primary:     oklch(0.995 0.004 80);
 }
-
-/* Dark Sahara */
+/* ── Sahara dark (H=52, warm amber — chroma deliberately very low) ── */
 .dark.theme-sahara {
-  --color-neutral-900: #1c1812;
-  --color-neutral-800: #252016;
-  --color-neutral-700: #3a3020;
-  --color-neutral-600: #60502e;
-  --color-neutral-500: #7c6840;
-  --color-neutral-400: #9c8658;
-  --color-primary:     #181410;
-  --text-base:         rgba(255, 246, 225, 0.92);
-
-  --grad-a: #fef3c7;
-  --grad-b: #fbbf24;
-  --grad-c: #f97316;
-
-  --accent-1: #fbbf24;
-  --accent-2: #f97316;
-
-  --spotlight-color: rgba(251, 191, 36, 0.07);
-
-  --blob-1-bg: rgba(251, 191,  36, 0.09);
-  --blob-2-bg: rgba(249, 115,  22, 0.07);
-  --blob-3-bg: rgba(239,  68,  68, 0.05);
-
-  --selection-bg:   #78350f;
-  --selection-text: #fef3c7;
+  --color-neutral-900: oklch(0.205 0.022 52);
+  --color-neutral-800: oklch(0.265 0.028 52);
+  --color-neutral-700: oklch(0.375 0.034 52);
+  --color-primary:     oklch(0.155 0.020 52);
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   OCEAN  — deep sea, cyan/teal palette
-   Surface hue: ~210 ° (blue / deep ocean)
-   ══════════════════════════════════════════════════════════════════════════ */
-
-/* Light Ocean */
+/* ── Ocean light (H=222, cool blue) ── */
 .theme-ocean {
-  --color-neutral-900: #f0f9ff;
-  --color-neutral-800: #e0f4fe;
-  --color-neutral-700: #bae8fd;
-  --color-neutral-600: #3a7a9c;
-  --color-neutral-500: #285e7c;
-  --color-neutral-400: #18445c;
-  --color-primary:     #f0f9ff;
-  --text-base:         #0a2440;
-
-  --grad-a: #0a1628;
-  --grad-b: #0891b2;
-  --grad-c: #0369a1;
-
-  --accent-1: #0891b2;
-  --accent-2: #0369a1;
-
-  --spotlight-color: rgba(34, 211, 238, 0.06);
-
-  --blob-1-bg: rgba( 34, 211, 238, 0.20);
-  --blob-2-bg: rgba( 56, 189, 248, 0.16);
-  --blob-3-bg: rgba( 14, 165, 233, 0.12);
-
-  --selection-bg:   #bae6fd;
-  --selection-text: #0c4a6e;
+  --color-neutral-900: oklch(0.975 0.012 226);
+  --color-neutral-800: oklch(0.960 0.014 224);
+  --color-neutral-700: oklch(0.895 0.016 222);
+  --color-primary:     oklch(0.995 0.005 226);
 }
-
-/* Dark Ocean */
+/* ── Ocean dark (H=230) ── */
 .dark.theme-ocean {
-  --color-neutral-900: #0e1820;
-  --color-neutral-800: #142028;
-  --color-neutral-700: #1c3040;
-  --color-neutral-600: #2c4a62;
-  --color-neutral-500: #3c6080;
-  --color-neutral-400: #5080a0;
-  --color-primary:     #0a1218;
-  --text-base:         rgba(220, 242, 255, 0.92);
-
-  --grad-a: #ecfeff;
-  --grad-b: #22d3ee;
-  --grad-c: #38bdf8;
-
-  --accent-1: #22d3ee;
-  --accent-2: #38bdf8;
-
-  --spotlight-color: rgba(34, 211, 238, 0.07);
-
-  --blob-1-bg: rgba( 34, 211, 238, 0.09);
-  --blob-2-bg: rgba( 56, 189, 248, 0.07);
-  --blob-3-bg: rgba( 14, 165, 233, 0.05);
-
-  --selection-bg:   #0e4c6e;
-  --selection-text: #ecfeff;
+  --color-neutral-900: oklch(0.205 0.025 230);
+  --color-neutral-800: oklch(0.265 0.031 230);
+  --color-neutral-700: oklch(0.375 0.038 230);
+  --color-primary:     oklch(0.155 0.022 230);
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   FOREST  — deep woodland, green/emerald palette
-   Surface hue: ~145 ° (green)
-   ══════════════════════════════════════════════════════════════════════════ */
-
-/* Light Forest */
+/* ── Forest light (H=148, green) ── */
 .theme-forest {
-  --color-neutral-900: #f2faf4;
-  --color-neutral-800: #e4f5e8;
-  --color-neutral-700: #b8d8c2;
-  --color-neutral-600: #3a6e48;
-  --color-neutral-500: #285835;
-  --color-neutral-400: #184025;
-  --color-primary:     #f2faf4;
-  --text-base:         #0c2414;
-
-  --grad-a: #052010;
-  --grad-b: #15803d;
-  --grad-c: #0d9488;
-
-  --accent-1: #16a34a;
-  --accent-2: #0d9488;
-
-  --spotlight-color: rgba(74, 222, 128, 0.06);
-
-  --blob-1-bg: rgba( 74, 222, 128, 0.20);
-  --blob-2-bg: rgba( 52, 211, 153, 0.16);
-  --blob-3-bg: rgba( 45, 212, 191, 0.12);
-
-  --selection-bg:   #bbf7d0;
-  --selection-text: #14532d;
+  --color-neutral-900: oklch(0.975 0.010 148);
+  --color-neutral-800: oklch(0.960 0.012 148);
+  --color-neutral-700: oklch(0.895 0.014 148);
+  --color-primary:     oklch(0.995 0.004 148);
 }
-
-/* Dark Forest */
+/* ── Forest dark (H=150) ── */
 .dark.theme-forest {
-  --color-neutral-900: #0e1810;
-  --color-neutral-800: #142016;
-  --color-neutral-700: #1e3022;
-  --color-neutral-600: #2e5035;
-  --color-neutral-500: #3e6848;
-  --color-neutral-400: #528a60;
-  --color-primary:     #0a1410;
-  --text-base:         rgba(220, 248, 228, 0.92);
-
-  --grad-a: #f0fdf4;
-  --grad-b: #4ade80;
-  --grad-c: #34d399;
-
-  --accent-1: #4ade80;
-  --accent-2: #34d399;
-
-  --spotlight-color: rgba(74, 222, 128, 0.07);
-
-  --blob-1-bg: rgba( 74, 222, 128, 0.09);
-  --blob-2-bg: rgba( 52, 211, 153, 0.07);
-  --blob-3-bg: rgba( 45, 212, 191, 0.05);
-
-  --selection-bg:   #14532d;
-  --selection-text: #f0fdf4;
+  --color-neutral-900: oklch(0.205 0.022 150);
+  --color-neutral-800: oklch(0.265 0.028 150);
+  --color-neutral-700: oklch(0.375 0.034 150);
+  --color-primary:     oklch(0.155 0.020 150);
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   AURORA  — northern lights, purple/pink palette
-   Surface hue: ~290 ° (violet / purple)
-   ══════════════════════════════════════════════════════════════════════════ */
-
-/* Light Aurora */
+/* ── Aurora light (H=286, purple/violet) ── */
 .theme-aurora {
-  --color-neutral-900: #faf5ff;
-  --color-neutral-800: #f3e8ff;
-  --color-neutral-700: #dab8f8;
-  --color-neutral-600: #7040b0;
-  --color-neutral-500: #5828a0;
-  --color-neutral-400: #3e1888;
-  --color-primary:     #faf5ff;
-  --text-base:         #1e0840;
-
-  --grad-a: #1a0228;
-  --grad-b: #7c3aed;
-  --grad-c: #db2777;
-
-  --accent-1: #7c3aed;
-  --accent-2: #db2777;
-
-  --spotlight-color: rgba(192, 132, 252, 0.06);
-
-  --blob-1-bg: rgba(192, 132, 252, 0.22);
-  --blob-2-bg: rgba(244, 114, 182, 0.16);
-  --blob-3-bg: rgba(251, 113, 133, 0.12);
-
-  --selection-bg:   #e9d5ff;
-  --selection-text: #3b0764;
+  --color-neutral-900: oklch(0.975 0.012 286);
+  --color-neutral-800: oklch(0.960 0.014 286);
+  --color-neutral-700: oklch(0.895 0.016 286);
+  --color-primary:     oklch(0.995 0.005 286);
 }
-
-/* Dark Aurora */
+/* ── Aurora dark (H=286) ── */
 .dark.theme-aurora {
-  --color-neutral-900: #130d1e;
-  --color-neutral-800: #1a1228;
-  --color-neutral-700: #281a3e;
-  --color-neutral-600: #4a2e6e;
-  --color-neutral-500: #623e8e;
-  --color-neutral-400: #8258ae;
-  --color-primary:     #0f0918;
-  --text-base:         rgba(245, 232, 255, 0.92);
-
-  --grad-a: #fdf4ff;
-  --grad-b: #c084fc;
-  --grad-c: #f472b6;
-
-  --accent-1: #c084fc;
-  --accent-2: #f472b6;
-
-  --spotlight-color: rgba(192, 132, 252, 0.07);
-
-  --blob-1-bg: rgba(192, 132, 252, 0.10);
-  --blob-2-bg: rgba(244, 114, 182, 0.08);
-  --blob-3-bg: rgba(251, 113, 133, 0.06);
-
-  --selection-bg:   #3b0764;
-  --selection-text: #fdf4ff;
+  --color-neutral-900: oklch(0.205 0.028 286);
+  --color-neutral-800: oklch(0.265 0.034 286);
+  --color-neutral-700: oklch(0.375 0.042 286);
+  --color-primary:     oklch(0.155 0.026 286);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   TEXT SELECTION  (theme-aware)
+   ACCENT / GRADIENT / GLOW TOKENS
+   These give each theme its expressive "color" — used on gradient text,
+   interactive elements, spotlight, selection highlight, and glow orbs.
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Default light ── */
+:root {
+  --grad-a:          oklch(0.18 0 0);
+  --grad-b:          oklch(0.52 0.18 240);
+  --grad-c:          oklch(0.52 0.22 280);
+  --accent-1:        oklch(0.60 0.20 240);
+  --accent-2:        oklch(0.58 0.22 280);
+  --spotlight-color: rgba(56, 189, 248, 0.04);
+  --selection-bg:    #bfdbfe;
+  --selection-fg:    #1e3a5f;
+  /* glow orb colors for BackgroundGlows component */
+  --glow-a: rgba(56, 189, 248, 0.10);
+  --glow-b: rgba(99, 102, 241, 0.08);
+  --glow-c: rgba(139, 92, 246, 0.07);
+  --glow-d: rgba(56, 189, 248, 0.06);
+}
+/* ── Default dark ── */
+.dark {
+  --grad-a:          #ffffff;
+  --grad-b:          #7dd3fc;
+  --grad-c:          #818cf8;
+  --accent-1:        #38bdf8;
+  --accent-2:        #818cf8;
+  --spotlight-color: rgba(56, 189, 248, 0.05);
+  --selection-bg:    #1e40af;
+  --selection-fg:    #e0f2fe;
+  --glow-a: rgba(56, 189, 248, 0.08);
+  --glow-b: rgba(99, 102, 241, 0.07);
+  --glow-c: rgba(139, 92, 246, 0.06);
+  --glow-d: rgba(56, 189, 248, 0.05);
+}
+
+/* ── Sahara light ── */
+.theme-sahara {
+  --grad-a:          oklch(0.22 0.10 52);
+  --grad-b:          oklch(0.55 0.18 52);
+  --grad-c:          oklch(0.56 0.20 38);
+  --accent-1:        oklch(0.58 0.18 55);
+  --accent-2:        oklch(0.58 0.20 38);
+  --spotlight-color: rgba(251, 191, 36, 0.05);
+  --selection-bg:    #fde68a;
+  --selection-fg:    #451a03;
+  --glow-a: rgba(251, 191, 36, 0.12);
+  --glow-b: rgba(249, 115, 22, 0.10);
+  --glow-c: rgba(239, 68, 68, 0.07);
+  --glow-d: rgba(245, 158, 11, 0.09);
+}
+/* ── Sahara dark ── */
+.dark.theme-sahara {
+  --grad-a:          #fef3c7;
+  --grad-b:          #fbbf24;
+  --grad-c:          #f97316;
+  --accent-1:        #fbbf24;
+  --accent-2:        #f97316;
+  --spotlight-color: rgba(251, 191, 36, 0.06);
+  --selection-bg:    #78350f;
+  --selection-fg:    #fef3c7;
+  --glow-a: rgba(251, 191, 36, 0.09);
+  --glow-b: rgba(249, 115, 22, 0.07);
+  --glow-c: rgba(239, 68, 68, 0.05);
+  --glow-d: rgba(245, 158, 11, 0.06);
+}
+
+/* ── Ocean light ── */
+.theme-ocean {
+  --grad-a:          oklch(0.18 0.06 230);
+  --grad-b:          oklch(0.55 0.16 210);
+  --grad-c:          oklch(0.52 0.18 235);
+  --accent-1:        oklch(0.58 0.16 210);
+  --accent-2:        oklch(0.52 0.18 235);
+  --spotlight-color: rgba(34, 211, 238, 0.05);
+  --selection-bg:    #bae6fd;
+  --selection-fg:    #0c4a6e;
+  --glow-a: rgba(34, 211, 238, 0.12);
+  --glow-b: rgba(56, 189, 248, 0.10);
+  --glow-c: rgba(14, 165, 233, 0.07);
+  --glow-d: rgba(6, 182, 212, 0.08);
+}
+/* ── Ocean dark ── */
+.dark.theme-ocean {
+  --grad-a:          #ecfeff;
+  --grad-b:          #22d3ee;
+  --grad-c:          #38bdf8;
+  --accent-1:        #22d3ee;
+  --accent-2:        #38bdf8;
+  --spotlight-color: rgba(34, 211, 238, 0.06);
+  --selection-bg:    #0e4c6e;
+  --selection-fg:    #ecfeff;
+  --glow-a: rgba(34, 211, 238, 0.08);
+  --glow-b: rgba(56, 189, 248, 0.07);
+  --glow-c: rgba(14, 165, 233, 0.05);
+  --glow-d: rgba(6, 182, 212, 0.06);
+}
+
+/* ── Forest light ── */
+.theme-forest {
+  --grad-a:          oklch(0.18 0.06 148);
+  --grad-b:          oklch(0.52 0.16 150);
+  --grad-c:          oklch(0.54 0.14 178);
+  --accent-1:        oklch(0.55 0.16 152);
+  --accent-2:        oklch(0.56 0.14 178);
+  --spotlight-color: rgba(74, 222, 128, 0.05);
+  --selection-bg:    #bbf7d0;
+  --selection-fg:    #14532d;
+  --glow-a: rgba(74, 222, 128, 0.10);
+  --glow-b: rgba(52, 211, 153, 0.08);
+  --glow-c: rgba(16, 185, 129, 0.07);
+  --glow-d: rgba(45, 212, 191, 0.07);
+}
+/* ── Forest dark ── */
+.dark.theme-forest {
+  --grad-a:          #f0fdf4;
+  --grad-b:          #4ade80;
+  --grad-c:          #34d399;
+  --accent-1:        #4ade80;
+  --accent-2:        #34d399;
+  --spotlight-color: rgba(74, 222, 128, 0.06);
+  --selection-bg:    #14532d;
+  --selection-fg:    #f0fdf4;
+  --glow-a: rgba(74, 222, 128, 0.08);
+  --glow-b: rgba(52, 211, 153, 0.07);
+  --glow-c: rgba(16, 185, 129, 0.05);
+  --glow-d: rgba(45, 212, 191, 0.06);
+}
+
+/* ── Aurora light ── */
+.theme-aurora {
+  --grad-a:          oklch(0.18 0.08 286);
+  --grad-b:          oklch(0.52 0.22 290);
+  --grad-c:          oklch(0.54 0.22 340);
+  --accent-1:        oklch(0.54 0.22 290);
+  --accent-2:        oklch(0.56 0.22 340);
+  --spotlight-color: rgba(192, 132, 252, 0.05);
+  --selection-bg:    #e9d5ff;
+  --selection-fg:    #3b0764;
+  --glow-a: rgba(192, 132, 252, 0.11);
+  --glow-b: rgba(244, 114, 182, 0.09);
+  --glow-c: rgba(167, 139, 250, 0.07);
+  --glow-d: rgba(251, 113, 133, 0.06);
+}
+/* ── Aurora dark ── */
+.dark.theme-aurora {
+  --grad-a:          #fdf4ff;
+  --grad-b:          #c084fc;
+  --grad-c:          #f472b6;
+  --accent-1:        #c084fc;
+  --accent-2:        #f472b6;
+  --spotlight-color: rgba(192, 132, 252, 0.06);
+  --selection-bg:    #3b0764;
+  --selection-fg:    #fdf4ff;
+  --glow-a: rgba(192, 132, 252, 0.09);
+  --glow-b: rgba(244, 114, 182, 0.08);
+  --glow-c: rgba(167, 139, 250, 0.06);
+  --glow-d: rgba(251, 113, 133, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL RULES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 ::selection {
   background-color: var(--selection-bg);
-  color:            var(--selection-text);
+  color:            var(--selection-fg);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   CURSOR SPOTLIGHT  (tint changes with theme via --spotlight-color)
-   ═══════════════════════════════════════════════════════════════════════════ */
 .cursor-spotlight {
   background: radial-gradient(
     600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--spotlight-color, rgba(56, 189, 248, 0.04)) 0%,
+    var(--spotlight-color) 0%,
     transparent 70%
   );
   pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 1;
-  transition: background 0.15s ease;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   AMBIENT BACKGROUND BLOBS
-   ═══════════════════════════════════════════════════════════════════════════ */
-@keyframes blob-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(30px, -40px) scale(1.05); }
-  66%       { transform: translate(-20px, 20px) scale(0.97); }
-}
-@keyframes blob-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(-35px, 25px) scale(1.04); }
-  66%       { transform: translate(20px, -30px) scale(0.98); }
-}
-@keyframes blob-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%       { transform: translate(25px, 35px) scale(1.06); }
-}
-.ambient-blob-1 { animation: blob-drift-1 18s ease-in-out infinite; }
-.ambient-blob-2 { animation: blob-drift-2 22s ease-in-out infinite; }
-.ambient-blob-3 { animation: blob-drift-3 26s ease-in-out infinite; }
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   GRADIENT TEXT  — single rule, all colors from CSS vars
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* ── Gradient text ── */
 @keyframes gradient-shift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -399,8 +310,7 @@ html.font-serif-pkg h5 {
 }
 
 .gradient-text {
-  background: linear-gradient(
-    135deg,
+  background: linear-gradient(135deg,
     var(--grad-a) 0%,
     var(--grad-b) 30%,
     var(--grad-c) 60%,
@@ -413,7 +323,31 @@ html.font-serif-pkg h5 {
   animation: gradient-shift 6s ease infinite;
 }
 
-/* ── Timeline draw-in ── */
-.timeline-line {
-  transform-origin: top center;
+/* ── Glow orb drift animations ── */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -40px) scale(1.05); }
+  66%       { transform: translate(-20px, 25px) scale(0.97); }
 }
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-35px, 22px) scale(1.03); }
+  66%       { transform: translate(25px, -30px) scale(0.98); }
+}
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(22px, 35px) scale(1.06); }
+}
+@keyframes blob-drift-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-18px, -24px) scale(1.04); }
+  80%       { transform: translate(28px, 18px) scale(0.96); }
+}
+
+.blob-anim-1 { animation: blob-drift-1 24s ease-in-out infinite; }
+.blob-anim-2 { animation: blob-drift-2 30s ease-in-out infinite; }
+.blob-anim-3 { animation: blob-drift-3 34s ease-in-out infinite; }
+.blob-anim-4 { animation: blob-drift-4 28s ease-in-out infinite; }
+
+/* ── Timeline draw-in ── */
+.timeline-line { transform-origin: top center; }

@@ -9,6 +9,7 @@ import SearchCommand from "../components/SearchCommand";
 import { useSearchCommand } from "../context/SearchCommandContext";
 import PeekingCat from "../components/PeekingCat";
 import ThemeDrawer from "../components/ThemeDrawer";
+import BackgroundGlows from "../components/BackgroundGlows";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -59,12 +60,8 @@ const DashboardLayout = () => {
       {/* Cursor spotlight overlay */}
       <div ref={spotlightRef} className="cursor-spotlight" aria-hidden="true" />
 
-      {/* Ambient background blobs — color driven by CSS vars, updates with theme */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-        <div className="ambient-blob-1 absolute top-[-10%] left-[10%] w-80 h-80 rounded-full blur-3xl" style={{ background: "var(--blob-1-bg)" }} />
-        <div className="ambient-blob-2 absolute top-[40%] right-[5%] w-72 h-72 rounded-full blur-3xl"  style={{ background: "var(--blob-2-bg)" }} />
-        <div className="ambient-blob-3 absolute bottom-[10%] left-[30%] w-64 h-64 rounded-full blur-3xl" style={{ background: "var(--blob-3-bg)" }} />
-      </div>
+      {/* Atmospheric background glows — theme-specific large radial orbs */}
+      <BackgroundGlows />
 
       {/* Sidebar */}
       <div className="hidden lg:block w-64 h-screen fixed bg-primary px-2 pt-8 border-r border-neutral-700 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 overflow-y-auto z-10">
