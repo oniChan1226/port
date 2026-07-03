@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 const Sidebar = () => {
   const { toggle: toggleSearch } = useSearchCommand();
-  const { theme, toggle: toggleTheme } = useTheme();
+  const { mode: theme, toggleMode: toggleTheme } = useTheme();
   const location = useLocation();
   const [time, setTime] = useState(() => new Date());
 

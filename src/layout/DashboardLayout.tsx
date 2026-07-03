@@ -8,6 +8,7 @@ import { keyNavRoutes } from "../config/KeyNavConfig";
 import SearchCommand from "../components/SearchCommand";
 import { useSearchCommand } from "../context/SearchCommandContext";
 import PeekingCat from "../components/PeekingCat";
+import ThemeDrawer from "../components/ThemeDrawer";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -52,17 +53,17 @@ const DashboardLayout = () => {
 
   return (
     <div
-      className="flex relative selection:bg-sky-900 selection:text-white"
+      className="flex relative"
       style={{ color: "var(--text-base)" }}
     >
       {/* Cursor spotlight overlay */}
       <div ref={spotlightRef} className="cursor-spotlight" aria-hidden="true" />
 
-      {/* Ambient background blobs — tinted differently per theme */}
+      {/* Ambient background blobs — color driven by CSS vars, updates with theme */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-        <div className="ambient-blob-1 absolute top-[-10%] left-[10%] w-80 h-80 rounded-full dark:bg-sky-900/10 bg-sky-300/20 blur-3xl" />
-        <div className="ambient-blob-2 absolute top-[40%] right-[5%] w-72 h-72 rounded-full dark:bg-indigo-900/10 bg-indigo-300/20 blur-3xl" />
-        <div className="ambient-blob-3 absolute bottom-[10%] left-[30%] w-64 h-64 rounded-full dark:bg-violet-900/8 bg-violet-300/15 blur-3xl" />
+        <div className="ambient-blob-1 absolute top-[-10%] left-[10%] w-80 h-80 rounded-full blur-3xl" style={{ background: "var(--blob-1-bg)" }} />
+        <div className="ambient-blob-2 absolute top-[40%] right-[5%] w-72 h-72 rounded-full blur-3xl"  style={{ background: "var(--blob-2-bg)" }} />
+        <div className="ambient-blob-3 absolute bottom-[10%] left-[30%] w-64 h-64 rounded-full blur-3xl" style={{ background: "var(--blob-3-bg)" }} />
       </div>
 
       {/* Sidebar */}
@@ -91,6 +92,7 @@ const DashboardLayout = () => {
       </div>
 
       <SearchCommand />
+      <ThemeDrawer />
       <PeekingCat />
     </div>
   );

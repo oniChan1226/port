@@ -47,7 +47,8 @@ export default function LoadingScreen() {
             className="absolute left-0 right-0 h-px pointer-events-none"
             style={{
               background:
-                "linear-gradient(90deg, transparent 0%, rgba(56,189,248,0.25) 30%, rgba(99,102,241,0.4) 50%, rgba(56,189,248,0.25) 70%, transparent 100%)",
+                "linear-gradient(90deg, transparent 0%, var(--spotlight-color, rgba(56,189,248,0.3)) 30%, var(--accent-1, #38bdf8) 50%, var(--spotlight-color, rgba(56,189,248,0.3)) 70%, transparent 100%)",
+              opacity: 0.6,
             }}
             initial={{ top: "0%" }}
             animate={{ top: "105%" }}
@@ -95,7 +96,8 @@ export default function LoadingScreen() {
 
             {/* Dot separator */}
             <motion.span
-              className="mt-3 w-1 h-1 rounded-full bg-sky-500"
+              className="mt-3 w-1 h-1 rounded-full"
+              style={{ background: "var(--accent-1, #0ea5e9)" }}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3, delay: 1.2 }}
@@ -117,7 +119,7 @@ export default function LoadingScreen() {
               className="h-full"
               style={{
                 background:
-                  "linear-gradient(90deg, #0ea5e9, #6366f1, #8b5cf6)",
+                  "linear-gradient(90deg, var(--accent-1, #0ea5e9), var(--accent-2, #6366f1), var(--grad-c, #8b5cf6))",
                 transformOrigin: "left",
               }}
               initial={{ scaleX: 0 }}

@@ -2,125 +2,418 @@
 @plugin 'tailwind-scrollbar';
 @plugin "@tailwindcss/typography";
 
-/* Class-based dark mode: dark: prefix activates when any ancestor has .dark */
 @variant dark (&:where(.dark, .dark *));
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   FONT PACKAGES
+   --font-body drives body { font-family }, heading elements also override
+   when font-serif-pkg is active.
+   ═══════════════════════════════════════════════════════════════════════════ */
 body {
-    font-family: "Inter", sans-serif;
+  font-family: var(--font-body, 'Inter', sans-serif);
 }
 
-/* ══════════════════════════════════════════
-   THEME TOKENS
-   :root  = light mode (default)
-   .dark  = dark mode (restores Tailwind's dark neutral values)
-   ══════════════════════════════════════════ */
+html.font-inter-pkg  { --font-body: 'Inter', sans-serif; }
+html.font-mono-pkg   { --font-body: 'JetBrains Mono', monospace; }
+html.font-serif-pkg  { --font-body: 'Inter', sans-serif; }
 
+html.font-serif-pkg h1,
+html.font-serif-pkg h2,
+html.font-serif-pkg h3,
+html.font-serif-pkg h4,
+html.font-serif-pkg h5 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THEME TOKEN SYSTEM
+   ─────────────────────────────────────────────────────────────────────────
+   Cascade order (later = wins for same property):
+     :root              light defaults (neutral grays)
+     .dark              dark defaults  (neutral grays)
+     .theme-X           light variant  (hue-tinted surface scale)
+     .dark.theme-X      dark  variant  (hue-tinted surface scale, highest spec)
+
+   Every --color-neutral-* override automatically propagates to ALL Tailwind
+   bg-neutral-*, border-neutral-*, text-neutral-* utilities sitewide.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── DEFAULT LIGHT ──────────────────────────────────────────────────────── */
 :root {
-  /* Neutral scale — remapped for light mode */
-  --color-neutral-900: #f8fafc;   /* main page bg: near-white */
-  --color-neutral-800: #f1f5f9;   /* card / secondary surface */
-  --color-neutral-700: #e2e8f0;   /* borders / tertiary surface */
-  --color-neutral-600: #64748b;   /* intentionally mid-gray — used for hover text */
-  --color-neutral-500: #64748b;   /* muted text */
-  --color-neutral-400: #475569;   /* subtitle text — darker for light contrast */
+  /* Surface scale */
+  --color-neutral-900: #f8fafc;
+  --color-neutral-800: #f1f5f9;
+  --color-neutral-700: #e2e8f0;
+  --color-neutral-600: #64748b;
+  --color-neutral-500: #64748b;
+  --color-neutral-400: #475569;
+  --color-primary:     #ffffff;
+  --text-base:         #111827;
 
-  /* Primary color override — sidebar, primary surfaces */
-  --color-primary: #ffffff;
+  /* Gradient text stops */
+  --grad-a: #0f172a;
+  --grad-b: #0369a1;
+  --grad-c: #4338ca;
 
-  /* Semantic text token used in root layout */
-  --text-base: #111827;
+  /* Accent (components use this for highlights) */
+  --accent-1: #0284c7;
+  --accent-2: #4338ca;
+
+  /* Cursor spotlight tint */
+  --spotlight-color: rgba(56, 189, 248, 0.04);
+
+  /* Ambient blob backgrounds */
+  --blob-1-bg: rgba(56,  189, 248, 0.18);
+  --blob-2-bg: rgba(99,  102, 241, 0.16);
+  --blob-3-bg: rgba(139,  92, 246, 0.12);
+
+  /* Text selection */
+  --selection-bg:   #bfdbfe;
+  --selection-text: #1e3a5f;
 }
 
+/* ── DEFAULT DARK ───────────────────────────────────────────────────────── */
 .dark {
-  /* Restore Tailwind v4's default dark neutral values */
   --color-neutral-900: oklch(0.205 0 0);
   --color-neutral-800: oklch(0.269 0 0);
   --color-neutral-700: oklch(0.371 0 0);
   --color-neutral-600: oklch(0.439 0 0);
   --color-neutral-500: oklch(0.509 0 0);
   --color-neutral-400: oklch(0.608 0 0);
+  --color-primary:     #1c1c1c;
+  --text-base:         rgba(255, 255, 255, 0.9);
 
-  /* Primary dark surface */
-  --color-primary: #1c1c1c;
+  --grad-a: #ffffff;
+  --grad-b: #7dd3fc;
+  --grad-c: #818cf8;
 
-  /* Semantic text token */
-  --text-base: rgba(255, 255, 255, 0.9);
+  --accent-1: #38bdf8;
+  --accent-2: #818cf8;
+
+  --spotlight-color: rgba(56, 189, 248, 0.05);
+
+  --blob-1-bg: rgba(56,  189, 248, 0.07);
+  --blob-2-bg: rgba(99,  102, 241, 0.07);
+  --blob-3-bg: rgba(139,  92, 246, 0.05);
+
+  --selection-bg:   #1e40af;
+  --selection-text: #e0f2fe;
 }
 
-/* ── Cursor spotlight ── */
+/* ══════════════════════════════════════════════════════════════════════════
+   SAHARA  — warm desert, amber/orange palette
+   Surface hue: ~65 ° (warm brown / golden)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Light Sahara */
+.theme-sahara {
+  --color-neutral-900: #fffbf2;
+  --color-neutral-800: #fdf5e0;
+  --color-neutral-700: #e8d8a8;
+  --color-neutral-600: #8a6c3c;
+  --color-neutral-500: #6b5028;
+  --color-neutral-400: #4a3418;
+  --color-primary:     #fffbf2;
+  --text-base:         #2a1a06;
+
+  --grad-a: #1c0a00;
+  --grad-b: #b45309;
+  --grad-c: #c2410c;
+
+  --accent-1: #d97706;
+  --accent-2: #ea580c;
+
+  --spotlight-color: rgba(251, 191, 36, 0.06);
+
+  --blob-1-bg: rgba(251, 191,  36, 0.22);
+  --blob-2-bg: rgba(249, 115,  22, 0.18);
+  --blob-3-bg: rgba(239,  68,  68, 0.12);
+
+  --selection-bg:   #fde68a;
+  --selection-text: #451a03;
+}
+
+/* Dark Sahara */
+.dark.theme-sahara {
+  --color-neutral-900: #1c1812;
+  --color-neutral-800: #252016;
+  --color-neutral-700: #3a3020;
+  --color-neutral-600: #60502e;
+  --color-neutral-500: #7c6840;
+  --color-neutral-400: #9c8658;
+  --color-primary:     #181410;
+  --text-base:         rgba(255, 246, 225, 0.92);
+
+  --grad-a: #fef3c7;
+  --grad-b: #fbbf24;
+  --grad-c: #f97316;
+
+  --accent-1: #fbbf24;
+  --accent-2: #f97316;
+
+  --spotlight-color: rgba(251, 191, 36, 0.07);
+
+  --blob-1-bg: rgba(251, 191,  36, 0.09);
+  --blob-2-bg: rgba(249, 115,  22, 0.07);
+  --blob-3-bg: rgba(239,  68,  68, 0.05);
+
+  --selection-bg:   #78350f;
+  --selection-text: #fef3c7;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   OCEAN  — deep sea, cyan/teal palette
+   Surface hue: ~210 ° (blue / deep ocean)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Light Ocean */
+.theme-ocean {
+  --color-neutral-900: #f0f9ff;
+  --color-neutral-800: #e0f4fe;
+  --color-neutral-700: #bae8fd;
+  --color-neutral-600: #3a7a9c;
+  --color-neutral-500: #285e7c;
+  --color-neutral-400: #18445c;
+  --color-primary:     #f0f9ff;
+  --text-base:         #0a2440;
+
+  --grad-a: #0a1628;
+  --grad-b: #0891b2;
+  --grad-c: #0369a1;
+
+  --accent-1: #0891b2;
+  --accent-2: #0369a1;
+
+  --spotlight-color: rgba(34, 211, 238, 0.06);
+
+  --blob-1-bg: rgba( 34, 211, 238, 0.20);
+  --blob-2-bg: rgba( 56, 189, 248, 0.16);
+  --blob-3-bg: rgba( 14, 165, 233, 0.12);
+
+  --selection-bg:   #bae6fd;
+  --selection-text: #0c4a6e;
+}
+
+/* Dark Ocean */
+.dark.theme-ocean {
+  --color-neutral-900: #0e1820;
+  --color-neutral-800: #142028;
+  --color-neutral-700: #1c3040;
+  --color-neutral-600: #2c4a62;
+  --color-neutral-500: #3c6080;
+  --color-neutral-400: #5080a0;
+  --color-primary:     #0a1218;
+  --text-base:         rgba(220, 242, 255, 0.92);
+
+  --grad-a: #ecfeff;
+  --grad-b: #22d3ee;
+  --grad-c: #38bdf8;
+
+  --accent-1: #22d3ee;
+  --accent-2: #38bdf8;
+
+  --spotlight-color: rgba(34, 211, 238, 0.07);
+
+  --blob-1-bg: rgba( 34, 211, 238, 0.09);
+  --blob-2-bg: rgba( 56, 189, 248, 0.07);
+  --blob-3-bg: rgba( 14, 165, 233, 0.05);
+
+  --selection-bg:   #0e4c6e;
+  --selection-text: #ecfeff;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FOREST  — deep woodland, green/emerald palette
+   Surface hue: ~145 ° (green)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Light Forest */
+.theme-forest {
+  --color-neutral-900: #f2faf4;
+  --color-neutral-800: #e4f5e8;
+  --color-neutral-700: #b8d8c2;
+  --color-neutral-600: #3a6e48;
+  --color-neutral-500: #285835;
+  --color-neutral-400: #184025;
+  --color-primary:     #f2faf4;
+  --text-base:         #0c2414;
+
+  --grad-a: #052010;
+  --grad-b: #15803d;
+  --grad-c: #0d9488;
+
+  --accent-1: #16a34a;
+  --accent-2: #0d9488;
+
+  --spotlight-color: rgba(74, 222, 128, 0.06);
+
+  --blob-1-bg: rgba( 74, 222, 128, 0.20);
+  --blob-2-bg: rgba( 52, 211, 153, 0.16);
+  --blob-3-bg: rgba( 45, 212, 191, 0.12);
+
+  --selection-bg:   #bbf7d0;
+  --selection-text: #14532d;
+}
+
+/* Dark Forest */
+.dark.theme-forest {
+  --color-neutral-900: #0e1810;
+  --color-neutral-800: #142016;
+  --color-neutral-700: #1e3022;
+  --color-neutral-600: #2e5035;
+  --color-neutral-500: #3e6848;
+  --color-neutral-400: #528a60;
+  --color-primary:     #0a1410;
+  --text-base:         rgba(220, 248, 228, 0.92);
+
+  --grad-a: #f0fdf4;
+  --grad-b: #4ade80;
+  --grad-c: #34d399;
+
+  --accent-1: #4ade80;
+  --accent-2: #34d399;
+
+  --spotlight-color: rgba(74, 222, 128, 0.07);
+
+  --blob-1-bg: rgba( 74, 222, 128, 0.09);
+  --blob-2-bg: rgba( 52, 211, 153, 0.07);
+  --blob-3-bg: rgba( 45, 212, 191, 0.05);
+
+  --selection-bg:   #14532d;
+  --selection-text: #f0fdf4;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   AURORA  — northern lights, purple/pink palette
+   Surface hue: ~290 ° (violet / purple)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Light Aurora */
+.theme-aurora {
+  --color-neutral-900: #faf5ff;
+  --color-neutral-800: #f3e8ff;
+  --color-neutral-700: #dab8f8;
+  --color-neutral-600: #7040b0;
+  --color-neutral-500: #5828a0;
+  --color-neutral-400: #3e1888;
+  --color-primary:     #faf5ff;
+  --text-base:         #1e0840;
+
+  --grad-a: #1a0228;
+  --grad-b: #7c3aed;
+  --grad-c: #db2777;
+
+  --accent-1: #7c3aed;
+  --accent-2: #db2777;
+
+  --spotlight-color: rgba(192, 132, 252, 0.06);
+
+  --blob-1-bg: rgba(192, 132, 252, 0.22);
+  --blob-2-bg: rgba(244, 114, 182, 0.16);
+  --blob-3-bg: rgba(251, 113, 133, 0.12);
+
+  --selection-bg:   #e9d5ff;
+  --selection-text: #3b0764;
+}
+
+/* Dark Aurora */
+.dark.theme-aurora {
+  --color-neutral-900: #130d1e;
+  --color-neutral-800: #1a1228;
+  --color-neutral-700: #281a3e;
+  --color-neutral-600: #4a2e6e;
+  --color-neutral-500: #623e8e;
+  --color-neutral-400: #8258ae;
+  --color-primary:     #0f0918;
+  --text-base:         rgba(245, 232, 255, 0.92);
+
+  --grad-a: #fdf4ff;
+  --grad-b: #c084fc;
+  --grad-c: #f472b6;
+
+  --accent-1: #c084fc;
+  --accent-2: #f472b6;
+
+  --spotlight-color: rgba(192, 132, 252, 0.07);
+
+  --blob-1-bg: rgba(192, 132, 252, 0.10);
+  --blob-2-bg: rgba(244, 114, 182, 0.08);
+  --blob-3-bg: rgba(251, 113, 133, 0.06);
+
+  --selection-bg:   #3b0764;
+  --selection-text: #fdf4ff;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEXT SELECTION  (theme-aware)
+   ═══════════════════════════════════════════════════════════════════════════ */
+::selection {
+  background-color: var(--selection-bg);
+  color:            var(--selection-text);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CURSOR SPOTLIGHT  (tint changes with theme via --spotlight-color)
+   ═══════════════════════════════════════════════════════════════════════════ */
 .cursor-spotlight {
-    background: radial-gradient(
-        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(56, 189, 248, 0.04) 0%,
-        transparent 70%
-    );
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    transition: background 0.1s ease;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--spotlight-color, rgba(56, 189, 248, 0.04)) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  transition: background 0.15s ease;
 }
 
-/* ── Ambient background blobs ── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   AMBIENT BACKGROUND BLOBS
+   ═══════════════════════════════════════════════════════════════════════════ */
 @keyframes blob-drift-1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33%       { transform: translate(30px, -40px) scale(1.05); }
-    66%       { transform: translate(-20px, 20px) scale(0.97); }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -40px) scale(1.05); }
+  66%       { transform: translate(-20px, 20px) scale(0.97); }
 }
 @keyframes blob-drift-2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33%       { transform: translate(-35px, 25px) scale(1.04); }
-    66%       { transform: translate(20px, -30px) scale(0.98); }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-35px, 25px) scale(1.04); }
+  66%       { transform: translate(20px, -30px) scale(0.98); }
 }
 @keyframes blob-drift-3 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50%       { transform: translate(25px, 35px) scale(1.06); }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(25px, 35px) scale(1.06); }
 }
-
 .ambient-blob-1 { animation: blob-drift-1 18s ease-in-out infinite; }
 .ambient-blob-2 { animation: blob-drift-2 22s ease-in-out infinite; }
 .ambient-blob-3 { animation: blob-drift-3 26s ease-in-out infinite; }
 
-/* ── Animated gradient text — dual theme ── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   GRADIENT TEXT  — single rule, all colors from CSS vars
+   ═══════════════════════════════════════════════════════════════════════════ */
 @keyframes gradient-shift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* Light mode: rich dark-to-indigo gradient (readable on white) */
 .gradient-text {
-    background: linear-gradient(
-        135deg,
-        #0f172a 0%,
-        #0369a1 30%,
-        #4338ca 60%,
-        #0f172a 100%
-    );
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 6s ease infinite;
-}
-
-/* Dark mode: light sky-to-indigo gradient */
-.dark .gradient-text {
-    background: linear-gradient(
-        135deg,
-        #ffffff 0%,
-        #7dd3fc 30%,
-        #818cf8 60%,
-        #ffffff 100%
-    );
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 6s ease infinite;
+  background: linear-gradient(
+    135deg,
+    var(--grad-a) 0%,
+    var(--grad-b) 30%,
+    var(--grad-c) 60%,
+    var(--grad-a) 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
 }
 
 /* ── Timeline draw-in ── */
 .timeline-line {
-    transform-origin: top center;
+  transform-origin: top center;
 }

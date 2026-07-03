@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 const Header = () => {
   const { toggle: toggleSearch } = useSearchCommand();
-  const { theme, toggle: toggleTheme } = useTheme();
+  const { mode: theme, toggleMode: toggleTheme } = useTheme();
 
   return (
     <div className="w-[94%] mx-auto flex justify-between items-center">
