@@ -1,3 +1,52 @@
+export const forgeMarkdown = `
+## Overview
+
+**Forge** is a discipline workspace that unifies todos, habits, notes, and journaling on a single dashboard with an aggregated calendar view. Built and launched solo — ships **free and Pro tiers** with advanced analytics & insights, a recall system, and custom themes.
+
+## Key Features
+
+- **Unified Dashboard** — todos, habits, notes, and journal entries in one place
+- **Aggregated Calendar View** — see all your activity in a single timeline
+- **Pro Tier** — advanced analytics & insights, recall system, custom themes
+- **PostHog Instrumentation** — user behavior tracked to validate features and guide the product roadmap
+
+## Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS, Framer Motion
+- **Backend**: Node.js, Express.js, MongoDB
+- **Auth**: JWT / OAuth 2.0
+- **Analytics**: PostHog
+- **Deployment**: Vercel
+
+## Product Thinking
+
+Instrumented user behavior with PostHog to validate features and guide the roadmap toward what drove real engagement — building what users actually use, not just what sounds good.
+
+> Live at [forgehub.me](https://forgehub.me)
+`;
+
+export const aiResumeMatcherMarkdown = `
+## Overview
+
+**AI Resume Matcher** is an AI tool that scores a resume against a job description, returns a match percentage, recommends targeted tweaks, and predicts likely interview questions from role and market data.
+
+## Features
+
+- **Match Scoring** — AI-powered resume ↔ JD alignment score
+- **Targeted Tweaks** — specific, actionable improvement suggestions
+- **Interview Question Prediction** — predicts likely questions based on role and market data
+- **LLM Integration** — powered by OpenAI / Claude for deep semantic analysis
+
+## Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **AI**: OpenAI / Claude API, vector search for semantic matching
+- **Database**: PostgreSQL + pgvector
+
+> 🚧 Currently in development.
+`;
+
 export const skillNexusMarkdown = `
 ## Abstract
 
@@ -13,56 +62,19 @@ The app follows a **modular client-server architecture**:
 - **Backend**: Node.js + Express (REST APIs)
 - **Database**: MongoDB Atlas (cloud-hosted)
 - **ML Layer**: Python (planned microservice integration for KNN model)
-- **Design Patterns**: MVC, Singleton (DB), Observer (planned), Factory (user roles)
-
-Diagrams & Flowcharts were created using **Draw.io** for better visualization and future collaboration.
 
 ## Key Features
 
-- **Profile Setup** – Define skills you can teach and those you want to learn  
-- **Skill Barter Requests** – Request, accept, reject, or complete exchanges  
-- **ML-Based Matching** – Personalized suggestions using **KNN**  
-- **Ratings & Reviews** – Reputation building after each exchange  
-- **Analytics Dashboard** – Insights into your barter history and feedback  
+- **Profile Setup** – Define skills you can teach and those you want to learn
+- **Skill Barter Requests** – Request, accept, reject, or complete exchanges
+- **ML-Based Matching** – Personalized suggestions using **KNN**
+- **Ratings & Reviews** – Reputation building after each exchange
+- **Analytics Dashboard** – Insights into your barter history and feedback
 
-## Security & Dev Tools
+## Security
 
-- **Auth**: JWT, bcrypt-hashed passwords  
-- **Access Control**: Role-based permissions (admin, user, reviewer planned)  
-- **Testing**: Postman, peer testing  
-- **Version Control**: GitHub  
-- **Planned**: Firebase for notification triggers
-
-## Next Steps
-
-We're aiming to expand Skill Nexus into a full-fledged **community platform**, featuring:
-
-- Real-time chat (via WebSockets)
-- Mobile app (React Native)
-- Gamification elements (XP, badges, leaderboards)
-- Voice & video-based sessions for live mentorship
-- Verified user profiles and endorsements
-
-## Use Cases
-
-- A student trades **frontend mentorship** for **Python tutoring**  
-- A freelancer swaps **logo design** for **SEO content writing**  
-- A hobbyist learns by **teaching others**, forming a feedback loop of growth
-
-## References
-
-- [React Documentation](https://reactjs.org)  
-- [Node.js Docs](https://nodejs.org/en/docs)  
-- [Express Guide](https://expressjs.com)  
-- [MongoDB Atlas](https://www.mongodb.com/atlas/database)  
-- [Scikit-learn: KNN](https://scikit-learn.org/stable/modules/neighbors.html)  
-- [JWT Introduction](https://jwt.io/introduction)  
-- [bcrypt GitHub](https://github.com/kelektiv/node.bcrypt.js)  
-- [Draw.io](https://app.diagrams.net)
-
-> ⚠️ Project is under active development.  
-> **Developers**: Uzair Zahid · M. Zeeshan · Fahad Khan
-
+- **Auth**: JWT, bcrypt-hashed passwords
+- **Access Control**: Role-based permissions
 `;
 
 export const alyonusMarkdown = `
@@ -70,49 +82,20 @@ export const alyonusMarkdown = `
 
 **Alyonus** is a modern web application tailored for the medical industry. It empowers clinics and service providers to **streamline operations**, **highlight their services**, and improve **patient engagement**. Built using the **MERN stack**, Alyonus focuses on simplicity, performance, and modularity.
 
-It’s not just a business showcase — it’s a lightweight **digital assistant** for medical organizations.
-
 ## My Contribution
 
-As the lead developer, I implemented the full-stack system from the ground up, ensuring seamless UI/UX while maintaining a modular backend.
+As the lead developer, I implemented the full-stack system from the ground up:
 
-- Built with **React.js** and **Tailwind CSS** for a fast, responsive interface  
-- Implemented secure **authentication** and **role-based access**  
-- Designed **MongoDB schemas** for managing clinics, services, and appointments  
-- Connected everything with **Express APIs**, ensuring clean separation of concerns  
-- Embedded an elegant video landing component to showcase **Alyonus' value visually**
+- Built with **React.js** and **Tailwind CSS** for a fast, responsive interface
+- Implemented secure **authentication** and **role-based access**
+- Designed **MongoDB schemas** for managing clinics, services, and appointments
+- Connected everything with **Express APIs**, ensuring clean separation of concerns
 
-## Tech Stack & Tools
+## Tech Stack
 
-- **Frontend**: React + Tailwind CSS (SPA with component-based design)  
-- **Backend**: Node.js + Express.js (RESTful API architecture)  
-- **Database**: MongoDB (cloud-hosted using MongoDB Atlas)  
-- **Tools**: Postman, GitHub, Figma (for layout planning)
-
-## Core Features
-
-- **Service Listings** – Highlight medical services with dynamic cards  
-- **Clinic Search & Profiles** – Easy discovery with filterable service categories  
-- **Promotional Video Integration** – Enhances branding and trust  
-- **User Roles** – Patient vs Admin dashboard (planned)  
-- **Appointment Booking & Review System** (future roadmap)
-
-## Design Philosophy
-
-- **Minimal & Accessible** – Focused on clean visuals, legible content, and fast loads  
-- **Reusable Components** – Everything from cards to navbars is modular  
-- **Scalable API Structure** – Routes follow REST principles with future GraphQL support in mind  
-- **Performance-First** – Media assets compressed to <1MB and lazy-loaded
-
-## References
-
-- [React](https://reactjs.org/)  
-- [Tailwind CSS](https://tailwindcss.com/)  
-- [Node.js](https://nodejs.org/en/)  
-- [Express](https://expressjs.com/)  
-- [MongoDB Atlas](https://www.mongodb.com/atlas)  
-- [Video Optimization (Cloudinary)](https://cloudinary.com/documentation/video_manipulation)
-
+- **Frontend**: React + Tailwind CSS
+- **Backend**: Node.js + Express.js
+- **Database**: MongoDB Atlas
 `;
 
 export interface Project {
@@ -126,31 +109,60 @@ export interface Project {
   markdown: string;
   demoLink: string;
   sourceLink: string;
+  status?: "live" | "in-development";
 }
 
 export const myProjects: Project[] = [
   {
     _id: 0,
+    slug: "forge",
+    title: "Forge",
+    description:
+      "A discipline workspace unifying todos, habits, notes, and journaling on one dashboard — ships free and Pro tiers.",
+    tag: "SaaS",
+    src: "",
+    timestamps: "2025",
+    markdown: forgeMarkdown,
+    demoLink: "https://forgehub.me",
+    sourceLink: "",
+    status: "live",
+  },
+  {
+    _id: 1,
+    slug: "ai-resume-matcher",
+    title: "AI Resume Matcher",
+    description:
+      "AI tool that scores a resume against a JD, returns a match %, recommends targeted tweaks, and predicts interview questions.",
+    tag: "AI Tool",
+    src: "",
+    timestamps: "2025",
+    markdown: aiResumeMatcherMarkdown,
+    demoLink: "",
+    sourceLink: "",
+    status: "in-development",
+  },
+  {
+    _id: 2,
     slug: "skill-nexus",
     title: "Skill Nexus",
     description:
       "A barter system that eliminates the financial barrier and lets you exchange skills for skills.",
     tag: "SaaS",
     src: "/SkillNexus.mp4",
-    timestamps: "24 May, 2025",
+    timestamps: "May 2025",
     markdown: skillNexusMarkdown,
     demoLink: "https://skill-nexus-frontend.vercel.app/",
     sourceLink: "",
   },
   {
-    _id: 1,
+    _id: 3,
     slug: "alyonus",
     title: "Alyonus",
     description:
       "A medical business application that streamlines and highlights the services provided by Alyonus.",
     tag: "MERN",
     src: "/Medical.mp4",
-    timestamps: "24 May, 2025",
+    timestamps: "May 2025",
     markdown: alyonusMarkdown,
     demoLink: "https://medical-three-gamma.vercel.app/",
     sourceLink: "",

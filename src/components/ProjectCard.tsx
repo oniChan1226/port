@@ -51,14 +51,22 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         className="relative block w-fit rounded-lg overflow-hidden bg-primary border border-neutral-800 cursor-pointer group hover:border-neutral-700 hover:shadow-lg hover:shadow-neutral-900/50 duration-300"
       >
         <div>
-          <video
-            src={project.src}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-          />
+          {project.src ? (
+            <video src={project.src} autoPlay loop muted playsInline preload="metadata" />
+          ) : (
+            <div className="w-full h-40 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-800 flex items-center justify-center">
+              {project.status === "live" && (
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-900/40 border border-green-700/50 text-green-400">
+                  Live
+                </span>
+              )}
+              {project.status === "in-development" && (
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-900/40 border border-amber-700/50 text-amber-400">
+                  In Development
+                </span>
+              )}
+            </div>
+          )}
         </div>
         <div className="w-[90%] mx-auto my-4 flex justify-between items-center gap-5">
           <div>

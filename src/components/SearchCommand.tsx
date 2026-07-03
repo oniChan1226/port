@@ -11,15 +11,12 @@ const SearchCommand = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
+    if (isOpen && inputRef.current) inputRef.current.focus();
   }, [isOpen]);
 
-  const clearText = () => setSearchQuery(() => "");
+  const clearText = () => setSearchQuery("");
 
   useEffect(() => {
-    console.log("executed")
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     };
@@ -28,24 +25,31 @@ const SearchCommand = () => {
   }, [closeModal]);
 
   const navigate = useNavigate();
-  const navigateTo = useCallback((link: string) => {
-    closeModal();
-    navigate(link);
-  }, [closeModal, navigate]);
+  const navigateTo = useCallback(
+    (link: string) => {
+      closeModal();
+      navigate(link);
+    },
+    [closeModal, navigate]
+  );
+
   const filteredLinks = NavlinksData.flatMap((navLink) =>
     navLink.links.filter((link) =>
       link.label.toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
+
   useEffect(() => {
     const handleEnter = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && filteredLinks.length > 0 && inputRef.current?.value !== "") {
+      if (
+        e.key === "Enter" &&
+        filteredLinks.length > 0 &&
+        inputRef.current?.value !== ""
+      ) {
         navigateTo(filteredLinks[0].href);
       }
     };
-    if (isOpen) {
-      window.addEventListener("keydown", handleEnter);
-    }
+    if (isOpen) window.addEventListener("keydown", handleEnter);
     return () => window.removeEventListener("keydown", handleEnter);
   }, [isOpen, filteredLinks, navigateTo]);
 
@@ -53,37 +57,23 @@ const SearchCommand = () => {
     <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
-          key={"search-query"}
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          exit={{
-            opacity: 0,
-          }}
+          key="search-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           className="fixed inset-0 z-[9998] bg-black/60 backdrop-blur-sm flex items-center justify-center"
           onClick={() => closeModal()}
         >
           <motion.div
-            initial={{
-              scale: 0.5,
-              opacity: 0,
-            }}
-            animate={{
-              scale: 1,
-              opacity: 1,
-            }}
-            exit={{
-              scale: 0.5,
-              opacity: 0,
-            }}
-            className="bg-neutral-900 text-white p-3 rounded-lg w-full max-w-md lg:max-w-xl shadow-xl"
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            className="bg-neutral-900 p-3 rounded-lg w-full max-w-md lg:max-w-xl shadow-xl border border-neutral-700"
+            style={{ color: "var(--text-base)" }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center text-sm mt-2">
-              <Search size={20} className="text-neutral-400" />
+              <Search size={20} className="text-neutral-500" />
               <input
                 type="text"
                 name="search"
@@ -91,24 +81,26 @@ const SearchCommand = () => {
                 placeholder="Type your command..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-2  outline-0"
+                className="w-full pl-2 outline-0 bg-transparent"
+                style={{ color: "var(--text-base)" }}
                 ref={inputRef}
               />
               {searchQuery && (
                 <X
                   size={20}
                   onClick={clearText}
-                  className="text-neutral-500 hover:text-neutral-200 transition-colors duration-300 cursor-pointer"
+                  className="text-neutral-500 hover:text-[var(--text-base)] transition-colors duration-300 cursor-pointer"
                 />
               )}
             </div>
-            <div className="mt-2 pt-2 border-t border-t-neutral-700 max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-neutral-900 text-sm font-semibold">
+            <div className="mt-2 pt-2 border-t border-neutral-700 max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 text-sm font-semibold">
               {filteredLinks.length > 0 ? (
                 filteredLinks.map((link) => (
                   <div
                     onClick={() => navigateTo(link.href)}
                     key={link.href}
-                    className="list-none flex items-center border border-transparent hover:border-neutral-700 px-2 py-2 rounded-md cursor-pointer duration-300 text-neutral-100 hover:text-neutral-300 space-x-2"
+                    className="list-none flex items-center border border-transparent hover:border-neutral-700 hover:bg-neutral-800 px-2 py-2 rounded-md cursor-pointer duration-300 space-x-2"
+                    style={{ color: "var(--text-base)" }}
                   >
                     {link.icon}
                     <p>{link.label}</p>

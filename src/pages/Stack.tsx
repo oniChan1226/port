@@ -60,7 +60,8 @@ const Stack = () => {
             name="search"
             id="search"
             placeholder="Search tools..."
-            className="border border-neutral-800/80 w-full rounded-md pl-9 pr-2 py-2 text-sm focus:outline-none focus:border-neutral-800 focus:shadow-xs shadow-neutral-800"
+            className="border border-neutral-700 w-full rounded-md pl-9 pr-2 py-2 text-sm focus:outline-none focus:border-neutral-600 bg-neutral-900 placeholder:text-neutral-500"
+            style={{ color: "var(--text-base)" }}
           />
           <Search
             className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500"

@@ -27,7 +27,7 @@ const StackCard: React.FC<StackCardProps> = ({ title, stackArray }) => {
         variants={cardVariants}
         className="border border-neutral-800 rounded-xl overflow-hidden"
       >
-        <h2 className="bg-primary text-lg font-bold p-5">{title}</h2>
+        <h2 className="bg-neutral-800 text-lg font-bold p-5 border-b border-neutral-700">{title}</h2>
         <motion.div
           variants={containerVariants}
           className="grid grid-cols-1 md:grid-cols-2 gap-5 p-3 lg:p-6"
@@ -41,7 +41,7 @@ const StackCard: React.FC<StackCardProps> = ({ title, stackArray }) => {
               rel="noopener noreferrer"
               className="flex gap-x-2 items-start justify-start border border-transparent rounded-lg p-2 lg:p-4 cursor-pointer group hover:border-neutral-800 hover:scale-105 hover:shadow-lg duration-300"
             >
-              <div className="bg-primary rounded-md p-3">
+              <div className="bg-neutral-800 rounded-md p-3 border border-neutral-700">
                 <stack.icon size={30} />
               </div>
               <div className="space-y-2">

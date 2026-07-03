@@ -32,7 +32,6 @@ const DashboardLayout = () => {
         toggle();
         return;
       }
-
       const target = e.target as HTMLElement;
       if (
         target.tagName === "INPUT" ||
@@ -40,50 +39,51 @@ const DashboardLayout = () => {
         target.isContentEditable
       )
         return;
-
       const route = keyNavRoutes[e.key];
       if (route) {
         e.preventDefault();
         navigate(route);
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [navigate, toggle]);
 
   return (
-    <div className="flex relative text-white/90 selection:bg-sky-900 selection:text-white">
+    <div
+      className="flex relative selection:bg-sky-900 selection:text-white"
+      style={{ color: "var(--text-base)" }}
+    >
       {/* Cursor spotlight overlay */}
       <div ref={spotlightRef} className="cursor-spotlight" aria-hidden="true" />
 
-      {/* Ambient background blobs */}
+      {/* Ambient background blobs — tinted differently per theme */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-        <div className="ambient-blob-1 absolute top-[-10%] left-[10%] w-80 h-80 rounded-full bg-sky-900/10 blur-3xl" />
-        <div className="ambient-blob-2 absolute top-[40%] right-[5%] w-72 h-72 rounded-full bg-indigo-900/10 blur-3xl" />
-        <div className="ambient-blob-3 absolute bottom-[10%] left-[30%] w-64 h-64 rounded-full bg-violet-900/8 blur-3xl" />
+        <div className="ambient-blob-1 absolute top-[-10%] left-[10%] w-80 h-80 rounded-full dark:bg-sky-900/10 bg-sky-300/20 blur-3xl" />
+        <div className="ambient-blob-2 absolute top-[40%] right-[5%] w-72 h-72 rounded-full dark:bg-indigo-900/10 bg-indigo-300/20 blur-3xl" />
+        <div className="ambient-blob-3 absolute bottom-[10%] left-[30%] w-64 h-64 rounded-full dark:bg-violet-900/8 bg-violet-300/15 blur-3xl" />
       </div>
 
       {/* Sidebar */}
-      <div className="hidden lg:block w-64 h-screen fixed bg-primary px-2 pt-8 border-r-1 border-r-neutral-800 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-neutral-900 overflow-y-auto z-10">
+      <div className="hidden lg:block w-64 h-screen fixed bg-primary px-2 pt-8 border-r border-neutral-700 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 overflow-y-auto z-10">
         <Sidebar />
       </div>
 
       {/* Mobile header */}
-      <header className="absolute left-0 top-0 lg:hidden w-full py-4 z-[9999] bg-neutral-900 border-b border-neutral-800">
+      <header className="absolute left-0 top-0 lg:hidden w-full py-4 z-[9999] bg-primary border-b border-neutral-700">
         <Header />
       </header>
 
       {/* Mobile bottom nav */}
-      <div className="absolute left-0 bottom-0 lg:hidden w-full py-2 md:py-3 z-[9999] bg-primary border-t border-neutral-800">
+      <div className="absolute left-0 bottom-0 lg:hidden w-full py-2 md:py-3 z-[9999] bg-primary border-t border-neutral-700">
         <NavigationMobile />
       </div>
 
       {/* Main content */}
-      <div className="flex-1 relative bg-neutral-900 lg:ml-64 pt-8 lg:pt-0 overflow-y-auto h-screen scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-neutral-900 z-[2]">
+      <div className="flex-1 relative bg-neutral-900 lg:ml-64 pt-8 lg:pt-0 overflow-y-auto h-screen scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 z-[2]">
         <main className="w-[90%] pb-32 lg:pb-0 max-w-4xl mx-auto mt-22 flex flex-col justify-between min-h-[93vh]">
           <Outlet />
-          <footer className="hidden lg:block w-full max-w-6xl mx-auto mt-10 py-6 bg-primary border border-neutral-800 text-sm">
+          <footer className="hidden lg:block w-full max-w-6xl mx-auto mt-10 py-6 bg-primary border border-neutral-700 text-sm">
             <Footer />
           </footer>
         </main>

@@ -1,28 +1,30 @@
-import { Code, GraduationCap, HeartHandshake, Sparkles } from "lucide-react";
+import { Brain, Code, GraduationCap, HeartHandshake } from "lucide-react";
 
-export const aboutMe: string = 
-  "Hi, I’m Fahad Khan, a software engineer based in Pakistan. I build thoughtful, user-centric websites and web applications that solve real problems with a strong product-focused mindset and attention to detail,  always with the end user in mind.";
-
+export const aboutMe: string =
+  "Full-stack software engineer with ~1.5 years building production MERN applications, with a deep focus on AI/LLM integration and an AI-first workflow. Core engineer on JobJen — a platform that grew from 50 to 7,000+ users — where I own AI interview quality through a human-in-the-loop calibration system and parallel scoring pipelines. Strong in system design, real-time event-driven backends, and shipping production-ready features autonomously in remote, distributed teams.";
 
 export const myCards = [
   {
     title: "Background",
-    brief: "I have been incolved in web development since 2023, focusing on full-stack development and DevOps",
+    brief:
+      "~1.5 years building production MERN apps. CS graduate from University of Central Punjab (2021–2025). Certified Web Developer — Johns Hopkins (Coursera).",
     Icon: GraduationCap,
   },
   {
-    title: "Skills",
-    brief: "MERN, TypeScript, Tailwind, Firebase, Docker, Redis, BullMQ.",
+    title: "Specialization",
+    brief:
+      "AI/LLM integration, agentic workflows, real-time event-driven backends, system design, and shipping at scale with an AI-first workflow.",
+    Icon: Brain,
+  },
+  {
+    title: "Tech Stack",
+    brief:
+      "MERN, TypeScript, Next.js, Redis, BullMQ, Socket.IO, PostgreSQL, Docker, OpenAI, Whisper, PostHog.",
     Icon: Code,
   },
   {
-    title: "Interests",
-    brief: "Development, System design, startups, financial literacy.",
-    Icon: Sparkles,
-  },
-  {
-    title: "Hobbies",
-    brief: "Gym, reading, netflix, anime, tech experiments.",
+    title: "Outside Work",
+    brief: "Gym, reading, startups, financial literacy, anime, tech experiments.",
     Icon: HeartHandshake,
   },
 ];

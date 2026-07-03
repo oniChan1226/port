@@ -4,11 +4,14 @@ import {
   SiTypescript,
   SiTailwindcss,
   SiShadcnui,
-  // SiNodeDotJs,
+  SiRedux,
   SiExpress,
   SiMongodb,
   SiPostgresql,
   SiRedis,
+  SiSupabase,
+  SiFirebase,
+  SiPrisma,
   SiFigma,
   SiCanva,
   SiDocker,
@@ -16,14 +19,16 @@ import {
   SiGithub,
   SiPosthog,
   SiVercel,
-  SiPostman
+  SiPostman,
+  SiOpenai,
+  SiJest,
 } from "react-icons/si";
 
 import { FaNodeJs, FaAws } from "react-icons/fa";
 import { GiBull } from "react-icons/gi";
-import { GrGraphQl } from "react-icons/gr";
 import { VscVscode } from "react-icons/vsc";
 import { type IconType } from "react-icons";
+import { Brain } from "lucide-react";
 
 export interface TechItem {
   name: string;
@@ -34,19 +39,19 @@ export interface TechItem {
 }
 
 export const myFrontEndTechStack: TechItem[] = [
-  // {
-  //   name: "Next.js",
-  //   description: "React framework for production-grade applications",
-  //   categories: ["React", "SSR", "TypeScript"],
-  //   website: "https://nextjs.org/",
-  //   icon: SiNextdotjs,
-  // },
   {
     name: "React",
     description: "Library for building user interfaces",
     categories: ["UI", "Components", "JavaScript"],
     website: "https://react.dev/",
     icon: SiReact,
+  },
+  {
+    name: "Next.js",
+    description: "React framework for production-grade full-stack applications",
+    categories: ["React", "SSR", "Full-Stack"],
+    website: "https://nextjs.org/",
+    icon: SiNextdotjs,
   },
   {
     name: "TypeScript",
@@ -56,18 +61,18 @@ export const myFrontEndTechStack: TechItem[] = [
     icon: SiTypescript,
   },
   {
+    name: "Redux",
+    description: "Predictable state container for JavaScript apps",
+    categories: ["State Management", "React"],
+    website: "https://redux.js.org/",
+    icon: SiRedux,
+  },
+  {
     name: "Tailwind CSS",
     description: "Utility-first CSS framework",
     categories: ["CSS", "Styling"],
     website: "https://tailwindcss.com/",
     icon: SiTailwindcss,
-  },
-  {
-    name: "Aceternity UI",
-    description: "Re-usable components built with Tailwind and Framer motion",
-    categories: ["Components", "UI", "Animations"],
-    website: "https://ui.aceternity.com/",
-    icon: SiShadcnui,
   },
   {
     name: "shadcn/ui",
@@ -95,29 +100,21 @@ export const myBackendTechStack: TechItem[] = [
   },
   {
     name: "MongoDB",
-    description: "NoSQL document database for high-volume data storage",
+    description: "NoSQL document database with advanced aggregation pipelines",
     categories: ["Database", "NoSQL"],
     website: "https://www.mongodb.com/",
     icon: SiMongodb,
   },
-  // {
-  //   name: "PostgreSQL",
-  //   description: "Advanced open-source relational database",
-  //   categories: ["Database", "SQL"],
-  //   website: "https://www.postgresql.org/",
-  //   icon: SiPostgresql,
-  // },
   {
-    name: "GraphQL",
+    name: "PostgreSQL",
     description: "Advanced open-source relational database",
     categories: ["Database", "SQL"],
     website: "https://www.postgresql.org/",
-    icon: GrGraphQl,
+    icon: SiPostgresql,
   },
   {
     name: "Redis",
-    description:
-      "In-memory data store used as a database, cache and message broker",
+    description: "In-memory data store used as a database, cache and message broker",
     categories: ["Caching", "Database", "Pub/Sub"],
     website: "https://redis.io/",
     icon: SiRedis,
@@ -125,9 +122,54 @@ export const myBackendTechStack: TechItem[] = [
   {
     name: "BullMQ",
     description: "Robust job and queue manager for Node.js with Redis backend",
-    categories: ["Queues", "Jobs", "Redis"],
+    categories: ["Queues", "Jobs", "Async"],
     website: "https://docs.bullmq.io/",
     icon: GiBull,
+  },
+  {
+    name: "Supabase",
+    description: "Open-source Firebase alternative with PostgreSQL at its core",
+    categories: ["Database", "Auth", "Realtime"],
+    website: "https://supabase.com/",
+    icon: SiSupabase,
+  },
+  {
+    name: "Firebase",
+    description: "Google's platform for app development with realtime database & auth",
+    categories: ["Database", "Auth", "Realtime"],
+    website: "https://firebase.google.com/",
+    icon: SiFirebase,
+  },
+  {
+    name: "Prisma",
+    description: "Next-generation ORM for Node.js and TypeScript",
+    categories: ["ORM", "TypeScript", "SQL"],
+    website: "https://www.prisma.io/",
+    icon: SiPrisma,
+  },
+];
+
+export const myAIStack: TechItem[] = [
+  {
+    name: "OpenAI",
+    description: "GPT models, Whisper transcription, and GPT Realtime audio API",
+    categories: ["LLM", "Audio", "AI"],
+    website: "https://openai.com/",
+    icon: SiOpenai,
+  },
+  {
+    name: "Claude / Anthropic",
+    description: "LLM for agentic workflows, prompt engineering, and evaluation",
+    categories: ["LLM", "AI", "Agents"],
+    website: "https://anthropic.com/",
+    icon: Brain as unknown as IconType,
+  },
+  {
+    name: "PostHog",
+    description: "Product analytics for validating features and tracking user behavior",
+    categories: ["Analytics", "Product Metrics"],
+    website: "https://posthog.com/",
+    icon: SiPosthog,
   },
 ];
 
@@ -151,23 +193,21 @@ export const myDesignTools: TechItem[] = [
 export const myDevOpsAndCloudTools: TechItem[] = [
   {
     name: "Docker",
-    description:
-      "Platform to build, share, and run applications using containers",
+    description: "Platform to build, share, and run applications using containers",
     categories: ["DevOps", "Containers"],
     website: "https://www.docker.com/",
     icon: SiDocker,
   },
   {
     name: "Vercel",
-    description:
-      "Platform to build, share, and run applications using containers",
+    description: "Frontend cloud platform for deployment and edge functions",
     categories: ["Hosting", "Deployment"],
     website: "https://vercel.com/",
     icon: SiVercel,
   },
   {
     name: "AWS",
-    description: "Comprehensive cloud computing paltform",
+    description: "Comprehensive cloud computing platform",
     categories: ["Cloud", "Infrastructure"],
     website: "https://aws.amazon.com/",
     icon: FaAws,
@@ -198,16 +238,16 @@ export const myDevTools: TechItem[] = [
   },
   {
     name: "Postman",
-    description: "API testing and team collaboration",
-    categories: ["API", "Collaboration"],
+    description: "API testing and team collaboration platform",
+    categories: ["API", "Testing"],
     website: "https://www.postman.com/",
     icon: SiPostman,
   },
   {
-    name: "PostHog",
-    description: "Code editor optimized for building and debugging web apps",
-    categories: ["Analytics", "Product Metrices"],
-    website: "https://posthog.com/",
-    icon: SiPosthog,
+    name: "Jest / Vitest",
+    description: "Unit and integration testing frameworks for JavaScript/TypeScript",
+    categories: ["Testing", "CI/CD"],
+    website: "https://vitest.dev/",
+    icon: SiJest,
   },
 ];

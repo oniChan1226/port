@@ -22,10 +22,10 @@ const ROLES = [
 ];
 
 const STATS = [
-  { value: 3, suffix: "+", label: "Years of Experience" },
-  { value: 12, suffix: "+", label: "Projects Delivered" },
-  { value: 55, suffix: "%", label: "Satisfaction Increase" },
-  { value: 5, suffix: "", label: "Team Members Led" },
+  { value: 7, suffix: "K+", label: "Platform Users Reached" },
+  { value: 8, suffix: "x", label: "API Response Speed Boost" },
+  { value: 3, suffix: "+", label: "Apps Delivered End-to-End" },
+  { value: 8, suffix: "", label: "Team Size at Ragzon" },
 ];
 
 function useCountUp(target: number, duration = 1200, start = false) {

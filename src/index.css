@@ -2,8 +2,49 @@
 @plugin 'tailwind-scrollbar';
 @plugin "@tailwindcss/typography";
 
+/* Class-based dark mode: dark: prefix activates when any ancestor has .dark */
+@variant dark (&:where(.dark, .dark *));
+
 body {
     font-family: "Inter", sans-serif;
+}
+
+/* ══════════════════════════════════════════
+   THEME TOKENS
+   :root  = light mode (default)
+   .dark  = dark mode (restores Tailwind's dark neutral values)
+   ══════════════════════════════════════════ */
+
+:root {
+  /* Neutral scale — remapped for light mode */
+  --color-neutral-900: #f8fafc;   /* main page bg: near-white */
+  --color-neutral-800: #f1f5f9;   /* card / secondary surface */
+  --color-neutral-700: #e2e8f0;   /* borders / tertiary surface */
+  --color-neutral-600: #64748b;   /* intentionally mid-gray — used for hover text */
+  --color-neutral-500: #64748b;   /* muted text */
+  --color-neutral-400: #475569;   /* subtitle text — darker for light contrast */
+
+  /* Primary color override — sidebar, primary surfaces */
+  --color-primary: #ffffff;
+
+  /* Semantic text token used in root layout */
+  --text-base: #111827;
+}
+
+.dark {
+  /* Restore Tailwind v4's default dark neutral values */
+  --color-neutral-900: oklch(0.205 0 0);
+  --color-neutral-800: oklch(0.269 0 0);
+  --color-neutral-700: oklch(0.371 0 0);
+  --color-neutral-600: oklch(0.439 0 0);
+  --color-neutral-500: oklch(0.509 0 0);
+  --color-neutral-400: oklch(0.608 0 0);
+
+  /* Primary dark surface */
+  --color-primary: #1c1c1c;
+
+  /* Semantic text token */
+  --text-base: rgba(255, 255, 255, 0.9);
 }
 
 /* ── Cursor spotlight ── */
@@ -36,24 +77,35 @@ body {
     50%       { transform: translate(25px, 35px) scale(1.06); }
 }
 
-.ambient-blob-1 {
-    animation: blob-drift-1 18s ease-in-out infinite;
-}
-.ambient-blob-2 {
-    animation: blob-drift-2 22s ease-in-out infinite;
-}
-.ambient-blob-3 {
-    animation: blob-drift-3 26s ease-in-out infinite;
-}
+.ambient-blob-1 { animation: blob-drift-1 18s ease-in-out infinite; }
+.ambient-blob-2 { animation: blob-drift-2 22s ease-in-out infinite; }
+.ambient-blob-3 { animation: blob-drift-3 26s ease-in-out infinite; }
 
-/* ── Animated gradient text ── */
+/* ── Animated gradient text — dual theme ── */
 @keyframes gradient-shift {
     0%   { background-position: 0% 50%; }
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+/* Light mode: rich dark-to-indigo gradient (readable on white) */
 .gradient-text {
+    background: linear-gradient(
+        135deg,
+        #0f172a 0%,
+        #0369a1 30%,
+        #4338ca 60%,
+        #0f172a 100%
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 6s ease infinite;
+}
+
+/* Dark mode: light sky-to-indigo gradient */
+.dark .gradient-text {
     background: linear-gradient(
         135deg,
         #ffffff 0%,
@@ -68,35 +120,7 @@ body {
     animation: gradient-shift 6s ease infinite;
 }
 
-/* ── Availability pulse ── */
-@keyframes pulse-ring {
-    0%   { transform: scale(1); opacity: 1; }
-    100% { transform: scale(2.2); opacity: 0; }
-}
-
-.pulse-ring::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background: #22c55e;
-    animation: pulse-ring 1.8s ease-out infinite;
-}
-
-/* ── Gradient border on hover (cards) ── */
-@keyframes border-spin {
-    0%   { --border-angle: 0turn; }
-    100% { --border-angle: 1turn; }
-}
-
 /* ── Timeline draw-in ── */
 .timeline-line {
     transform-origin: top center;
-}
-
-/* ── Count-up number shimmer ── */
-@keyframes count-shimmer {
-    0%   { opacity: 0.6; }
-    50%  { opacity: 1; }
-    100% { opacity: 0.6; }
 }

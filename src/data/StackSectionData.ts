@@ -1,29 +1,33 @@
-import { myBackendTechStack, myDesignTools, myDevOpsAndCloudTools, myDevTools, myFrontEndTechStack, type TechItem } from "./StackData";
+import { myAIStack, myBackendTechStack, myDesignTools, myDevOpsAndCloudTools, myDevTools, myFrontEndTechStack, type TechItem } from "./StackData";
 
 export interface MyStackSections {
-    title: string;
-    data: TechItem[],
-};
+  title: string;
+  data: TechItem[];
+}
 
-export const myStackSections = [
-    {
-        title: "Frontend Development",
-        data: myFrontEndTechStack,
-    },
-    {
-        title: "Backend Development",
-        data: myBackendTechStack,
-    },
-    {
-        title: "DevOps & Cloud",
-        data: myDevOpsAndCloudTools,
-    },
-    {
-        title: "Development Tools",
-        data: myDevTools,
-    },
-    {
-        title: "Design Tools",
-        data: myDesignTools,
-    },
+export const myStackSections: MyStackSections[] = [
+  {
+    title: "Frontend Development",
+    data: myFrontEndTechStack,
+  },
+  {
+    title: "Backend, Databases & ORMs",
+    data: myBackendTechStack,
+  },
+  {
+    title: "AI / LLM & Analytics",
+    data: myAIStack,
+  },
+  {
+    title: "DevOps & Cloud",
+    data: myDevOpsAndCloudTools,
+  },
+  {
+    title: "Development Tools",
+    data: myDevTools,
+  },
+  {
+    title: "Design Tools",
+    data: myDesignTools,
+  },
 ];
