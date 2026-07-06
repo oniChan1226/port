@@ -1,10 +1,20 @@
 import { Github, Sparkle } from "lucide-react";
+import { myGuestBook } from "../data/GuestBookData";
+import { formatter } from "../lib/helpers";
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
 const GuestBook = () => {
   const isLoggedIn = false;
 
   const handleSignin = async () => {
-    
+
   };
 
   return (
@@ -33,7 +43,7 @@ const GuestBook = () => {
               <p className="text-sm text-neutral-500">
                 Sign in to leave a comment
               </p>
-              <button 
+              <button
               onClick={handleSignin}
               className="flex items-center justify-center space-x-1 bg-primary hover:opacity-70 cursor-pointer duration-400 px-5 py-2 rounded-md">
                 <Github size={20} />
@@ -41,6 +51,35 @@ const GuestBook = () => {
               </button>
             </>
           )}
+        </div>
+      </div>
+
+      <div className="mt-8">
+        <p className="text-sm font-medium text-neutral-500 mb-4">
+          Recent messages
+        </p>
+        <div className="space-y-5">
+          {myGuestBook.map((entry) => (
+            <div key={entry.name + entry.date} className="flex gap-3">
+              <div
+                className="w-9 h-9 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center flex-shrink-0 text-xs font-semibold"
+                style={{ color: "var(--text-base)" }}
+              >
+                {initials(entry.name)}
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-sm font-semibold" style={{ color: "var(--text-base)" }}>
+                    {entry.name}
+                  </span>
+                  <span className="text-xs text-neutral-500">
+                    {formatter.format(new Date(entry.date))}
+                  </span>
+                </div>
+                <p className="text-sm text-neutral-400/90 mt-0.5">{entry.message}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

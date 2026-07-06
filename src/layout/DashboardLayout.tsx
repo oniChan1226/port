@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { keyNavRoutes } from "../config/KeyNavConfig";
 import SearchCommand from "../components/SearchCommand";
 import { useSearchCommand } from "../context/SearchCommandContext";
-import PeekingCat from "../components/PeekingCat";
+// import PeekingCat from "../components/PeekingCat"; // disabled for now — revisit later
 import ThemeDrawer from "../components/ThemeDrawer";
 import BackgroundGlows from "../components/BackgroundGlows";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -116,7 +116,7 @@ const DashboardLayout = () => {
 
       <SearchCommand />
       <ThemeDrawer />
-      <PeekingCat />
+      {/* <PeekingCat /> */}
     </div>
   );
 };
