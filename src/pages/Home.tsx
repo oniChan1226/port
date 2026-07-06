@@ -1,4 +1,5 @@
-import { Check, CodeXml, Copy, LayoutDashboard, Newspaper } from "lucide-react";
+import { Check, CodeXml, Copy, LayoutDashboard, Newspaper, Package, Rocket, Users, Zap } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { myWorkEmail } from "../constants/constants.ts";
@@ -12,48 +13,98 @@ import { useQuery } from "@tanstack/react-query";
 import type { ArticleList } from "../interfaces/Article.ts";
 import { fetchBlogs } from "../api/fetchBlogs.ts";
 import { motion, useInView } from "motion/react";
+import { LayoutTextFlip } from "../components/ui/layout-text-flip";
 
 const ROLES = [
-  "Full-Stack Developer.",
-  "React Engineer.",
-  "Backend Architect.",
-  "DevOps Enthusiast.",
-  "Open Source Builder.",
+  "Full-Stack Engineer",
+  "AI/LLM Integrator",
+  "React Engineer",
+  "Backend Architect",
+  "Systems Optimizer",
 ];
 
 const STATS = [
-  { value: 7, suffix: "K+", label: "Platform Users Reached" },
-  { value: 8, suffix: "x", label: "API Response Speed Boost" },
-  { value: 3, suffix: "+", label: "Apps Delivered End-to-End" },
-  { value: 8, suffix: "", label: "Team Size at Ragzon" },
+  {
+    icon: Users,
+    value: 7,
+    suffix: "K+",
+    label: "Users Scaled",
+    detail: "From 50 → 7,000+ on JobJen",
+  },
+  {
+    icon: Zap,
+    value: 8,
+    suffix: "x",
+    label: "Faster APIs",
+    detail: "8s response cut to <1s",
+  },
+  {
+    icon: Rocket,
+    value: 1.5,
+    decimals: 1,
+    suffix: "+",
+    label: "Yrs Experience",
+    detail: "Production MERN & AI systems",
+  },
+  {
+    icon: Package,
+    value: 2,
+    suffix: "",
+    label: "Solo Products",
+    detail: "Forge (Live) + AI Resume Matcher",
+  },
 ];
 
-function useCountUp(target: number, duration = 1200, start = false) {
+function useCountUp(target: number, duration = 1200, start = false, decimals = 0) {
   const [count, setCount] = useState(0);
   useEffect(() => {
     if (!start) return;
     let startTime: number | null = null;
+    const factor = 10 ** decimals;
     const step = (ts: number) => {
       if (!startTime) startTime = ts;
       const progress = Math.min((ts - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
+      setCount(Math.round(progress * target * factor) / factor);
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
-  }, [target, duration, start]);
+  }, [target, duration, start, decimals]);
   return count;
 }
 
-function StatCard({ value, suffix, label }: { value: number; suffix: string; label: string }) {
+function StatCard({
+  icon: Icon,
+  value,
+  decimals = 0,
+  suffix,
+  label,
+  detail,
+}: {
+  icon: LucideIcon;
+  value: number;
+  decimals?: number;
+  suffix: string;
+  label: string;
+  detail: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const count = useCountUp(value, 1000, inView);
+  const count = useCountUp(value, 1100, inView, decimals);
   return (
-    <div ref={ref} className="flex flex-col items-center gap-1 text-center">
-      <span className="text-3xl font-bold" style={{ color: "var(--text-base)" }}>
-        {count}{suffix}
+    <div
+      ref={ref}
+      className="group flex flex-col gap-2.5 rounded-xl border border-neutral-800 bg-neutral-900/50 p-4 hover:border-neutral-700 hover:bg-neutral-900 transition-colors duration-300"
+    >
+      <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-1,#38bdf8)]/10 text-[var(--accent-1,#38bdf8)]">
+        <Icon size={16} />
+      </div>
+      <span className="text-2xl lg:text-3xl font-bold" style={{ color: "var(--text-base)" }}>
+        {count.toFixed(decimals)}{suffix}
       </span>
-      <span className="text-xs text-neutral-500 leading-4">{label}</span>
+      <div className="leading-tight">
+        <p className="text-xs font-semibold" style={{ color: "var(--text-base)" }}>{label}</p>
+        <p className="text-[0.7rem] text-neutral-500 mt-0.5">{detail}</p>
+      </div>
     </div>
   );
 }
@@ -70,39 +121,12 @@ const fadeUp = {
 
 const Home = () => {
   const [copied, setCopied] = useState<boolean>(false);
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const typeRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { data, isLoading } = useQuery<ArticleList>({
     queryKey: ["devBlog"],
     queryFn: fetchBlogs,
     select: (data) => data.slice(0, 2),
   });
-
-  // Typewriter effect
-  useEffect(() => {
-    const current = ROLES[roleIndex];
-    const speed = isDeleting ? 40 : 80;
-
-    typeRef.current = setTimeout(() => {
-      if (!isDeleting) {
-        setDisplayText(current.slice(0, displayText.length + 1));
-        if (displayText.length + 1 === current.length) {
-          setTimeout(() => setIsDeleting(true), 1600);
-        }
-      } else {
-        setDisplayText(current.slice(0, displayText.length - 1));
-        if (displayText.length - 1 === 0) {
-          setIsDeleting(false);
-          setRoleIndex((i) => (i + 1) % ROLES.length);
-        }
-      }
-    }, speed);
-
-    return () => { if (typeRef.current) clearTimeout(typeRef.current); };
-  }, [displayText, isDeleting, roleIndex]);
 
   const copyEmailToClipboard = async () => {
     try {
@@ -127,15 +151,16 @@ const Home = () => {
           <h2 className="text-4xl lg:text-5xl font-semibold leading-8 lg:leading-16 tracking-wide text-shadow-lg/10">
             Hey, I'm Fahad,
           </h2>
-          <h2 className="text-4xl lg:text-5xl font-semibold leading-14 tracking-wide text-shadow-lg/10">
-            A{" "}
-            <span className="gradient-text">
-              {displayText}
-            </span>
-            <span className="inline-block w-0.5 h-9 lg:h-11 bg-sky-400 ml-1 align-middle animate-pulse" />
+          <h2 className="flex flex-wrap items-center gap-3 text-4xl lg:text-5xl leading-14 tracking-wide text-shadow-lg/10">
+            <LayoutTextFlip
+              text="A"
+              words={ROLES}
+              className="font-semibold tracking-wide"
+              wordClassName="gradient-text"
+            />
           </h2>
           <motion.div variants={fadeUp} className="my-4 text-neutral-400/70 text-md leading-5">
-            <h6>I enjoy building web applications that look good and scale well —</h6>
+            <h6>Shipping AI-integrated products end-to-end — from real-time backends to sub-second APIs.</h6>
             <h6>Rare combo. I know.</h6>
           </motion.div>
         </motion.div>
@@ -167,7 +192,7 @@ const Home = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-60px" }}
-        className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-5 px-4 border border-neutral-800 rounded-lg bg-neutral-900/50"
+        className="grid grid-cols-2 lg:grid-cols-4 gap-3"
       >
         {STATS.map((s) => (
           <motion.div key={s.label} variants={fadeUp}>
