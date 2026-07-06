@@ -53,6 +53,24 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <div>
           {project.src ? (
             <video src={project.src} autoPlay loop muted playsInline preload="metadata" />
+          ) : project.images?.length ? (
+            <div className="relative w-full h-40 overflow-hidden">
+              <img
+                src={project.images[0]}
+                alt={project.title}
+                className="w-full h-full object-cover object-top"
+              />
+              {project.status === "live" && (
+                <span className="absolute top-2 right-2 text-xs font-semibold px-3 py-1 rounded-full bg-green-100 border border-green-300 text-green-700 dark:bg-green-900/40 dark:border-green-700/50 dark:text-green-400">
+                  Live
+                </span>
+              )}
+              {project.status === "in-development" && (
+                <span className="absolute top-2 right-2 text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-700 dark:bg-amber-900/40 dark:border-amber-700/50 dark:text-amber-400">
+                  In Development
+                </span>
+              )}
+            </div>
           ) : (
             <div className="w-full h-40 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-800 flex items-center justify-center">
               {project.status === "live" && (

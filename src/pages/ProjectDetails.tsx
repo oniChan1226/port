@@ -24,9 +24,34 @@ const ProjectDetails = () => {
           <Dot />
           {project.tag}
         </div>
-        <div className="rounded-lg overflow-hidden shadow-xl h-74 sm:h-auto">
-          <video src={project.src} autoPlay muted loop preload="metadata" className="h-full w-full object-contain"></video>
-        </div>
+        {project.src ? (
+          <div className="rounded-lg overflow-hidden shadow-xl h-74 sm:h-auto">
+            <video src={project.src} autoPlay muted loop preload="metadata" className="h-full w-full object-contain"></video>
+          </div>
+        ) : project.images?.length ? (
+          <div className="space-y-2">
+            <div className="rounded-lg overflow-hidden shadow-xl border border-neutral-800">
+              <img src={project.images[0]} alt={project.title} className="w-full h-auto object-cover" />
+            </div>
+            {project.images.length > 1 && (
+              <div className="grid grid-cols-2 gap-2">
+                {project.images.slice(1).map((img) => (
+                  <div key={img} className="rounded-lg overflow-hidden shadow-xl border border-neutral-800">
+                    <img src={img} alt={project.title} className="w-full h-auto object-cover" />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="rounded-lg h-60 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-800 flex items-center justify-center">
+            {project.status === "in-development" && (
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-700 dark:bg-amber-900/40 dark:border-amber-700/50 dark:text-amber-400">
+                In Development
+              </span>
+            )}
+          </div>
+        )}
       </div>
       <DemoCard demo={project.demoLink} source={project.sourceLink}/>
       <div className="prose dark:prose-invert max-w-none">

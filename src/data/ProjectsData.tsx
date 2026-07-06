@@ -25,6 +25,30 @@ Instrumented user behavior with PostHog to validate features and guide the roadm
 > Live at [forgehub.me](https://forgehub.me)
 `;
 
+export const jobJenMarkdown = `
+## Overview
+
+**JobJen** (jobjen.com) is an AI technical-interview platform I helped build as a core engineer (team of 8) at Ragzon Solutions — it grew from 50 to 7,000+ users during my time on it, and I owned AI interview scoring and quality.
+
+## Key Contributions
+
+- **Human-in-the-Loop Calibration** — benchmarked AI interview scores against human raters and iteratively tuned prompts and scoring logic to align AI judgment with human evaluators
+- **Dual Parallel Scoring Pipeline** — Whisper transcription scoring substance & coherence, run alongside GPT Realtime audio analysis of vocal delivery & flow, aggregated into one calibrated score
+- **Performance** — identified high-frequency endpoints and optimized them with MongoDB aggregation pipelines and compound indexing, cutting key API response times from ~8s to under 1s
+- **Real-Time Infrastructure** — event-driven services with Socket.IO Pub/Sub across multiple server instances, BullMQ for async/batch processing
+- **Product Analytics** — PostHog instrumentation to validate features and prioritize high-impact quality improvements
+
+## Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js, WebSockets / Socket.IO, BullMQ
+- **Database**: MongoDB (aggregation pipelines, compound indexing), Redis
+- **AI**: Whisper, OpenAI GPT Realtime (audio)
+- **Analytics**: PostHog
+
+> Live at [jobjen.com](https://jobjen.com)
+`;
+
 export const aiResumeMatcherMarkdown = `
 ## Overview
 
@@ -105,6 +129,7 @@ export interface Project {
   description: string;
   tag: string;
   src: string;
+  images?: string[];
   timestamps: string;
   markdown: string;
   demoLink: string;
@@ -121,6 +146,11 @@ export const myProjects: Project[] = [
       "A discipline workspace unifying todos, habits, notes, and journaling on one dashboard — ships free and Pro tiers.",
     tag: "SaaS",
     src: "",
+    images: [
+      "/projects/forge-landing.png",
+      "/projects/forge-dashboard.png",
+      "/projects/forge-calendar.png",
+    ],
     timestamps: "2025",
     markdown: forgeMarkdown,
     demoLink: "https://forgehub.me",
@@ -166,5 +196,20 @@ export const myProjects: Project[] = [
     markdown: alyonusMarkdown,
     demoLink: "https://medical-three-gamma.vercel.app/",
     sourceLink: "",
+  },
+  {
+    _id: 4,
+    slug: "jobjen",
+    title: "JobJen",
+    description:
+      "AI technical-interview platform I helped scale from 50 to 7,000+ users as a core engineer at Ragzon Solutions.",
+    tag: "AI Platform",
+    src: "",
+    images: ["/projects/jobjen-cover.png"],
+    timestamps: "Sep 2025 – Present",
+    markdown: jobJenMarkdown,
+    demoLink: "https://jobjen.com",
+    sourceLink: "",
+    status: "live",
   },
 ];
