@@ -396,6 +396,15 @@ html.font-serif-pkg h5 {
 /* ── Timeline draw-in ── */
 .timeline-line { transform-origin: top center; }
 
+/* ── Request-flow edge current (marching dashes along an active wire) ── */
+@keyframes flow-dash {
+  to { stroke-dashoffset: -16; }
+}
+.edge-flow {
+  stroke-dasharray: 4 3;
+  animation: flow-dash 0.5s linear infinite;
+}
+
 /* ── Dark-mode toggle circular reveal (View Transitions API) ──────────────
    The new theme's snapshot grows as a circle from the click point (set via
    --theme-toggle-x/y/r) over the old theme's snapshot, which stays static
