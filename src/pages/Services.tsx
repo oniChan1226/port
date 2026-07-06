@@ -13,7 +13,7 @@ const Services = () => {
             href="https://www.fiverr.com/fahadkhanhere?public_mode=true"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gradient-to-b from-green-800 to-green-950 rounded-md px-2 py-1 hover:text-white/50 cursor-pointer duration-300"
+            className="bg-gradient-to-b from-green-800 to-green-950 text-white rounded-md px-2 py-1 hover:opacity-50 cursor-pointer duration-300"
           >
             Fiverr
           </a>{" "}
@@ -22,7 +22,7 @@ const Services = () => {
             href="https://www.upwork.com/freelancers/~011b2c1ef8ac9b0568?viewMode=1"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gradient-to-b from-gray-400 to-gray-700 px-2 py-1 rounded-md hover:text-white/50 cursor-pointer duration-300"
+            className="bg-gradient-to-b from-gray-400 to-gray-700 text-white px-2 py-1 rounded-md hover:opacity-50 cursor-pointer duration-300"
           >
             Upwork
           </a>

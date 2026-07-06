@@ -35,7 +35,7 @@ const GuestBook = () => {
               </h2>
               <button 
               onClick={handleSignin}
-              className="flex items-center justify-center space-x-1 bg-primary hover:text-white/70 cursor-pointer duration-400 px-5 py-2 rounded-md">
+              className="flex items-center justify-center space-x-1 bg-primary hover:opacity-70 cursor-pointer duration-400 px-5 py-2 rounded-md">
                 <Github size={20} />
                 <span>Sign in with Github</span>
               </button>

@@ -144,14 +144,14 @@ const Home = () => {
           <Tooltip content="More about me" position="top" alignments="mb-3">
             <Link
               to={"/about"}
-              className="rounded bg-neutral-800 px-5 py-2 border border-neutral-700 hover:bg-neutral-800/70 hover:text-white/80 duration-300"
+              className="rounded bg-neutral-800 px-5 py-2 border border-neutral-700 hover:bg-neutral-800/70 hover:opacity-80 duration-300"
             >
               About
             </Link>
           </Tooltip>
           <Tooltip content={copied ? "Copied!" : "Copy"} position="top" alignments="mb-1">
             <button
-              className="flex items-center gap-2 cursor-pointer bg-neutral-800/50 px-5 py-2 rounded border border-neutral-800 hover:text-white/70 duration-300"
+              className="flex items-center gap-2 cursor-pointer bg-neutral-800/50 px-5 py-2 rounded border border-neutral-800 hover:opacity-70 duration-300"
               onClick={copyEmailToClipboard}
             >
               {copied ? <Check size={15} /> : <Copy size={15} />}

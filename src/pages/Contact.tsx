@@ -35,7 +35,7 @@ const Contact = () => {
         >
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center gap-2 cursor-pointer bg-neutral-800/50 px-5 py-2 rounded border border-neutral-800 hover:text-white/70 duration-300"
+            className="flex items-center gap-2 cursor-pointer bg-neutral-800/50 px-5 py-2 rounded border border-neutral-800 hover:opacity-70 duration-300"
           >
             {<Calendar size={15} />}
             Book a free call
@@ -47,7 +47,7 @@ const Contact = () => {
           alignments="mb-1"
         >
           <button
-            className="flex items-center gap-2 cursor-pointer bg-neutral-800/50 px-5 py-2 rounded border border-neutral-800 hover:text-white/70 duration-300"
+            className="flex items-center gap-2 cursor-pointer bg-neutral-800/50 px-5 py-2 rounded border border-neutral-800 hover:opacity-70 duration-300"
             onClick={copyEmailToClipboard}
           >
             {copied ? <Check size={15} /> : <Copy size={15} />}

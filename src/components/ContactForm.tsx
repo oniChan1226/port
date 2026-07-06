@@ -60,7 +60,7 @@ const ContactForm = () => {
         <button
           type="submit"
           disabled={!isDirty}
-          className="w-full bg-neutral-700/40 transition-colors duration-300 cursor-pointer hover:text-white/70 hover:bg-neutral-700/30 rounded-md py-2 font-semibold"
+          className="w-full bg-neutral-700/40 transition-colors duration-300 cursor-pointer hover:opacity-70 hover:bg-neutral-700/30 rounded-md py-2 font-semibold"
         >
           Send Message
         </button>
