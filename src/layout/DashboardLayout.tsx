@@ -87,7 +87,7 @@ const DashboardLayout = () => {
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         style={{ left: (collapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_EXPANDED_WIDTH) - 12 }}
-        className="hidden lg:flex items-center justify-center fixed top-10 w-6 h-6 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-500 hover:text-[var(--text-base)] hover:bg-neutral-700 transition-[left,color,background-color] duration-300 ease-in-out z-20 cursor-pointer"
+        className="hidden lg:flex items-center justify-center fixed top-10 w-6 h-6 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-500 hover:text-[var(--accent-1,#38bdf8)] hover:border-[var(--accent-1,#38bdf8)]/40 hover:bg-neutral-700 transition-[left,color,background-color,border-color] duration-300 ease-in-out z-20 cursor-pointer"
       >
         {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
       </button>

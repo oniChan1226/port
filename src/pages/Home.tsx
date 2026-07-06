@@ -133,7 +133,7 @@ const Home = () => {
             Hey, I'm Fahad,
           </h2>
           <h2 className="flex flex-wrap items-center gap-2 text-4xl lg:text-5xl font-semibold leading-14 tracking-wide text-shadow-lg/10">
-            Full-Stack <span className="text-sky-500">AI Engineer</span>
+            Full-Stack <span className="gradient-text">AI Engineer</span>
           </h2>
           <motion.div variants={fadeUp} className="my-4 text-neutral-400/70 text-md leading-5">
             <h6>Shipping AI-integrated products end-to-end — from real-time backends to sub-second APIs.</h6>

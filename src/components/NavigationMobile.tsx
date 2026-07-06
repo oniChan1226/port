@@ -11,10 +11,10 @@ const NavigationMobile = () => {
             key={link.number}
             title={link.label}
             className={({ isActive }) =>
-              `flex flex-shrink-0 items-center justify-center flex-col gap-0.5 px-2.5 py-2 sm:p-3 min-w-14 sm:min-w-16 transition-all duration-300 rounded-lg text-[0.65rem] sm:text-xs snap-center ${
+              `flex flex-shrink-0 items-center justify-center flex-col gap-0.5 px-2.5 py-2 sm:p-3 min-w-14 sm:min-w-16 transition-all duration-300 rounded-lg border text-[0.65rem] sm:text-xs snap-center ${
                 isActive
-                  ? "bg-neutral-800 font-semibold"
-                  : "text-neutral-500 hover:text-neutral-400"
+                  ? "bg-[var(--accent-1,#38bdf8)]/10 border-[var(--accent-1,#38bdf8)]/30 font-semibold"
+                  : "border-transparent text-neutral-500 hover:text-neutral-400"
               }`
             }
             style={({ isActive }) =>

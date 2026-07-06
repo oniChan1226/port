@@ -39,10 +39,16 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
           className={`flex items-center gap-2 min-w-0 ${collapsed ? "justify-center" : ""}`}
         >
           <div className="relative flex-shrink-0">
+            {/* Subtle accent halo behind the avatar — theme-reactive */}
+            <span
+              className="absolute -inset-1.5 rounded-full opacity-30 blur-md pointer-events-none"
+              style={{ background: "var(--accent-1, #38bdf8)" }}
+              aria-hidden="true"
+            />
             <img
               src={pfp}
               alt="Fahad Khan"
-              className="w-14 h-14 rounded-full object-contain dark:bg-black/50 bg-neutral-200/60"
+              className="relative w-14 h-14 rounded-full object-contain dark:bg-black/50 bg-neutral-200/60"
             />
             <span className="absolute bottom-0 right-0 w-3.5 h-3.5 flex items-center justify-center">
               <span className="absolute w-full h-full rounded-full bg-green-500 animate-ping opacity-60" />
@@ -61,7 +67,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
         <button
           onClick={(e) => toggleTheme({ x: e.clientX, y: e.clientY })}
           aria-label="Toggle theme"
-          className="p-2 rounded-md hover:bg-neutral-800 border border-transparent hover:border-neutral-700 transition-colors duration-200 text-neutral-500 hover:text-[var(--text-base)] flex-shrink-0"
+          className="p-2 rounded-md hover:bg-[var(--accent-1,#38bdf8)]/10 border border-transparent hover:border-[var(--accent-1,#38bdf8)]/30 transition-colors duration-200 text-[var(--accent-1,#38bdf8)]/70 hover:text-[var(--accent-1,#38bdf8)] flex-shrink-0"
         >
           <AnimatePresence mode="wait" initial={false}>
             {theme === "dark" ? (
@@ -134,7 +140,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute inset-0 rounded-md bg-neutral-800"
+                        className="absolute inset-0 rounded-md bg-neutral-800 border-l-2 border-[var(--accent-1,#38bdf8)]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -147,7 +153,13 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
                     {!collapsed && <p className="truncate">{link.label}</p>}
                   </div>
                   {!collapsed && (
-                    <div className="relative z-10 border px-1.5 py-0.5 text-[0.7rem] border-neutral-600 rounded-md flex-shrink-0">
+                    <div
+                      className={`relative z-10 border px-1.5 py-0.5 text-[0.7rem] rounded-md flex-shrink-0 ${
+                        isActive
+                          ? "border-[var(--accent-1,#38bdf8)]/50 text-[var(--accent-1,#38bdf8)]"
+                          : "border-neutral-600"
+                      }`}
+                    >
                       <p>{link.number}</p>
                     </div>
                   )}
@@ -179,7 +191,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
       {/* Search Command Bar */}
       <div
         title={collapsed ? "Search (Ctrl + K)" : undefined}
-        className={`flex items-center gap-2 mb-2 border border-neutral-700 rounded-md text-sm cursor-pointer hover:bg-neutral-800 transition-colors duration-200 ${
+        className={`flex items-center gap-2 mb-2 border border-neutral-700 rounded-md text-sm cursor-pointer hover:bg-neutral-800 hover:border-[var(--accent-1,#38bdf8)]/40 transition-colors duration-200 ${
           collapsed ? "justify-center px-2 py-2.5" : "justify-between px-3 py-2"
         }`}
         onClick={() => toggleSearch()}
