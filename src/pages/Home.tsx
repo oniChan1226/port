@@ -50,7 +50,7 @@ function StatCard({ value, suffix, label }: { value: number; suffix: string; lab
   const count = useCountUp(value, 1000, inView);
   return (
     <div ref={ref} className="flex flex-col items-center gap-1 text-center">
-      <span className="text-3xl font-bold text-white">
+      <span className="text-3xl font-bold" style={{ color: "var(--text-base)" }}>
         {count}{suffix}
       </span>
       <span className="text-xs text-neutral-500 leading-4">{label}</span>

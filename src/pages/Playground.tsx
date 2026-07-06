@@ -55,7 +55,7 @@ function SkillCard({ skill }: { skill: Skill }) {
 
       {/* Icon + name row */}
       <div className="flex items-center gap-3 mt-1">
-        <div className={`p-2.5 rounded-lg border border-neutral-700 ${colors.badge.split(" ")[0]}`}>
+        <div className={`p-2.5 rounded-lg border border-neutral-700 ${colors.chipBg}`}>
           <skill.icon size={22} />
         </div>
         <div>

@@ -31,14 +31,14 @@ export type SkillCategory =
 
 export const CATEGORY_COLORS: Record<
   SkillCategory,
-  { bar: string; dot: string; badge: string; glow: string }
+  { bar: string; dot: string; chipBg: string; badge: string; glow: string }
 > = {
-  Frontend:  { bar: "bg-sky-500",     dot: "bg-sky-400",     badge: "bg-sky-500/15 text-sky-400 border-sky-500/30",     glow: "hover:shadow-sky-500/10"     },
-  Backend:   { bar: "bg-violet-500",  dot: "bg-violet-400",  badge: "bg-violet-500/15 text-violet-400 border-violet-500/30",  glow: "hover:shadow-violet-500/10"  },
-  Database:  { bar: "bg-emerald-500", dot: "bg-emerald-400", badge: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30", glow: "hover:shadow-emerald-500/10" },
-  "AI / LLM":{ bar: "bg-amber-500",   dot: "bg-amber-400",   badge: "bg-amber-500/15 text-amber-400 border-amber-500/30",   glow: "hover:shadow-amber-500/10"   },
-  DevOps:    { bar: "bg-green-500",   dot: "bg-green-400",   badge: "bg-green-500/15 text-green-400 border-green-500/30",   glow: "hover:shadow-green-500/10"   },
-  Tools:     { bar: "bg-slate-400",   dot: "bg-slate-400",   badge: "bg-slate-500/15 text-slate-400 border-slate-500/30",   glow: "hover:shadow-slate-500/10"   },
+  Frontend:  { bar: "bg-sky-500",     dot: "bg-sky-400",     chipBg: "bg-sky-100 dark:bg-sky-500/15",         badge: "bg-sky-100 text-sky-700 border-sky-300 dark:bg-sky-500/15 dark:text-sky-400 dark:border-sky-500/30",         glow: "hover:shadow-sky-500/10"     },
+  Backend:   { bar: "bg-violet-500",  dot: "bg-violet-400",  chipBg: "bg-violet-100 dark:bg-violet-500/15",   badge: "bg-violet-100 text-violet-700 border-violet-300 dark:bg-violet-500/15 dark:text-violet-400 dark:border-violet-500/30",  glow: "hover:shadow-violet-500/10"  },
+  Database:  { bar: "bg-emerald-500", dot: "bg-emerald-400", chipBg: "bg-emerald-100 dark:bg-emerald-500/15", badge: "bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-500/15 dark:text-emerald-400 dark:border-emerald-500/30", glow: "hover:shadow-emerald-500/10" },
+  "AI / LLM":{ bar: "bg-amber-500",   dot: "bg-amber-400",   chipBg: "bg-amber-100 dark:bg-amber-500/15",     badge: "bg-amber-100 text-amber-700 border-amber-300 dark:bg-amber-500/15 dark:text-amber-400 dark:border-amber-500/30",   glow: "hover:shadow-amber-500/10"   },
+  DevOps:    { bar: "bg-green-500",   dot: "bg-green-400",   chipBg: "bg-green-100 dark:bg-green-500/15",     badge: "bg-green-100 text-green-700 border-green-300 dark:bg-green-500/15 dark:text-green-400 dark:border-green-500/30",   glow: "hover:shadow-green-500/10"   },
+  Tools:     { bar: "bg-slate-400",   dot: "bg-slate-400",   chipBg: "bg-slate-100 dark:bg-slate-500/15",     badge: "bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-500/15 dark:text-slate-400 dark:border-slate-500/30",   glow: "hover:shadow-slate-500/10"   },
 };
 
 export interface Skill {

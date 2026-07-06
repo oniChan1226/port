@@ -22,7 +22,7 @@ const ArticlesCard = ({ article }: Props) => {
       />
       <div className="flex space-x-6 justify-between px-5 py-4 bg-primary ">
         <div className="flex flex-col items-start space-y-1">
-          <h2 className="line-clamp-1 text-white font-semibold">
+          <h2 className="line-clamp-1 font-semibold" style={{ color: "var(--text-base)" }}>
             {article?.title}
           </h2>
           <p className="text-xs text-neutral-400/80">

@@ -61,7 +61,7 @@ const JoinReader = () => {
             </>
           ) : status === "subscribed" ? (
             <>
-              <FaCheckCircle className="text-green-400" />
+              <FaCheckCircle className="text-green-600 dark:text-green-400" />
               Subscribed
             </>
           ) : (

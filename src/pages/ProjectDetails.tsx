@@ -15,7 +15,7 @@ const ProjectDetails = () => {
     <div className="space-y-8">
       <BackTo to="/projects" text="All Projects"/>
       <div>
-        <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide text-white">{project.title}</h2>
+        <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide" style={{ color: "var(--text-base)" }}>{project.title}</h2>
         <p className="text-neutral-400/90">{project.description}</p>
       </div>
       <div className="space-y-1">
@@ -29,7 +29,7 @@ const ProjectDetails = () => {
         </div>
       </div>
       <DemoCard demo={project.demoLink} source={project.sourceLink}/>
-      <div className="prose prose-invert max-w-none">
+      <div className="prose dark:prose-invert max-w-none">
         <ReactMarkdown>{project.markdown}</ReactMarkdown>
       </div>
       <div className="grid lg:grid-cols-2 items-center gap-8">

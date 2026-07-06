@@ -56,12 +56,12 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           ) : (
             <div className="w-full h-40 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-800 flex items-center justify-center">
               {project.status === "live" && (
-                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-900/40 border border-green-700/50 text-green-400">
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 border border-green-300 text-green-700 dark:bg-green-900/40 dark:border-green-700/50 dark:text-green-400">
                   Live
                 </span>
               )}
               {project.status === "in-development" && (
-                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-900/40 border border-amber-700/50 text-amber-400">
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-700 dark:bg-amber-900/40 dark:border-amber-700/50 dark:text-amber-400">
                   In Development
                 </span>
               )}

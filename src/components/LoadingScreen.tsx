@@ -70,11 +70,12 @@ export default function LoadingScreen() {
             {/* Name — clips up from behind the bottom edge */}
             <div className="overflow-hidden pb-1">
               <motion.h1
-                className="font-black text-white uppercase text-center"
+                className="font-black uppercase text-center"
                 style={{
                   fontSize: "clamp(2.4rem, 8vw, 5.5rem)",
                   letterSpacing: "0.22em",
                   lineHeight: 1.1,
+                  color: "var(--text-base)",
                 }}
                 initial={{ y: "108%" }}
                 animate={{ y: 0 }}

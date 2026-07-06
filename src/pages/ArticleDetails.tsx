@@ -32,7 +32,7 @@ const ArticleDetails = () => {
         <div>Loading...</div>
       ) : (
         <article className=" porse-neutral space-y-5 hyphens-auto">
-          <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide text-white">
+          <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide" style={{ color: "var(--text-base)" }}>
             {data?.title}
           </h2>
           <p className="text-neutral-400/90">{data?.description}</p>
@@ -56,9 +56,7 @@ const ArticleDetails = () => {
             />
           </div>
           <div
-            className="prose prose-invert max-w-none 
-          prose-headings:text-white
-  prose-p:text-neutral-300"
+            className="prose dark:prose-invert max-w-none"
           >
             <ReactMarkdown>{data?.body_markdown}</ReactMarkdown>
           </div>

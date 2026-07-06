@@ -14,7 +14,10 @@ const GuestBook = () => {
           <Sparkle size={18} />
           <span>Share your thoughts</span>
         </div>
-        <h2 className="text-2xl lg:text-4xl font-semibold bg-gradient-to-b from-white/95 via-neutral-300 to-neutral-500 text-transparent bg-clip-text">
+        <h2
+          className="text-2xl lg:text-4xl font-semibold text-transparent bg-clip-text"
+          style={{ backgroundImage: "linear-gradient(to bottom, var(--text-base), var(--color-neutral-400))" }}
+        >
           Sign my Guestbook
         </h2>
         <p className="text-neutral-500 text-center text-sm lg:text-md  lg:text-start">

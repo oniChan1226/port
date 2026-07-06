@@ -17,14 +17,16 @@ const DemoCard = ({ demo, source }: DemoCardProps) => {
         <a
           href={demo}
           target="_blank"
-          className="px-4 py-2 w-full bg-neutral-800 hover:bg-neutral-800/80 hover:text-white/50 duration-300 text-white text-center rounded"
+          className="px-4 py-2 w-full bg-neutral-800 hover:bg-neutral-800/80 hover:opacity-70 duration-300 text-center rounded"
+          style={{ color: "var(--text-base)" }}
         >
           Demo
         </a>
         <a
           href={source}
           target="_blank"
-          className="px-4 py-2 w-full bg-neutral-900 hover:bg-neutral-900/80 hover:text-white/50 duration-300 text-white text-center rounded"
+          className="px-4 py-2 w-full bg-neutral-900 hover:bg-neutral-900/80 hover:opacity-70 duration-300 text-center rounded"
+          style={{ color: "var(--text-base)" }}
         >
           Source
         </a>
