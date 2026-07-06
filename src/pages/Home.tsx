@@ -1,5 +1,4 @@
-import { Check, CodeXml, Copy, LayoutDashboard, Newspaper, Package, Rocket, Users, Zap } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Check, CodeXml, Copy, LayoutDashboard, Newspaper } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { myWorkEmail } from "../constants/constants.ts";
@@ -13,41 +12,28 @@ import { useQuery } from "@tanstack/react-query";
 import type { ArticleList } from "../interfaces/Article.ts";
 import { fetchBlogs } from "../api/fetchBlogs.ts";
 import { motion, useInView } from "motion/react";
-import { LayoutTextFlip } from "../components/ui/layout-text-flip";
-
-const ROLES = [
-  "Full-Stack Engineer",
-  "AI/LLM Integrator",
-  "React Engineer",
-  "Backend Architect",
-  "Systems Optimizer",
-];
 
 const STATS = [
   {
-    icon: Users,
     value: 7,
     suffix: "K+",
     label: "Users Scaled",
     detail: "From 50 → 7,000+ on JobJen",
   },
   {
-    icon: Zap,
     value: 8,
     suffix: "x",
     label: "Faster APIs",
     detail: "8s response cut to <1s",
   },
   {
-    icon: Rocket,
-    value: 1.5,
+    value: 2.5,
     decimals: 1,
     suffix: "+",
     label: "Yrs Experience",
     detail: "Production MERN & AI systems",
   },
   {
-    icon: Package,
     value: 2,
     suffix: "",
     label: "Solo Products",
@@ -73,14 +59,12 @@ function useCountUp(target: number, duration = 1200, start = false, decimals = 0
 }
 
 function StatCard({
-  icon: Icon,
   value,
   decimals = 0,
   suffix,
   label,
   detail,
 }: {
-  icon: LucideIcon;
   value: number;
   decimals?: number;
   suffix: string;
@@ -93,11 +77,8 @@ function StatCard({
   return (
     <div
       ref={ref}
-      className="group flex flex-col gap-2.5 rounded-xl border border-neutral-800 bg-neutral-900/50 p-4 hover:border-neutral-700 hover:bg-neutral-900 transition-colors duration-300"
+      className="flex flex-col gap-2 rounded-xl border border-neutral-800 bg-neutral-900/50 p-4 hover:border-neutral-700 hover:bg-neutral-900 transition-colors duration-300"
     >
-      <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-1,#38bdf8)]/10 text-[var(--accent-1,#38bdf8)]">
-        <Icon size={16} />
-      </div>
       <span className="text-2xl lg:text-3xl font-bold" style={{ color: "var(--text-base)" }}>
         {count.toFixed(decimals)}{suffix}
       </span>
@@ -151,13 +132,8 @@ const Home = () => {
           <h2 className="text-4xl lg:text-5xl font-semibold leading-8 lg:leading-16 tracking-wide text-shadow-lg/10">
             Hey, I'm Fahad,
           </h2>
-          <h2 className="flex flex-wrap items-center gap-3 text-4xl lg:text-5xl leading-14 tracking-wide text-shadow-lg/10">
-            <LayoutTextFlip
-              text="A"
-              words={ROLES}
-              className="font-semibold tracking-wide"
-              wordClassName="gradient-text"
-            />
+          <h2 className="flex flex-wrap items-center gap-2 text-4xl lg:text-5xl font-semibold leading-14 tracking-wide text-shadow-lg/10">
+            Full-Stack <span className="text-sky-500">AI Engineer</span>
           </h2>
           <motion.div variants={fadeUp} className="my-4 text-neutral-400/70 text-md leading-5">
             <h6>Shipping AI-integrated products end-to-end — from real-time backends to sub-second APIs.</h6>
