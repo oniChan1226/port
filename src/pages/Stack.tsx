@@ -39,16 +39,12 @@ const Stack = () => {
 
   return (
     <div>
-      <PageTitle title="My Daily Dev Stack" />
-      <div className="mt-2 space-y-8">
-        <motion.h2
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="text-neutral-400/70 text-xl tracking-wide">
-          Frameworks, libraries, and tools I regularly use in development.
-        </motion.h2>
-        <motion.div 
+      <PageTitle
+        title="My Daily Dev Stack"
+        brief="Frameworks, libraries, and tools I regularly use in development."
+      />
+      <div className="mt-8 space-y-8">
+        <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.3 }}

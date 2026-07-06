@@ -31,7 +31,7 @@ const JoinReader = () => {
   return (
     <div className="bg-neutral-800 flex flex-col lg:flex-row lg:justify-between lg:items-center px-5 py-6 space-y-3 lg:space-y-0">
       <div>
-        <h2 className="font-semibold text-sm lg:text-md">Join 500+ Readers</h2>
+        <h2 className="font-semibold text-sm lg:text-base">Join 500+ Readers</h2>
         <p className="text-neutral-500 text-xs lg:text-sm">Read about authentic insights.</p>
       </div>
 

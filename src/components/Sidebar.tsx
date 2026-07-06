@@ -51,8 +51,8 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
           </div>
           {!collapsed && (
             <div className="min-w-0">
-              <h2 className="text-xl font-bold truncate">Fahad Khan</h2>
-              <h6 className="text-xs tracking-wide text-neutral-500 truncate">Software Engineer</h6>
+              <p className="text-xl font-bold truncate">Fahad Khan</p>
+              <p className="text-xs text-neutral-500 truncate">Software Engineer</p>
             </div>
           )}
         </Link>
@@ -95,7 +95,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
           <span className="w-1.5 h-1.5 rounded-full bg-green-500/70 inline-block" />
         </div>
       ) : (
-        <div className="mt-3 ml-0.5 flex items-center gap-1.5 text-[0.7rem] text-neutral-500">
+        <div className="mt-3 ml-0.5 flex items-center gap-1.5 text-xs text-neutral-500">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500/70 inline-block" />
           <span>PKT {formattedTime}</span>
         </div>
@@ -106,7 +106,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
         {NavlinksData.map((group, i) => (
           <div key={group.group + i}>
             {group.group !== "Main" && !collapsed && (
-              <h6 className="pl-4 text-neutral-500 my-3 font-medium truncate">{group.group}</h6>
+              <p className="pl-4 text-neutral-500 my-3 font-medium truncate">{group.group}</p>
             )}
             {group.group !== "Main" && collapsed && (
               <div className="my-3 mx-3 border-t border-neutral-800" />
@@ -148,7 +148,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
                   </div>
                   {!collapsed && (
                     <div
-                      className={`relative z-10 border px-1.5 py-0.5 text-[0.7rem] rounded-md flex-shrink-0 ${
+                      className={`relative z-10 border px-1.5 py-0.5 text-[0.65rem] rounded-md flex-shrink-0 ${
                         isActive
                           ? "border-[var(--accent-1,#38bdf8)]/50 text-[var(--accent-1,#38bdf8)]"
                           : "border-neutral-600"

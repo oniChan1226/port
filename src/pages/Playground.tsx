@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import PlaygroundTerminal from "../components/PlaygroundTerminal";
 import RequestFlowPlayground from "../components/RequestFlowPlayground";
+import PageTitle from "../components/PageTitle";
 
 const EXPERIENCES = [
   {
@@ -36,20 +37,13 @@ const Playground = () => {
     <div className="space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <motion.h1
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-3xl sm:text-5xl font-semibold tracking-wide"
-        >
-          Playground
-        </motion.h1>
+        <PageTitle title="Playground" />
         <motion.p
           key={active.id}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="text-neutral-500 text-md lg:text-lg leading-5"
+          className="text-neutral-400/90 text-base lg:text-lg leading-relaxed"
         >
           {active.tagline}
         </motion.p>

@@ -25,7 +25,7 @@ const ArticlesCard = ({ article }: Props) => {
           <h2 className="line-clamp-1 font-semibold" style={{ color: "var(--text-base)" }}>
             {article?.title}
           </h2>
-          <p className="text-xs text-neutral-400/80">
+          <p className="text-xs text-neutral-400/90">
             {formatter.format(new Date(article?.created_at))}
           </p>
         </div>

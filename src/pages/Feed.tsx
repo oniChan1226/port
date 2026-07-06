@@ -6,7 +6,7 @@ const Feed = () => {
   return (
     <div>
         <PageTitle title='Feed' brief='Brief progress updates, milestones, and lessons from my journey.' />
-        <div className='mt-12'>
+        <div className='mt-8'>
             {myFeed.map((feed, i) => (
               <FeedView
                 key={feed.timestamp}

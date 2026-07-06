@@ -19,8 +19,8 @@ const Header = () => {
           className="w-10 h-10 rounded-full object-contain dark:bg-black/50 bg-neutral-200/60 flex-shrink-0"
         />
         <div className="min-w-0">
-          <h2 className="text-md font-semibold leading-5 truncate">Fahad Khan</h2>
-          <h6 className="text-xs text-neutral-500 truncate">Software Engineer</h6>
+          <p className="text-base font-semibold leading-5 truncate">Fahad Khan</p>
+          <p className="text-xs text-neutral-500 truncate">Software Engineer</p>
         </div>
       </Link>
 

@@ -14,7 +14,7 @@ const Projects = () => {
         </span>
       </div>
 
-      <div className="mt-8 lg:mt-16">
+      <div className="mt-8">
         <CardContainer>
           {myProjects.map((project, i) => (
             <ProjectCard project={project} key={project._id + i} />

@@ -10,17 +10,17 @@ const GuestBook = () => {
   return (
     <div className=" mt-16">
       <div className="justify-center items-center flex flex-col space-y-3 ">
-        <div className="flex justify-center items-center text-neutral-500 space-x-1">
+        <div className="flex justify-center items-center text-sm font-semibold text-neutral-500 space-x-1">
           <Sparkle size={18} />
           <span>Share your thoughts</span>
         </div>
-        <h2
-          className="text-2xl lg:text-4xl font-semibold text-transparent bg-clip-text"
+        <h1
+          className="text-3xl lg:text-5xl font-semibold tracking-wide leading-tight text-transparent bg-clip-text"
           style={{ backgroundImage: "linear-gradient(to bottom, var(--text-base), var(--color-neutral-400))" }}
         >
           Sign my Guestbook
-        </h2>
-        <p className="text-neutral-500 text-center text-sm lg:text-md  lg:text-start">
+        </h1>
+        <p className="text-neutral-400/90 text-center text-base lg:text-lg lg:text-start">
           Share your thoughts, feedback, or just say hi!
         </p>
       </div>
@@ -30,9 +30,9 @@ const GuestBook = () => {
             "Showing"
           ) : (
             <>
-              <h2 className="text-neutral-400/80">
+              <p className="text-sm text-neutral-500">
                 Sign in to leave a comment
-              </h2>
+              </p>
               <button 
               onClick={handleSignin}
               className="flex items-center justify-center space-x-1 bg-primary hover:opacity-70 cursor-pointer duration-400 px-5 py-2 rounded-md">

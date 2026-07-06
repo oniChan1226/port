@@ -19,9 +19,9 @@ const Articles = () => {
         title="Articles"
         brief="Documenting what I learn, build, and think about as a dev."
       />
-      <div className="grid lg:grid-cols-2 gap-6 mt-12">
+      <div className="grid lg:grid-cols-2 gap-6 mt-8">
         {isLoading || !data ? (
-          <div className="text-neutral-400 animate-pulse">Loading...</div>
+          <div className="text-neutral-500 animate-pulse">Loading...</div>
         ) : (
           data?.map((article) => (
             <ArticlesCard

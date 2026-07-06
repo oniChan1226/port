@@ -27,7 +27,7 @@ const StackCard: React.FC<StackCardProps> = ({ title, stackArray }) => {
         variants={cardVariants}
         className="border border-neutral-800 rounded-xl overflow-hidden"
       >
-        <h2 className="bg-neutral-800 text-lg font-bold p-5 border-b border-neutral-700">{title}</h2>
+        <h2 className="bg-neutral-800 text-lg font-semibold p-5 border-b border-neutral-700">{title}</h2>
         <motion.div
           variants={containerVariants}
           className="grid grid-cols-1 md:grid-cols-2 gap-5 p-3 lg:p-6"
@@ -45,13 +45,13 @@ const StackCard: React.FC<StackCardProps> = ({ title, stackArray }) => {
                 <stack.icon size={30} />
               </div>
               <div className="space-y-2">
-                <h2 className="font-semibold text-md flex items-center space-x-1">
+                <h3 className="font-semibold text-base flex items-center space-x-1">
                   <span>{stack.name}</span>
                   <ExternalLink
                     size={12}
                     className="hidden group-hover:block duration-300"
                   />
-                </h2>
+                </h3>
                 <p className="text-sm text-neutral-500">{stack.description}</p>
                 <div className="flex items-center justify-start space-x-2">
                   {stack.categories.map((cat: string) => (

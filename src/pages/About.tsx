@@ -32,7 +32,7 @@ const About = () => {
       {/* about me */}
       <article className="flex flex-col lg:flex-row justify-center items-center lg:gap-16 ">
         <div className="w-full lg:w-[70%] ">
-          <motion.h2
+          <motion.h1
             initial={{
               x: -40,
               opacity: 0,
@@ -42,11 +42,11 @@ const About = () => {
               opacity: 100,
             }}
             transition={TransitionDuration}
-            className="text-3xl lg:text-5xl font-semibold mb-5"
+            className="text-3xl lg:text-5xl font-semibold tracking-wide leading-tight mb-5"
           >
             About Me
-          </motion.h2>
-          <motion.p
+          </motion.h1>
+          <motion.div
           initial={{
             x: -40,
             opacity: 0
@@ -58,7 +58,7 @@ const About = () => {
           transition={TransitionDuration}
            className="">
             <TextGenerateEffect words={aboutMe}  />
-          </motion.p>
+          </motion.div>
           <div className="grid md:grid-cols-2 gap-4 my-12 hyphens-auto">
             {myCards.map((card, i) => (
               <BadgeCards

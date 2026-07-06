@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { myProjects } from "../data/ProjectsData";
 import { Briefcase, Flame } from "lucide-react";
 import BackTo from "../components/BackTo";
+import PageTitle from "../components/PageTitle";
 import DemoCard from "../components/DemoCard";
 import QuickAction from "../components/QuickAction";
 import { FeaturedBadge, StatusBadge, TagBadge } from "../components/ProjectBadges";
@@ -21,11 +22,10 @@ const ProjectDetails = () => {
           <StatusBadge status={project.status} />
           <TagBadge tag={project.tag} />
         </div>
-        <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide" style={{ color: "var(--text-base)" }}>{project.title}</h2>
-        <p className="text-neutral-400/90">{project.description}</p>
+        <PageTitle title={project.title} brief={project.description} />
       </div>
       <div className="space-y-1">
-        <div className="text-neutral-400/90 flex items-center text-sm">
+        <div className="text-neutral-500 flex items-center text-sm">
           {project.timestamps}
         </div>
         {project.src ? (

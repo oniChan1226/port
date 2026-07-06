@@ -84,7 +84,7 @@ function StatCard({
       </span>
       <div className="leading-tight">
         <p className="text-xs font-semibold" style={{ color: "var(--text-base)" }}>{label}</p>
-        <p className="text-[0.7rem] text-neutral-500 mt-0.5">{detail}</p>
+        <p className="text-xs text-neutral-500 mt-0.5">{detail}</p>
       </div>
     </div>
   );
@@ -129,15 +129,15 @@ const Home = () => {
         animate="show"
       >
         <motion.div variants={fadeUp}>
-          <h2 className="text-4xl lg:text-5xl font-semibold leading-8 lg:leading-16 tracking-wide text-shadow-lg/10">
-            Hey, I'm Fahad,
-          </h2>
-          <h2 className="flex flex-wrap items-center gap-2 text-4xl lg:text-5xl font-semibold leading-14 tracking-wide text-shadow-lg/10">
-            Full-Stack <span className="gradient-text">AI Engineer</span>
-          </h2>
-          <motion.div variants={fadeUp} className="my-4 text-neutral-400/70 text-md leading-5">
-            <h6>Shipping AI-integrated products end-to-end — from real-time backends to sub-second APIs.</h6>
-            <h6>Rare combo. I know.</h6>
+          <h1 className="text-4xl lg:text-5xl font-semibold leading-tight tracking-wide text-shadow-lg/10">
+            <span className="block">Hey, I'm Fahad,</span>
+            <span className="flex flex-wrap items-center gap-2">
+              Full-Stack <span className="gradient-text">AI Engineer</span>
+            </span>
+          </h1>
+          <motion.div variants={fadeUp} className="my-4 text-neutral-400/90 text-base lg:text-lg leading-relaxed">
+            <p>Shipping AI-integrated products end-to-end — from real-time backends to sub-second APIs.</p>
+            <p>Rare combo. I know.</p>
           </motion.div>
         </motion.div>
 
@@ -184,9 +184,9 @@ const Home = () => {
         whileInView="show"
         viewport={{ once: true, margin: "-60px" }}
       >
-        <motion.h4 variants={fadeUp} className="text-lg font-semibold mb-3">
+        <motion.h2 variants={fadeUp} className="text-lg font-semibold mb-3">
           New Drops
-        </motion.h4>
+        </motion.h2>
         <CardContainer>
           {myProjects.slice(0, 2).map((project, i) => (
             <motion.div key={project.title + i} variants={fadeUp}>
@@ -207,7 +207,7 @@ const Home = () => {
         <div className="w-[90%] mx-auto my-6">
           <div>
             <h2 className="text-lg font-semibold">Articles</h2>
-            <p className="text-neutral-500">
+            <p className="text-neutral-400/90">
               Explore concise articles sharing insights, tutorials, and ideas from my development journey.
             </p>
           </div>
@@ -229,7 +229,7 @@ const Home = () => {
                     <Newspaper size={20} />
                   </div>
                   <div>
-                    <h2 className="line-clamp-1 text-sm lg:text-md font-semibold">{article.title}</h2>
+                    <h3 className="line-clamp-1 text-sm lg:text-base font-semibold">{article.title}</h3>
                     <p className="line-clamp-1 text-xs lg:text-sm text-neutral-500">{article.description}</p>
                   </div>
                 </Link>

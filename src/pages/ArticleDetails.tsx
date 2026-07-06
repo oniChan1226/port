@@ -9,6 +9,7 @@ import { formatter } from "../lib/helpers";
 import { Dot } from "lucide-react";
 import JoinReader from "../components/JoinReader";
 import BackTo from "../components/BackTo";
+import PageTitle from "../components/PageTitle";
 
 const ArticleDetails = () => {
   const id = useParams().id;
@@ -31,11 +32,8 @@ const ArticleDetails = () => {
         <div>Loading...</div>
       ) : (
         <article className="space-y-5 hyphens-auto">
-          <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide" style={{ color: "var(--text-base)" }}>
-            {data?.title}
-          </h2>
-          <p className="text-neutral-400/90">{data?.description}</p>
-          <div className="text-neutral-400/90 flex items-center text-sm">
+          <PageTitle title={data?.title ?? ""} brief={data?.description} />
+          <div className="text-neutral-500 flex items-center text-sm">
             <span>{formatter.format(new Date(data?.created_at))}</span>
             <Dot />
             <span className="whitespace-normal capitalize">

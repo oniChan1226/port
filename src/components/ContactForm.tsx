@@ -19,8 +19,8 @@ const ContactForm = () => {
   return (
     <div className="bg-primary border border-neutral-800 rounded-md p-5">
       <div>
-        <h2 className="font-semibold lg:text-lg">Send a message</h2>
-        <p className="text-neutral-500 text-sm lg:text-md">
+        <h2 className="text-lg font-semibold">Send a message</h2>
+        <p className="text-neutral-500 text-sm lg:text-base">
           Fill out the form below and we'll get back to you as soon as possible.
         </p>
       </div>

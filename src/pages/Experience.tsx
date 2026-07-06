@@ -35,22 +35,22 @@ const ExperienceEntry = ({
       <div className="space-y-2">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <h2 className="text-xl font-semibold leading-6">{exp.companyName}</h2>
+            <h2 className="text-lg font-semibold leading-6">{exp.companyName}</h2>
             {exp.duration.to === "Present" && (
               <span className="text-[0.65rem] font-semibold px-2 py-0.5 rounded-full bg-sky-100 border border-sky-300 text-sky-700 dark:bg-sky-900/40 dark:border-sky-800/60 dark:text-sky-300">
                 Current
               </span>
             )}
           </div>
-          <h6 className="text-neutral-500 text-sm">
+          <p className="text-neutral-500 text-sm">
             {exp.designation} · {exp.duration.from} – {exp.duration.to} · {exp.location}
-          </h6>
+          </p>
         </div>
         <p className="text-neutral-400/90">{exp.brief}</p>
         <ul className="space-y-1 list-disc ml-5">
           {exp.responsibilities.map((rsp) => (
             <li key={rsp.header} className="text-neutral-400/90">
-              <span className="font-bold text-md" style={{ color: "var(--text-base)" }}>{rsp.header}: </span>
+              <span className="font-bold text-base" style={{ color: "var(--text-base)" }}>{rsp.header}: </span>
               {rsp.content.map((part, idx) =>
                 part.highlight ? (
                   <span key={idx} style={{ color: "var(--text-base)" }}>

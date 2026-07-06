@@ -55,7 +55,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ Icon, title, description, tag
         <h2 className="text-lg font-semibold">{title}</h2>
       </div>
       <div className="space-y-3">
-        <p className="text-neutral-400/80">{description}</p>
+        <p className="text-neutral-400/90">{description}</p>
         <div className="flex gap-2 flex-wrap">
           {tags.map((tag) => (
             <Tag tag={tag} key={tag} />

@@ -81,9 +81,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <div className="w-[90%] mx-auto my-4 flex justify-between items-center gap-5">
           <div>
             <h2 className="text-lg font-semibold">{project.title}</h2>
-            <h6 className="text-xs md:text-sm text-neutral-500 line-clamp-2 leading-4 lg:leading-5">
+            <p className="text-xs md:text-sm text-neutral-500 line-clamp-2 leading-4 lg:leading-5">
               {project.description}
-            </h6>
+            </p>
           </div>
           <TagBadge tag={project.tag} className="text-right" />
         </div>
