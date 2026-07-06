@@ -59,7 +59,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
 
         {/* Theme toggle */}
         <button
-          onClick={toggleTheme}
+          onClick={(e) => toggleTheme({ x: e.clientX, y: e.clientY })}
           aria-label="Toggle theme"
           className="p-2 rounded-md hover:bg-neutral-800 border border-transparent hover:border-neutral-700 transition-colors duration-200 text-neutral-500 hover:text-[var(--text-base)] flex-shrink-0"
         >

@@ -79,7 +79,7 @@ function FontCard({ def, active, onClick }: { def: FontDef; active: boolean; onC
 }
 
 // ── Mode chip ──────────────────────────────────────────────────────────────
-function ModeChip({ icon, label, active, onClick }: { icon: React.ReactNode; label: string; active: boolean; onClick: () => void }) {
+function ModeChip({ icon, label, active, onClick }: { icon: React.ReactNode; label: string; active: boolean; onClick: (e: React.MouseEvent<HTMLButtonElement>) => void }) {
   return (
     <button
       onClick={onClick}
@@ -163,13 +163,13 @@ export default function ThemeDrawer() {
                     icon={<Moon size={14} />}
                     label="Dark"
                     active={mode === "dark"}
-                    onClick={() => mode !== "dark" && toggleMode()}
+                    onClick={(e) => mode !== "dark" && toggleMode({ x: e.clientX, y: e.clientY })}
                   />
                   <ModeChip
                     icon={<Sun size={14} />}
                     label="Light"
                     active={mode === "light"}
-                    onClick={() => mode !== "light" && toggleMode()}
+                    onClick={(e) => mode !== "light" && toggleMode({ x: e.clientX, y: e.clientY })}
                   />
                 </div>
               </section>

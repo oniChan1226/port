@@ -28,7 +28,7 @@ const Header = () => {
       <div className="flex items-center gap-2 flex-shrink-0">
         {/* Theme toggle */}
         <button
-          onClick={toggleTheme}
+          onClick={(e) => toggleTheme({ x: e.clientX, y: e.clientY })}
           aria-label="Toggle theme"
           className="p-2.5 rounded-lg bg-neutral-800 border border-neutral-700 cursor-pointer text-neutral-500 hover:text-[var(--text-base)] transition-colors duration-200"
         >

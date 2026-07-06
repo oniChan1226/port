@@ -351,3 +351,32 @@ html.font-serif-pkg h5 {
 
 /* ── Timeline draw-in ── */
 .timeline-line { transform-origin: top center; }
+
+/* ── Dark-mode toggle circular reveal (View Transitions API) ──────────────
+   The new theme's snapshot grows as a circle from the click point (set via
+   --theme-toggle-x/y/r) over the old theme's snapshot, which stays static
+   underneath. Only engages on browsers that support startViewTransition —
+   see ThemeContext.toggleMode, which skips straight to setMode otherwise. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-reveal 0.6s ease-in-out;
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0px at var(--theme-toggle-x, 50%) var(--theme-toggle-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--theme-toggle-r, 150%) at var(--theme-toggle-x, 50%) var(--theme-toggle-y, 50%));
+  }
+}

@@ -1,11 +1,17 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useLayoutEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import type { ColorTheme, FontPkg } from "../data/ThemeData";
+
+export interface ThemeToggleOrigin {
+  x: number;
+  y: number;
+}
 
 interface ThemeContextValue {
   mode:           "dark" | "light";
   colorTheme:     ColorTheme;
   font:           FontPkg;
-  toggleMode:     () => void;
+  toggleMode:     (origin?: ThemeToggleOrigin) => void;
   setColorTheme:  (t: ColorTheme) => void;
   setFont:        (f: FontPkg) => void;
 }
@@ -33,7 +39,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     (localStorage.getItem("th-font") as FontPkg) ?? "inter"
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement;
 
     // ── Mode ──
@@ -51,7 +57,31 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem("th-font", font);
   }, [mode, colorTheme, font]);
 
-  const toggleMode     = () => setMode((m) => (m === "dark" ? "light" : "dark"));
+  const toggleMode = (origin?: ThemeToggleOrigin) => {
+    const next = mode === "dark" ? "light" : "dark";
+    const supportsViewTransition = typeof document.startViewTransition === "function";
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!supportsViewTransition || prefersReducedMotion) {
+      setMode(next);
+      return;
+    }
+
+    if (origin) {
+      const root = document.documentElement;
+      const maxRadius = Math.hypot(
+        Math.max(origin.x, window.innerWidth - origin.x),
+        Math.max(origin.y, window.innerHeight - origin.y)
+      );
+      root.style.setProperty("--theme-toggle-x", `${origin.x}px`);
+      root.style.setProperty("--theme-toggle-y", `${origin.y}px`);
+      root.style.setProperty("--theme-toggle-r", `${maxRadius}px`);
+    }
+
+    document.startViewTransition(() => {
+      flushSync(() => setMode(next));
+    });
+  };
   const setColorTheme  = (t: ColorTheme) => setColorThemeState(t);
   const setFont        = (f: FontPkg) => setFontState(f);
 
