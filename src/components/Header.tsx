@@ -13,18 +13,11 @@ const Header = () => {
     <div className="w-[94%] mx-auto flex justify-between items-center gap-2">
       {/* Profile */}
       <Link to={"/"} title="Fahad Khan" className="flex items-center gap-1 min-w-0">
-        <div className="relative flex-shrink-0">
-          <span
-            className="absolute -inset-1 rounded-full opacity-30 blur-md pointer-events-none"
-            style={{ background: "var(--accent-1, #38bdf8)" }}
-            aria-hidden="true"
-          />
-          <img
-            src={pfp}
-            alt="Fahad Khan"
-            className="relative w-10 h-10 rounded-full object-contain dark:bg-black/50 bg-neutral-200/60"
-          />
-        </div>
+        <img
+          src={pfp}
+          alt="Fahad Khan"
+          className="w-10 h-10 rounded-full object-contain dark:bg-black/50 bg-neutral-200/60 flex-shrink-0"
+        />
         <div className="min-w-0">
           <h2 className="text-md font-semibold leading-5 truncate">Fahad Khan</h2>
           <h6 className="text-xs text-neutral-500 truncate">Software Engineer</h6>

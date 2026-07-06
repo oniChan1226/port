@@ -7,7 +7,18 @@ const Feed = () => {
     <div>
         <PageTitle title='Feed' brief='Brief progress updates, milestones, and lessons from my journey.' />
         <div className='mt-12'>
-            {myFeed.map((feed) => <FeedView timestamp={feed.timestamp} description={feed.description} title={feed.title} key={feed.timestamp} />)}
+            {myFeed.map((feed, i) => (
+              <FeedView
+                key={feed.timestamp}
+                timestamp={feed.timestamp}
+                description={feed.description}
+                title={feed.title}
+                icon={feed.icon}
+                type={feed.type}
+                index={i}
+                isLast={i === myFeed.length - 1}
+              />
+            ))}
         </div>
     </div>
   )

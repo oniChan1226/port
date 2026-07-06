@@ -39,16 +39,10 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
           className={`flex items-center gap-2 min-w-0 ${collapsed ? "justify-center" : ""}`}
         >
           <div className="relative flex-shrink-0">
-            {/* Subtle accent halo behind the avatar — theme-reactive */}
-            <span
-              className="absolute -inset-1.5 rounded-full opacity-30 blur-md pointer-events-none"
-              style={{ background: "var(--accent-1, #38bdf8)" }}
-              aria-hidden="true"
-            />
             <img
               src={pfp}
               alt="Fahad Khan"
-              className="relative w-14 h-14 rounded-full object-contain dark:bg-black/50 bg-neutral-200/60"
+              className="w-14 h-14 rounded-full object-contain dark:bg-black/50 bg-neutral-200/60"
             />
             <span className="absolute bottom-0 right-0 w-3.5 h-3.5 flex items-center justify-center">
               <span className="absolute w-full h-full rounded-full bg-green-500 animate-ping opacity-60" />
