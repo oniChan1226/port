@@ -7,7 +7,11 @@ import { useTheme } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 
-const Sidebar = () => {
+interface SidebarProps {
+  collapsed?: boolean;
+}
+
+const Sidebar = ({ collapsed = false }: SidebarProps) => {
   const { toggle: toggleSearch } = useSearchCommand();
   const { mode: theme, toggleMode: toggleTheme } = useTheme();
   const location = useLocation();
@@ -28,9 +32,13 @@ const Sidebar = () => {
   return (
     <div className="relative h-full flex flex-col">
       {/* Profile Badge */}
-      <div className="flex items-center justify-between">
-        <Link to={"/"} className="flex items-center gap-2">
-          <div className="relative">
+      <div className={`flex items-center ${collapsed ? "flex-col gap-3" : "justify-between"}`}>
+        <Link
+          to={"/"}
+          title="Fahad Khan"
+          className={`flex items-center gap-2 min-w-0 ${collapsed ? "justify-center" : ""}`}
+        >
+          <div className="relative flex-shrink-0">
             <img
               src={pfp}
               alt="Fahad Khan"
@@ -41,10 +49,12 @@ const Sidebar = () => {
               <span className="relative w-3 h-3 rounded-full bg-green-500 border-2 border-primary" />
             </span>
           </div>
-          <div>
-            <h2 className="text-xl font-bold">Fahad Khan</h2>
-            <h6 className="text-xs tracking-wide text-neutral-500">Software Engineer</h6>
-          </div>
+          {!collapsed && (
+            <div className="min-w-0">
+              <h2 className="text-xl font-bold truncate">Fahad Khan</h2>
+              <h6 className="text-xs tracking-wide text-neutral-500 truncate">Software Engineer</h6>
+            </div>
+          )}
         </Link>
 
         {/* Theme toggle */}
@@ -80,17 +90,26 @@ const Sidebar = () => {
       </div>
 
       {/* Live clock */}
-      <div className="mt-3 ml-0.5 flex items-center gap-1.5 text-[0.7rem] text-neutral-500">
-        <span className="w-1.5 h-1.5 rounded-full bg-green-500/70 inline-block" />
-        <span>PKT {formattedTime}</span>
-      </div>
+      {collapsed ? (
+        <div className="mt-3 flex items-center justify-center" title={`PKT ${formattedTime}`}>
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500/70 inline-block" />
+        </div>
+      ) : (
+        <div className="mt-3 ml-0.5 flex items-center gap-1.5 text-[0.7rem] text-neutral-500">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500/70 inline-block" />
+          <span>PKT {formattedTime}</span>
+        </div>
+      )}
 
       {/* Navigation Links */}
       <nav className="space-y-1 pt-8 font-semibold text-sm flex-1 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 overflow-y-auto">
         {NavlinksData.map((group, i) => (
           <div key={group.group + i}>
-            {group.group !== "Main" && (
-              <h6 className="pl-4 text-neutral-500 my-4 font-medium">{group.group}</h6>
+            {group.group !== "Main" && !collapsed && (
+              <h6 className="pl-4 text-neutral-500 my-4 font-medium truncate">{group.group}</h6>
+            )}
+            {group.group !== "Main" && collapsed && (
+              <div className="my-4 mx-3 border-t border-neutral-800" />
             )}
             {group.links.map((link) => {
               const isActive =
@@ -102,8 +121,11 @@ const Sidebar = () => {
                 <NavLink
                   key={link.number}
                   to={link.href}
+                  title={collapsed ? link.label : undefined}
                   className={() =>
-                    `relative flex items-center justify-between gap-2 px-4 py-3 rounded-md transition-colors duration-200 ${
+                    `relative flex items-center gap-2 py-3 rounded-md transition-colors duration-200 ${
+                      collapsed ? "justify-center px-2" : "justify-between px-4"
+                    } ${
                       isActive ? "text-[var(--text-base)]" : "text-neutral-500 hover:text-[var(--text-base)]"
                     }`
                   }
@@ -120,13 +142,15 @@ const Sidebar = () => {
                       />
                     )}
                   </AnimatePresence>
-                  <div className="relative flex items-center gap-2 z-10">
+                  <div className="relative flex items-center gap-2 z-10 min-w-0">
                     {link.icon}
-                    <p>{link.label}</p>
+                    {!collapsed && <p className="truncate">{link.label}</p>}
                   </div>
-                  <div className="relative z-10 border px-1.5 py-0.5 text-[0.7rem] border-neutral-600 rounded-md">
-                    <p>{link.number}</p>
-                  </div>
+                  {!collapsed && (
+                    <div className="relative z-10 border px-1.5 py-0.5 text-[0.7rem] border-neutral-600 rounded-md flex-shrink-0">
+                      <p>{link.number}</p>
+                    </div>
+                  )}
                 </NavLink>
               );
             })}
@@ -139,29 +163,37 @@ const Sidebar = () => {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between gap-2 px-4 py-3 rounded-md transition-colors duration-200 text-neutral-500 hover:text-[var(--text-base)]"
+            title={collapsed ? link.label : undefined}
+            className={`flex items-center gap-2 py-3 rounded-md transition-colors duration-200 text-neutral-500 hover:text-[var(--text-base)] ${
+              collapsed ? "justify-center px-2" : "justify-between px-4"
+            }`}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 min-w-0">
               {link.icon}
-              <p>{link.label}</p>
+              {!collapsed && <p className="truncate">{link.label}</p>}
             </div>
-            <ExternalLink size={15} />
+            {!collapsed && <ExternalLink size={15} className="flex-shrink-0" />}
           </a>
         ))}
       </nav>
 
       {/* Search Command Bar */}
       <div
-        className="flex items-center justify-between gap-2 px-3 py-2 mb-2 border border-neutral-700 rounded-md text-sm cursor-pointer hover:bg-neutral-800 transition-colors duration-200"
+        title={collapsed ? "Search (Ctrl + K)" : undefined}
+        className={`flex items-center gap-2 mb-2 border border-neutral-700 rounded-md text-sm cursor-pointer hover:bg-neutral-800 transition-colors duration-200 ${
+          collapsed ? "justify-center px-2 py-2.5" : "justify-between px-3 py-2"
+        }`}
         onClick={() => toggleSearch()}
       >
         <div className="flex items-center gap-2 text-neutral-500">
           <Search size={14} />
-          <span>Search</span>
+          {!collapsed && <span>Search</span>}
         </div>
-        <kbd className="bg-neutral-800 text-[var(--text-base)] px-2 py-0.5 rounded text-xs border border-neutral-700">
-          Ctrl + K
-        </kbd>
+        {!collapsed && (
+          <kbd className="bg-neutral-800 text-[var(--text-base)] px-2 py-0.5 rounded text-xs border border-neutral-700">
+            Ctrl + K
+          </kbd>
+        )}
       </div>
     </div>
   );
