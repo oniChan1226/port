@@ -17,6 +17,10 @@ export const TextGenerateEffect = ({
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
   useEffect(() => {
+    // Cap the total reveal at ~1.2s regardless of word count — a fixed
+    // per-word stagger looks great for a 5-word tagline but leaves a long
+    // paragraph's tail end blurred for many seconds.
+    const staggerDelay = Math.min(0.15, 1.2 / wordsArray.length);
     animate(
       "span",
       {
@@ -25,7 +29,7 @@ export const TextGenerateEffect = ({
       },
       {
         duration: duration ? duration : 1,
-        delay: stagger(0.2),
+        delay: stagger(staggerDelay),
       }
     );
   }, [scope.current]);

@@ -30,6 +30,15 @@ const COMMAND_NAMES = [
 const FILE_NAMES = ["about.md", "skills.json", "projects.log", "experience.txt", "contact.card", "stats.txt"];
 const HIDDEN_FILE = ".secrets";
 
+// ── Theme-reactive accent classes (light shade for light mode, brighter for dark) ──
+const C = {
+  green: "text-green-600 dark:text-green-400",
+  amber: "text-amber-600 dark:text-amber-400",
+  red: "text-red-600 dark:text-red-400",
+  sky: "text-sky-600 dark:text-sky-400",
+  violet: "text-violet-600 dark:text-violet-400",
+};
+
 const HELP_TEXT = `Available commands:
 
   help                 show this list
@@ -87,7 +96,7 @@ function loadHistory(): string[] {
   }
 }
 
-// ── Matrix rain easter egg ───────────────────────────────────────────────────
+// ── Matrix rain easter egg — deliberately always dark/green, it's the whole joke ──
 function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -149,7 +158,7 @@ const PlaygroundTerminal = () => {
       content: (
         <>
           <p>Welcome to fahad@portfolio — interactive shell v1.0</p>
-          <p className="text-neutral-500">Type <span className="text-green-400">help</span> to see what's possible.</p>
+          <p className="text-neutral-500">Type <span className={C.green}>help</span> to see what's possible.</p>
         </>
       ),
     },
@@ -188,7 +197,7 @@ const PlaygroundTerminal = () => {
       : undefined;
     if (arg && !category) {
       return (
-        <p className="text-amber-400">
+        <p className={C.amber}>
           No category matches "{arg}". Try one of: {CATEGORIES.filter((c) => c !== "All").join(", ")}
         </p>
       );
@@ -200,7 +209,7 @@ const PlaygroundTerminal = () => {
         {list.map((s) => (
           <p key={s.name}>
             <span className="inline-block w-40 text-[var(--text-base)]">{s.name}</span>
-            <span className="text-green-400">{"●".repeat(s.proficiency)}</span>
+            <span className={C.green}>{"●".repeat(s.proficiency)}</span>
             <span className="text-neutral-700">{"○".repeat(5 - s.proficiency)}</span>
             <span className="text-neutral-500 ml-2">{PROFICIENCY_LABEL[s.proficiency]}</span>
           </p>
@@ -215,11 +224,11 @@ const PlaygroundTerminal = () => {
         <p key={p.slug}>
           <span className="inline-block w-40 text-[var(--text-base)]">{p.title}</span>
           {p.status && (
-            <span className={p.status === "live" ? "text-green-400" : "text-amber-400"}>
+            <span className={p.status === "live" ? C.green : C.amber}>
               [{p.status === "live" ? "LIVE" : "BUILDING"}]
             </span>
           )}
-          {p.featured && <span className="text-violet-400 ml-2">★ featured</span>}
+          {p.featured && <span className={`${C.violet} ml-2`}>★ featured</span>}
         </p>
       ))}
       <p className="text-neutral-500 mt-1">→ open projects</p>
@@ -249,10 +258,10 @@ const PlaygroundTerminal = () => {
 
   const renderContact = () => (
     <p>
-      Email: <span className="text-green-400">{myWorkEmail}</span> · or just{" "}
+      Email: <span className={C.green}>{myWorkEmail}</span> · or just{" "}
       <button
         type="button"
-        className="text-sky-400 underline underline-offset-2"
+        className={`${C.sky} underline underline-offset-2`}
         onClick={() => navigate("/contact")}
       >
         open contact
@@ -287,7 +296,7 @@ const PlaygroundTerminal = () => {
         push(
           "output",
           <p>
-            <span className="text-green-400 font-semibold">Fahad Khan</span> — Full-Stack AI Engineer based in
+            <span className={`${C.green} font-semibold`}>Fahad Khan</span> — Full-Stack AI Engineer based in
             Lahore, Pakistan. ~2.5 years shipping production MERN &amp; AI systems.
           </p>
         );
@@ -320,7 +329,7 @@ const PlaygroundTerminal = () => {
       case "theme": {
         const want = arg.toLowerCase();
         if (want !== "dark" && want !== "light") {
-          push("output", <p className="text-amber-400">usage: theme &lt;dark|light&gt;</p>);
+          push("output", <p className={C.amber}>usage: theme &lt;dark|light&gt;</p>);
           break;
         }
         if (want === mode) {
@@ -340,7 +349,7 @@ const PlaygroundTerminal = () => {
         if (!path) {
           push(
             "output",
-            <p className="text-amber-400">
+            <p className={C.amber}>
               Unknown page "{arg}". Try: {Object.keys(ROUTES).join(", ")}
             </p>
           );
@@ -355,7 +364,7 @@ const PlaygroundTerminal = () => {
         push(
           "output",
           <p>
-            📄 Say hi at <span className="text-green-400">{myWorkEmail}</span> and I'll send a copy straight over.
+            📄 Say hi at <span className={C.green}>{myWorkEmail}</span> and I'll send a copy straight over.
           </p>
         );
         break;
@@ -375,16 +384,16 @@ const PlaygroundTerminal = () => {
       case "cat": {
         const file = arg.trim();
         if (!file) {
-          push("output", <p className="text-amber-400">usage: cat &lt;file&gt;</p>);
+          push("output", <p className={C.amber}>usage: cat &lt;file&gt;</p>);
         } else if (file === HIDDEN_FILE) {
           push(
             "output",
-            <p className="text-violet-400">🔒 nothing to see here. unless you know the magic words (try: sudo hire-me)</p>
+            <p className={C.violet}>🔒 nothing to see here. unless you know the magic words (try: sudo hire-me)</p>
           );
         } else if (FILES[file]) {
           push("output", FILES[file]());
         } else {
-          push("output", <p className="text-red-400">cat: {file}: No such file or directory</p>);
+          push("output", <p className={C.red}>cat: {file}: No such file or directory</p>);
         }
         break;
       }
@@ -424,10 +433,10 @@ const PlaygroundTerminal = () => {
 
       case "sudo":
         if (normalize(arg) === "hireme") {
-          push("output", <p className="text-green-400">Permission granted. Redirecting to /contact...</p>);
+          push("output", <p className={C.green}>Permission granted. Redirecting to /contact...</p>);
           setTimeout(() => navigate("/contact"), 500);
         } else {
-          push("output", <p className="text-red-400">Nice try. This incident will be reported. 🚓</p>);
+          push("output", <p className={C.red}>Nice try. This incident will be reported. 🚓</p>);
         }
         break;
 
@@ -435,8 +444,8 @@ const PlaygroundTerminal = () => {
         push(
           "output",
           <p>
-            command not found: <span className="text-red-400">{cmd}</span> — type{" "}
-            <span className="text-green-400">help</span> to see available commands.
+            command not found: <span className={C.red}>{cmd}</span> — type{" "}
+            <span className={C.green}>help</span> to see available commands.
           </p>
         );
     }
@@ -497,11 +506,12 @@ const PlaygroundTerminal = () => {
 
   return (
     <div
-      className="rounded-xl overflow-hidden border border-neutral-800 shadow-2xl bg-[#0d0f12] text-[#d4d4d4]"
+      className="rounded-xl overflow-hidden border border-neutral-800 shadow-2xl bg-neutral-900"
+      style={{ color: "var(--text-base)" }}
       onClick={() => inputRef.current?.focus()}
     >
       {/* Title bar */}
-      <div className="flex items-center gap-2 px-4 py-3 bg-[#16181c] border-b border-neutral-800">
+      <div className="flex items-center gap-2 px-4 py-3 bg-neutral-800 border-b border-neutral-700">
         <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
         <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
         <span className="w-3 h-3 rounded-full bg-[#28c840]" />
@@ -522,19 +532,19 @@ const PlaygroundTerminal = () => {
           >
             {line.kind === "input" ? (
               <p className="flex gap-2">
-                <span className="text-green-400 shrink-0">fahad@portfolio</span>
+                <span className={`${C.green} shrink-0`}>fahad@portfolio</span>
                 <span className="text-neutral-600 shrink-0">~$</span>
                 <span>{line.content}</span>
               </p>
             ) : (
-              <div className="text-neutral-300 pl-0">{line.content}</div>
+              <div className="text-neutral-400 pl-0">{line.content}</div>
             )}
           </motion.div>
         ))}
 
         {/* Live input line */}
         <form onSubmit={handleSubmit} className="flex items-center gap-2">
-          <span className="text-green-400 shrink-0">fahad@portfolio</span>
+          <span className={`${C.green} shrink-0`}>fahad@portfolio</span>
           <span className="text-neutral-600 shrink-0">~$</span>
           <input
             ref={inputRef}
@@ -544,7 +554,8 @@ const PlaygroundTerminal = () => {
             onKeyDown={handleKeyDown}
             spellCheck={false}
             autoComplete="off"
-            className="flex-1 bg-transparent outline-none border-none font-mono text-sm text-[#d4d4d4] caret-green-400"
+            className="flex-1 bg-transparent outline-none border-none font-mono text-sm caret-green-600 dark:caret-green-400"
+            style={{ color: "var(--text-base)" }}
             aria-label="Terminal input"
           />
         </form>
