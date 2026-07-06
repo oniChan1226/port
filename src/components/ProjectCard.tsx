@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Project } from "../data/ProjectsData";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion, useMotionValue, useTransform } from "motion/react";
+import { FeaturedBadge, StatusBadge, TagBadge } from "./ProjectBadges";
 
 interface ProjectCardProps {
   project: Project;
@@ -9,9 +10,6 @@ interface ProjectCardProps {
 const ProjectCard = ({ project }: ProjectCardProps) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 });
   const glowX = useTransform(x, [-0.5, 0.5], ["0%", "100%"]);
   const glowY = useTransform(y, [-0.5, 0.5], ["0%", "100%"]);
 
@@ -30,8 +28,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     <motion.div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 800 }}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className="relative"
     >
@@ -52,37 +49,32 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       >
         <div>
           {project.src ? (
-            <video src={project.src} autoPlay loop muted playsInline preload="metadata" />
+            <video
+              src={project.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              className="w-full h-40 object-cover"
+            />
           ) : project.images?.length ? (
             <div className="relative w-full h-40 overflow-hidden">
               <img
                 src={project.images[0]}
                 alt={project.title}
-                className="w-full h-full object-cover object-top"
+                draggable={false}
+                decoding="async"
+                className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
               />
-              {project.status === "live" && (
-                <span className="absolute top-2 right-2 text-xs font-semibold px-3 py-1 rounded-full bg-green-100 border border-green-300 text-green-700 dark:bg-green-900/40 dark:border-green-700/50 dark:text-green-400">
-                  Live
-                </span>
-              )}
-              {project.status === "in-development" && (
-                <span className="absolute top-2 right-2 text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-700 dark:bg-amber-900/40 dark:border-amber-700/50 dark:text-amber-400">
-                  In Development
-                </span>
-              )}
+              <div className="absolute top-2 left-2 right-2 flex items-center justify-between gap-2">
+                {project.featured ? <FeaturedBadge /> : <span />}
+                <StatusBadge status={project.status} />
+              </div>
             </div>
           ) : (
             <div className="w-full h-40 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-800 flex items-center justify-center">
-              {project.status === "live" && (
-                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 border border-green-300 text-green-700 dark:bg-green-900/40 dark:border-green-700/50 dark:text-green-400">
-                  Live
-                </span>
-              )}
-              {project.status === "in-development" && (
-                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-700 dark:bg-amber-900/40 dark:border-amber-700/50 dark:text-amber-400">
-                  In Development
-                </span>
-              )}
+              <StatusBadge status={project.status} />
             </div>
           )}
         </div>
@@ -93,9 +85,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               {project.description}
             </h6>
           </div>
-          <h3 className="text-xs lg:text-sm font-semibold text-right rounded-lg border border-neutral-700 px-2 py-1 whitespace-nowrap">
-            {project.tag}
-          </h3>
+          <TagBadge tag={project.tag} className="text-right" />
         </div>
       </Link>
     </motion.div>

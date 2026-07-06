@@ -46,7 +46,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ Icon, title, description, tag
     >
       <div className="flex items-center justify-start space-x-2">
         <motion.div
-          animate={{ y: [0, -4, 0] }}
+          animate={{ y: [0, -4, 0] }}se 
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           className="p-3 bg-neutral-800/80 rounded-full"
         >

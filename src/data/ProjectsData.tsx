@@ -135,11 +135,28 @@ export interface Project {
   demoLink: string;
   sourceLink: string;
   status?: "live" | "in-development";
+  featured?: boolean;
 }
 
 export const myProjects: Project[] = [
   {
     _id: 0,
+    slug: "jobjen",
+    title: "JobJen",
+    description:
+      "AI technical-interview platform I helped scale from 50 to 7,000+ users as a core engineer at Ragzon Solutions.",
+    tag: "AI Platform",
+    src: "",
+    images: ["/projects/jobjen-cover.png"],
+    timestamps: "Sep 2025 – Present",
+    markdown: jobJenMarkdown,
+    demoLink: "https://jobjen.com",
+    sourceLink: "",
+    status: "live",
+    featured: true,
+  },
+  {
+    _id: 1,
     slug: "forge",
     title: "Forge",
     description:
@@ -158,7 +175,7 @@ export const myProjects: Project[] = [
     status: "live",
   },
   {
-    _id: 1,
+    _id: 2,
     slug: "ai-resume-matcher",
     title: "AI Resume Matcher",
     description:
@@ -172,7 +189,7 @@ export const myProjects: Project[] = [
     status: "in-development",
   },
   {
-    _id: 2,
+    _id: 3,
     slug: "skill-nexus",
     title: "Skill Nexus",
     description:
@@ -185,7 +202,7 @@ export const myProjects: Project[] = [
     sourceLink: "",
   },
   {
-    _id: 3,
+    _id: 4,
     slug: "alyonus",
     title: "Alyonus",
     description:
@@ -196,20 +213,5 @@ export const myProjects: Project[] = [
     markdown: alyonusMarkdown,
     demoLink: "https://medical-three-gamma.vercel.app/",
     sourceLink: "",
-  },
-  {
-    _id: 4,
-    slug: "jobjen",
-    title: "JobJen",
-    description:
-      "AI technical-interview platform I helped scale from 50 to 7,000+ users as a core engineer at Ragzon Solutions.",
-    tag: "AI Platform",
-    src: "",
-    images: ["/projects/jobjen-cover.png"],
-    timestamps: "Sep 2025 – Present",
-    markdown: jobJenMarkdown,
-    demoLink: "https://jobjen.com",
-    sourceLink: "",
-    status: "live",
   },
 ];
