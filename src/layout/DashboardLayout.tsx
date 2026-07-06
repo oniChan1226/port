@@ -76,7 +76,7 @@ const DashboardLayout = () => {
 
       {/* Sidebar */}
       <div
-        className={`hidden lg:block ${collapsed ? "w-20" : "w-64"} h-screen fixed bg-primary px-2 pt-8 border-r border-neutral-700 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 overflow-y-auto overflow-x-hidden z-10 transition-[width] duration-300 ease-in-out`}
+        className={`hidden lg:block ${collapsed ? "w-20" : "w-64"} h-screen fixed bg-primary px-2 pt-6 border-r border-neutral-700 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 overflow-y-auto overflow-x-hidden z-10 transition-[width] duration-300 ease-in-out`}
       >
         <Sidebar collapsed={collapsed} />
       </div>

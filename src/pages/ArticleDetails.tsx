@@ -12,26 +12,25 @@ import BackTo from "../components/BackTo";
 
 const ArticleDetails = () => {
   const id = useParams().id;
-
   const articleId = Number(id);
-  if (isNaN(articleId)) {
-    return <SomethingWentWrong />;
-  }
 
-  const { data, isLoading, error } = useQuery<IArticle>({
+  const { data, isLoading } = useQuery<IArticle>({
     queryKey: ["devBlog", articleId],
     queryFn: () => fetchBlog(articleId),
     enabled: !isNaN(articleId),
   });
 
-  console.log(data);
+  if (isNaN(articleId)) {
+    return <SomethingWentWrong />;
+  }
+
   return (
     <div className="space-y-8">
       <BackTo to="/articles" text="All Articles" />
       {isLoading || !data ? (
         <div>Loading...</div>
       ) : (
-        <article className=" porse-neutral space-y-5 hyphens-auto">
+        <article className="space-y-5 hyphens-auto">
           <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide" style={{ color: "var(--text-base)" }}>
             {data?.title}
           </h2>

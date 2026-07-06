@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { AnimatePresence, motion, useInView, useMotionValue, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useInView, useMotionValue, useSpring, useTransform, type Variants } from "motion/react";
 import {
   ALL_SKILLS, CATEGORIES, CATEGORY_COLORS, PROFICIENCY_LABEL,
   type Skill, type SkillCategory,
@@ -137,11 +137,11 @@ const Playground = () => {
     ? ALL_SKILLS
     : ALL_SKILLS.filter(s => s.category === activeCategory);
 
-  const stagger = {
+  const stagger: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.05 } },
   };
-  const fadeUp = {
+  const fadeUp: Variants = {
     hidden: { opacity: 0, y: 16 },
     show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
     exit: { opacity: 0, y: -8, transition: { duration: 0.2 } },

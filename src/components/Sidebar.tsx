@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import pfp from "../assets/pfp.png";
 import { ExternalLinksData, NavlinksData } from "../data/NavLinksData";
-import { ExternalLink, Moon, Search, Sun } from "lucide-react";
+import { Moon, Search, Sun } from "lucide-react";
 import { useSearchCommand } from "../context/SearchCommandContext";
 import { useTheme } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "motion/react";
@@ -102,14 +102,14 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
       )}
 
       {/* Navigation Links */}
-      <nav className="space-y-1 pt-8 font-semibold text-sm flex-1 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 overflow-y-auto">
+      <nav className="space-y-0.5 pt-6 font-semibold text-sm flex-1 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-800 overflow-y-auto">
         {NavlinksData.map((group, i) => (
           <div key={group.group + i}>
             {group.group !== "Main" && !collapsed && (
-              <h6 className="pl-4 text-neutral-500 my-4 font-medium truncate">{group.group}</h6>
+              <h6 className="pl-4 text-neutral-500 my-3 font-medium truncate">{group.group}</h6>
             )}
             {group.group !== "Main" && collapsed && (
-              <div className="my-4 mx-3 border-t border-neutral-800" />
+              <div className="my-3 mx-3 border-t border-neutral-800" />
             )}
             {group.links.map((link) => {
               const isActive =
@@ -123,7 +123,7 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
                   to={link.href}
                   title={collapsed ? link.label : undefined}
                   className={() =>
-                    `relative flex items-center gap-2 py-3 rounded-md transition-colors duration-200 ${
+                    `relative flex items-center gap-2 py-2.5 rounded-md transition-colors duration-200 ${
                       collapsed ? "justify-center px-2" : "justify-between px-4"
                     } ${
                       isActive ? "text-[var(--text-base)]" : "text-neutral-500 hover:text-[var(--text-base)]"
@@ -157,24 +157,23 @@ const Sidebar = ({ collapsed = false }: SidebarProps) => {
           </div>
         ))}
 
-        {ExternalLinksData.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={collapsed ? link.label : undefined}
-            className={`flex items-center gap-2 py-3 rounded-md transition-colors duration-200 text-neutral-500 hover:text-[var(--text-base)] ${
-              collapsed ? "justify-center px-2" : "justify-between px-4"
-            }`}
-          >
-            <div className="flex items-center gap-2 min-w-0">
-              {link.icon}
-              {!collapsed && <p className="truncate">{link.label}</p>}
-            </div>
-            {!collapsed && <ExternalLink size={15} className="flex-shrink-0" />}
-          </a>
-        ))}
+        {/* External profile links — compact icon row instead of stacked full-width rows */}
+        <div className={`my-3 ${collapsed ? "mx-3 border-t border-neutral-800" : "border-t border-neutral-800 pt-3"}`}>
+          <div className={`flex items-center gap-1 ${collapsed ? "flex-col mt-3" : "justify-center"}`}>
+            {ExternalLinksData.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={link.label}
+                className="p-2 rounded-md transition-colors duration-200 text-neutral-500 hover:text-[var(--text-base)] hover:bg-neutral-800"
+              >
+                {link.icon}
+              </a>
+            ))}
+          </div>
+        </div>
       </nav>
 
       {/* Search Command Bar */}

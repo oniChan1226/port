@@ -2,7 +2,7 @@ import {
   SiNextdotjs, SiReact, SiTypescript, SiTailwindcss, SiRedux,
   SiExpress, SiMongodb, SiPostgresql, SiRedis, SiSupabase,
   SiFirebase, SiPrisma, SiSocketdotio,
-  SiDocker, SiGit, SiGithub, SiPosthog, SiVercel, SiPostman, SiOpenai, SiJest,
+  SiDocker, SiGithub, SiPosthog, SiVercel, SiPostman, SiOpenai, SiJest,
   SiFigma,
 } from "react-icons/si";
 import { FaNodeJs, FaAws } from "react-icons/fa";

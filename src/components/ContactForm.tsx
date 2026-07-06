@@ -16,7 +16,6 @@ const ContactForm = () => {
   const sendMessage = async (data: ContactFormType) => {
     console.log(data);
   };
-  console.log(isDirty);
   return (
     <div className="bg-primary border border-neutral-800 rounded-md p-5">
       <div>
@@ -36,6 +35,9 @@ const ContactForm = () => {
               required
               className="border border-neutral-800/80 w-full rounded-md px-3 py-1 text-sm focus:outline-none focus:border-neutral-800 focus:shadow-xs shadow-neutral-800 "
             />
+            {errors.name && (
+              <p className="text-xs text-red-500">{errors.name.message}</p>
+            )}
           </div>
           <div className="flex flex-col items-start w-full space-y-1">
             <label htmlFor="email">Email</label>
@@ -46,6 +48,9 @@ const ContactForm = () => {
               required
               className="border border-neutral-800/80 w-full rounded-md px-3 py-1 text-sm focus:outline-none focus:border-neutral-800 focus:shadow-xs shadow-neutral-800 "
             />
+            {errors.email && (
+              <p className="text-xs text-red-500">{errors.email.message}</p>
+            )}
           </div>
           <div className="flex flex-col items-start space-y-1 lg:col-span-2">
             <label htmlFor="message">Message</label>
@@ -55,6 +60,9 @@ const ContactForm = () => {
               required
               className=" border border-neutral-800/80 w-full rounded-md px-3 py-1 text-sm focus:outline-none focus:border-neutral-800 focus:shadow-xs shadow-neutral-800 min-h-36 "
             ></textarea>
+            {errors.message && (
+              <p className="text-xs text-red-500">{errors.message.message}</p>
+            )}
           </div>
         </div>
         <button

@@ -11,7 +11,7 @@ import JoinReader from "../components/JoinReader.tsx";
 import { useQuery } from "@tanstack/react-query";
 import type { ArticleList } from "../interfaces/Article.ts";
 import { fetchBlogs } from "../api/fetchBlogs.ts";
-import { motion, useInView } from "motion/react";
+import { motion, useInView, type Variants } from "motion/react";
 
 const STATS = [
   {
@@ -90,12 +90,12 @@ function StatCard({
   );
 }
 
-const stagger = {
+const stagger: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
 };
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };

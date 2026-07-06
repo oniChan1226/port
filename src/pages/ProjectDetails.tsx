@@ -1,6 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { myProjects, skillNexusMarkdown } from "../data/ProjectsData";
+import { myProjects } from "../data/ProjectsData";
 import { Briefcase, Flame } from "lucide-react";
 import BackTo from "../components/BackTo";
 import DemoCard from "../components/DemoCard";

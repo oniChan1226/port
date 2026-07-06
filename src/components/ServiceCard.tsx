@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import Tag from "./Tag";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion, useMotionValue, useSpring, useTransform, type Variants } from "motion/react";
 
 interface ServiceCardProps {
   Icon: IconType;
@@ -10,7 +10,7 @@ interface ServiceCardProps {
   cta: string;
 }
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
@@ -46,7 +46,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ Icon, title, description, tag
     >
       <div className="flex items-center justify-start space-x-2">
         <motion.div
-          animate={{ y: [0, -4, 0] }}se 
+          animate={{ y: [0, -4, 0] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           className="p-3 bg-neutral-800/80 rounded-full"
         >
