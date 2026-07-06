@@ -12,6 +12,7 @@ import {
   SiSupabase,
   SiFirebase,
   SiPrisma,
+  SiDrizzle,
   SiFigma,
   SiCanva,
   SiDocker,
@@ -61,7 +62,7 @@ export const myFrontEndTechStack: TechItem[] = [
     icon: SiTypescript,
   },
   {
-    name: "Redux",
+    name: "Redux Toolkit",
     description: "Predictable state container for JavaScript apps",
     categories: ["State Management", "React"],
     website: "https://redux.js.org/",
@@ -146,6 +147,13 @@ export const myBackendTechStack: TechItem[] = [
     categories: ["ORM", "TypeScript", "SQL"],
     website: "https://www.prisma.io/",
     icon: SiPrisma,
+  },
+  {
+    name: "Drizzle",
+    description: "Lightweight, type-safe SQL ORM for TypeScript",
+    categories: ["ORM", "TypeScript", "SQL"],
+    website: "https://orm.drizzle.team/",
+    icon: SiDrizzle,
   },
 ];
 

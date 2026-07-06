@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import PlaygroundTerminal from "../components/PlaygroundTerminal";
 import RequestFlowPlayground from "../components/RequestFlowPlayground";
+import CursorConstellation from "../components/CursorConstellation";
 import PageTitle from "../components/PageTitle";
 
 const EXPERIENCES = [
@@ -26,6 +27,17 @@ const EXPERIENCES = [
       </>
     ),
     Component: RequestFlowPlayground,
+  },
+  {
+    id: "constellation",
+    label: "Cursor Constellation",
+    tagline: (
+      <>
+        No purpose, no lesson — just a night sky that reacts to you. Move your cursor to trail stars, click to
+        burst one apart, and see what happens if you click fast enough.
+      </>
+    ),
+    Component: CursorConstellation,
   },
 ];
 

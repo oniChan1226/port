@@ -27,7 +27,7 @@ const About = () => {
         className="flex items-center gap-x-1 mb-4 text-sm font-semibold text-neutral-500"
       >
         <MapPin size={15} />
-        <p>Based in Pakistan</p>
+        <p>Based in Lahore, Pakistan · Open to remote work globally</p>
       </motion.div>
       {/* about me */}
       <article className="flex flex-col lg:flex-row justify-center items-center lg:gap-16 ">

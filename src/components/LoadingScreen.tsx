@@ -92,7 +92,7 @@ export default function LoadingScreen() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.95 }}
             >
-              Full-Stack Developer
+              Full-Stack Software Engineer
             </motion.p>
 
             {/* Dot separator */}
@@ -145,7 +145,7 @@ export default function LoadingScreen() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.1 }}
           >
-            2025 · Karachi, PK
+            2025 · Lahore, PK
           </motion.span>
 
           {/* ── Corner bracket accents ── */}

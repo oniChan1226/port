@@ -1,7 +1,7 @@
 import {
   SiNextdotjs, SiReact, SiTypescript, SiTailwindcss, SiRedux,
   SiExpress, SiMongodb, SiPostgresql, SiRedis, SiSupabase,
-  SiFirebase, SiPrisma, SiSocketdotio,
+  SiFirebase, SiPrisma, SiDrizzle, SiSocketdotio,
   SiDocker, SiGithub, SiPosthog, SiVercel, SiPostman, SiOpenai, SiJest,
   SiFigma,
 } from "react-icons/si";
@@ -9,7 +9,7 @@ import { FaNodeJs, FaAws } from "react-icons/fa";
 import { GiBull } from "react-icons/gi";
 import { VscVscode } from "react-icons/vsc";
 import { type IconType } from "react-icons";
-import { Brain, Mic } from "lucide-react";
+import { Brain, Mic, KeyRound } from "lucide-react";
 
 export type ProficiencyLevel = 1 | 2 | 3 | 4 | 5;
 
@@ -42,7 +42,7 @@ export const ALL_SKILLS: Skill[] = [
   { name: "React",        icon: SiReact,      category: "Frontend",  proficiency: 5, description: "Primary UI library. Built SPAs, dashboards, and real-time apps with complex state." },
   { name: "Next.js",      icon: SiNextdotjs,  category: "Frontend",  proficiency: 4, description: "Full-stack React framework. Used for SSR, routing, and API routes." },
   { name: "TypeScript",   icon: SiTypescript, category: "Frontend",  proficiency: 5, description: "Default language across all production projects — strict typing, generics, and ORMs." },
-  { name: "Redux",        icon: SiRedux,      category: "Frontend",  proficiency: 3, description: "Predictable state management for complex client-side data flows." },
+  { name: "Redux Toolkit",icon: SiRedux,      category: "Frontend",  proficiency: 3, description: "Predictable state management for complex client-side data flows." },
   { name: "Tailwind CSS", icon: SiTailwindcss,category: "Frontend",  proficiency: 5, description: "Utility-first styling in every project. Deep familiarity with v3 and v4." },
 
   // ── Backend ──
@@ -50,7 +50,8 @@ export const ALL_SKILLS: Skill[] = [
   { name: "Express.js",   icon: SiExpress,    category: "Backend",   proficiency: 5, description: "Primary API framework. Modular routing, middleware, and auth flows." },
   { name: "Socket.IO",    icon: SiSocketdotio,category: "Backend",   proficiency: 4, description: "Real-time Pub/Sub across multiple server instances in production at Ragzon." },
   { name: "BullMQ",       icon: GiBull,       category: "Backend",   proficiency: 4, description: "Async job queues and batch processing powered by Redis in production." },
-  { name: "Prisma",       icon: SiPrisma,     category: "Backend",   proficiency: 3, description: "Type-safe ORM for PostgreSQL — schema-first, migrations, and relation queries." },
+  { name: "Prisma",       icon: SiPrisma,     category: "Backend",   proficiency: 3, description: "Type-safe ORM for PostgreSQL, schema-first, migrations, and relation queries." },
+  { name: "Drizzle",      icon: SiDrizzle,    category: "Backend",   proficiency: 3, description: "Lightweight, type-safe SQL ORM used as a Prisma alternative on newer projects." },
 
   // ── Database ──
   { name: "MongoDB",      icon: SiMongodb,    category: "Database",  proficiency: 5, description: "Advanced aggregation pipelines and compound indexing. Cut API times from 8s → 1s." },
@@ -71,6 +72,7 @@ export const ALL_SKILLS: Skill[] = [
   { name: "AWS",          icon: FaAws,        category: "DevOps",    proficiency: 3, description: "EC2, S3, and basic IAM for cloud infrastructure." },
   { name: "Git / GitHub", icon: SiGithub,     category: "DevOps",    proficiency: 5, description: "Daily driver. PR-based workflows, CI/CD pipelines, and branch strategies." },
   { name: "Jest / Vitest",icon: SiJest,       category: "DevOps",    proficiency: 3, description: "Unit and integration tests for backend services and utility functions." },
+  { name: "OAuth 2.0 / JWT", icon: KeyRound as unknown as IconType, category: "DevOps", proficiency: 4, description: "Secure REST API authentication and authorization built and shipped in production." },
 
   // ── Tools ──
   { name: "VS Code",      icon: VscVscode,    category: "Tools",     proficiency: 5, description: "Primary editor. Deep extension ecosystem, custom snippets, and debugging." },

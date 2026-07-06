@@ -70,7 +70,7 @@ Shell       fahad-sh 1.0
 Theme       ${mode}
 Role        Full-Stack AI Engineer
 Location    Lahore, Pakistan
-Experience  2.5+ years
+Experience  2.7 years
 Stack       React · Node.js · MongoDB · Socket.IO
 Focus       AI/LLM integration · real-time systems
 Currently   JobJen @ Ragzon Solutions
@@ -184,7 +184,7 @@ const PlaygroundTerminal = () => {
   // ── Renderers shared between direct commands and `cat <file>` ─────────────
   const renderAbout = () => (
     <p>
-      Full-stack engineer with an AI-first workflow — core engineer on JobJen, an AI interview platform
+      Full-stack engineer with an AI-first workflow, core engineer on JobJen, an AI interview platform
       that scaled from 50 to 7,000+ users. I own things end-to-end: scoring pipelines, real-time
       infrastructure, and the occasional 8-second API I turn into a 1-second one.
     </p>
@@ -252,7 +252,7 @@ const PlaygroundTerminal = () => {
   const renderStats = () => (
     <pre className="whitespace-pre-wrap font-mono">{`7,000+   users scaled (from 50 on JobJen)
 8x       faster APIs (8s cut to <1s)
-2.5+     years shipping production code
+2.7      years shipping production code
 2        solo products built & launched`}</pre>
   );
 
@@ -296,8 +296,8 @@ const PlaygroundTerminal = () => {
         push(
           "output",
           <p>
-            <span className={`${C.green} font-semibold`}>Fahad Khan</span> — Full-Stack AI Engineer based in
-            Lahore, Pakistan. ~2.5 years shipping production MERN &amp; AI systems.
+            <span className={`${C.green} font-semibold`}>Fahad Khan</span>, Full-Stack Software Engineer based in
+            Lahore, Pakistan and open to remote work globally. 2.7 years shipping production MERN &amp; AI systems.
           </p>
         );
         break;

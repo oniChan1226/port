@@ -27,9 +27,9 @@ const STATS = [
     detail: "8s response cut to <1s",
   },
   {
-    value: 2.5,
+    value: 2.7,
     decimals: 1,
-    suffix: "+",
+    suffix: "",
     label: "Yrs Experience",
     detail: "Production MERN & AI systems",
   },
