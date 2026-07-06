@@ -21,6 +21,15 @@ const ROUTES: Record<string, string> = {
   contact: "/contact",
 };
 
+const COMMAND_NAMES = [
+  "help", "whoami", "about", "skills", "projects", "experience", "stats",
+  "contact", "theme", "open", "goto", "cd", "resume", "date", "echo",
+  "clear", "sudo", "ls", "cat", "history", "neofetch", "matrix",
+];
+
+const FILE_NAMES = ["about.md", "skills.json", "projects.log", "experience.txt", "contact.card", "stats.txt"];
+const HIDDEN_FILE = ".secrets";
+
 const HELP_TEXT = `Available commands:
 
   help                 show this list
@@ -34,10 +43,29 @@ const HELP_TEXT = `Available commands:
   theme <dark|light>   actually switches the site's theme
   open <page>          actually navigates there (try: open projects)
   resume               how to get a copy
+  neofetch             system info, dev-style
+  ls / cat <file>      poke around like it's a filesystem
+  history              your past commands
+  matrix               don't
   date                 current date & time
   echo <text>          repeats text back
   clear                clear the terminal
-  sudo hire-me         try it`;
+  sudo hire-me         try it
+
+  Tab completes commands. ↑/↓ recall history.`;
+
+const NEOFETCH = (mode: string) => `fahad@portfolio
+───────────────
+OS          PortfolioOS (React + Vite)
+Shell       fahad-sh 1.0
+Theme       ${mode}
+Role        Full-Stack AI Engineer
+Location    Lahore, Pakistan
+Experience  2.5+ years
+Stack       React · Node.js · MongoDB · Socket.IO
+Focus       AI/LLM integration · real-time systems
+Currently   JobJen @ Ragzon Solutions
+Status      Open to interesting problems`;
 
 type Line = { id: number; kind: "input" | "output"; content: ReactNode };
 
@@ -46,6 +74,69 @@ const nextId = () => idCounter++;
 
 function normalize(s: string) {
   return s.toLowerCase().replace(/[^a-z]/g, "");
+}
+
+const HISTORY_KEY = "playground-terminal-history";
+
+function loadHistory(): string[] {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    return raw ? (JSON.parse(raw) as string[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+// ── Matrix rain easter egg ───────────────────────────────────────────────────
+function MatrixRain() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+
+    const width = canvas.clientWidth;
+    const height = 160;
+    canvas.width = width;
+    canvas.height = height;
+
+    const fontSize = 14;
+    const columns = Math.floor(width / fontSize);
+    const drops = new Array(columns).fill(0);
+    const chars = "01アイウエオカキクケコサシスセソ";
+
+    let frame = 0;
+    let stopped = false;
+
+    const draw = () => {
+      if (stopped) return;
+      ctx.fillStyle = "rgba(13,15,18,0.15)";
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "#4ade80";
+      ctx.font = `${fontSize}px monospace`;
+      drops.forEach((y, i) => {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(char, i * fontSize, y * fontSize);
+        drops[i] = y * fontSize > height && Math.random() > 0.975 ? 0 : y + 1;
+      });
+      frame = requestAnimationFrame(draw);
+    };
+    draw();
+
+    const timeout = setTimeout(() => {
+      stopped = true;
+      cancelAnimationFrame(frame);
+    }, 4000);
+
+    return () => {
+      stopped = true;
+      cancelAnimationFrame(frame);
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="w-full rounded block" style={{ height: 160 }} />;
 }
 
 const PlaygroundTerminal = () => {
@@ -64,7 +155,7 @@ const PlaygroundTerminal = () => {
     },
   ]);
   const [input, setInput] = useState("");
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<string[]>(() => loadHistory());
   const [historyIndex, setHistoryIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -73,13 +164,114 @@ const PlaygroundTerminal = () => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [lines]);
 
+  useEffect(() => {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(-50)));
+  }, [history]);
+
   const push = (kind: Line["kind"], content: ReactNode) => {
     setLines((prev) => [...prev, { id: nextId(), kind, content }]);
   };
 
+  // ── Renderers shared between direct commands and `cat <file>` ─────────────
+  const renderAbout = () => (
+    <p>
+      Full-stack engineer with an AI-first workflow — core engineer on JobJen, an AI interview platform
+      that scaled from 50 to 7,000+ users. I own things end-to-end: scoring pipelines, real-time
+      infrastructure, and the occasional 8-second API I turn into a 1-second one.
+    </p>
+  );
+
+  const renderSkills = (arg: string): ReactNode => {
+    const wanted = arg ? normalize(arg) : "";
+    const category = wanted
+      ? CATEGORIES.find((c) => c !== "All" && normalize(c).includes(wanted))
+      : undefined;
+    if (arg && !category) {
+      return (
+        <p className="text-amber-400">
+          No category matches "{arg}". Try one of: {CATEGORIES.filter((c) => c !== "All").join(", ")}
+        </p>
+      );
+    }
+    const list = category ? ALL_SKILLS.filter((s) => s.category === category) : ALL_SKILLS;
+    return (
+      <div className="font-mono">
+        {category && <p className="text-neutral-500 mb-1">category: {category}</p>}
+        {list.map((s) => (
+          <p key={s.name}>
+            <span className="inline-block w-40 text-[var(--text-base)]">{s.name}</span>
+            <span className="text-green-400">{"●".repeat(s.proficiency)}</span>
+            <span className="text-neutral-700">{"○".repeat(5 - s.proficiency)}</span>
+            <span className="text-neutral-500 ml-2">{PROFICIENCY_LABEL[s.proficiency]}</span>
+          </p>
+        ))}
+      </div>
+    );
+  };
+
+  const renderProjects = () => (
+    <div className="font-mono">
+      {myProjects.map((p) => (
+        <p key={p.slug}>
+          <span className="inline-block w-40 text-[var(--text-base)]">{p.title}</span>
+          {p.status && (
+            <span className={p.status === "live" ? "text-green-400" : "text-amber-400"}>
+              [{p.status === "live" ? "LIVE" : "BUILDING"}]
+            </span>
+          )}
+          {p.featured && <span className="text-violet-400 ml-2">★ featured</span>}
+        </p>
+      ))}
+      <p className="text-neutral-500 mt-1">→ open projects</p>
+    </div>
+  );
+
+  const renderExperience = () => (
+    <div className="space-y-2">
+      {myExperience.map((exp) => (
+        <div key={exp._id}>
+          <p className="text-[var(--text-base)] font-semibold">
+            {exp.companyName} <span className="text-neutral-500 font-normal">— {exp.designation}</span>
+          </p>
+          <p className="text-neutral-500 text-xs">{exp.duration.from} – {exp.duration.to} · {exp.location}</p>
+          <p>{exp.brief}</p>
+        </div>
+      ))}
+    </div>
+  );
+
+  const renderStats = () => (
+    <pre className="whitespace-pre-wrap font-mono">{`7,000+   users scaled (from 50 on JobJen)
+8x       faster APIs (8s cut to <1s)
+2.5+     years shipping production code
+2        solo products built & launched`}</pre>
+  );
+
+  const renderContact = () => (
+    <p>
+      Email: <span className="text-green-400">{myWorkEmail}</span> · or just{" "}
+      <button
+        type="button"
+        className="text-sky-400 underline underline-offset-2"
+        onClick={() => navigate("/contact")}
+      >
+        open contact
+      </button>
+    </p>
+  );
+
+  const FILES: Record<string, () => ReactNode> = {
+    "about.md": renderAbout,
+    "skills.json": () => renderSkills(""),
+    "projects.log": renderProjects,
+    "experience.txt": renderExperience,
+    "contact.card": renderContact,
+    "stats.txt": renderStats,
+  };
+
   const runCommand = (raw: string) => {
     const trimmed = raw.trim();
-    push("input", trimmed || " ");
+    push("input", trimmed || " ");
     if (!trimmed) return;
 
     const [cmdRaw, ...args] = trimmed.split(/\s+/);
@@ -102,109 +294,27 @@ const PlaygroundTerminal = () => {
         break;
 
       case "about":
-        push(
-          "output",
-          <p>
-            Full-stack engineer with an AI-first workflow — core engineer on JobJen, an AI interview platform
-            that scaled from 50 to 7,000+ users. I own things end-to-end: scoring pipelines, real-time
-            infrastructure, and the occasional 8-second API I turn into a 1-second one.
-          </p>
-        );
+        push("output", renderAbout());
         break;
 
-      case "skills": {
-        const wanted = arg ? normalize(arg) : "";
-        const category = wanted
-          ? CATEGORIES.find((c) => c !== "All" && normalize(c).includes(wanted))
-          : undefined;
-        if (arg && !category) {
-          push(
-            "output",
-            <p className="text-amber-400">
-              No category matches "{arg}". Try one of: {CATEGORIES.filter((c) => c !== "All").join(", ")}
-            </p>
-          );
-          break;
-        }
-        const list = category ? ALL_SKILLS.filter((s) => s.category === category) : ALL_SKILLS;
-        push(
-          "output",
-          <div className="font-mono">
-            {category && <p className="text-neutral-500 mb-1">category: {category}</p>}
-            {list.map((s) => (
-              <p key={s.name}>
-                <span className="inline-block w-40 text-[var(--text-base)]">{s.name}</span>
-                <span className="text-green-400">{"●".repeat(s.proficiency)}</span>
-                <span className="text-neutral-700">{"○".repeat(5 - s.proficiency)}</span>
-                <span className="text-neutral-500 ml-2">{PROFICIENCY_LABEL[s.proficiency]}</span>
-              </p>
-            ))}
-          </div>
-        );
+      case "skills":
+        push("output", renderSkills(arg));
         break;
-      }
 
       case "projects":
-        push(
-          "output",
-          <div className="font-mono">
-            {myProjects.map((p) => (
-              <p key={p.slug}>
-                <span className="inline-block w-40 text-[var(--text-base)]">{p.title}</span>
-                {p.status && (
-                  <span className={p.status === "live" ? "text-green-400" : "text-amber-400"}>
-                    [{p.status === "live" ? "LIVE" : "BUILDING"}]
-                  </span>
-                )}
-                {p.featured && <span className="text-violet-400 ml-2">★ featured</span>}
-              </p>
-            ))}
-            <p className="text-neutral-500 mt-1">→ open projects</p>
-          </div>
-        );
+        push("output", renderProjects());
         break;
 
       case "experience":
-        push(
-          "output",
-          <div className="space-y-2">
-            {myExperience.map((exp) => (
-              <div key={exp._id}>
-                <p className="text-[var(--text-base)] font-semibold">
-                  {exp.companyName} <span className="text-neutral-500 font-normal">— {exp.designation}</span>
-                </p>
-                <p className="text-neutral-500 text-xs">{exp.duration.from} – {exp.duration.to} · {exp.location}</p>
-                <p>{exp.brief}</p>
-              </div>
-            ))}
-          </div>
-        );
+        push("output", renderExperience());
         break;
 
       case "stats":
-        push(
-          "output",
-          <pre className="whitespace-pre-wrap font-mono">{`7,000+   users scaled (from 50 on JobJen)
-8x       faster APIs (8s cut to <1s)
-2.5+     years shipping production code
-2        solo products built & launched`}</pre>
-        );
+        push("output", renderStats());
         break;
 
       case "contact":
-        push(
-          "output",
-          <p>
-            Email: <span className="text-green-400">{myWorkEmail}</span> · or just{" "}
-            <button
-              type="button"
-              className="text-sky-400 underline underline-offset-2"
-              onClick={() => navigate("/contact")}
-            >
-              open contact
-            </button>
-          </p>
-        );
+        push("output", renderContact());
         break;
 
       case "theme": {
@@ -250,12 +360,62 @@ const PlaygroundTerminal = () => {
         );
         break;
 
+      case "ls": {
+        const showHidden = arg === "-a";
+        push(
+          "output",
+          <p className="font-mono">
+            {FILE_NAMES.join("  ")}
+            {showHidden && <span className="text-neutral-600">  {HIDDEN_FILE}</span>}
+          </p>
+        );
+        break;
+      }
+
+      case "cat": {
+        const file = arg.trim();
+        if (!file) {
+          push("output", <p className="text-amber-400">usage: cat &lt;file&gt;</p>);
+        } else if (file === HIDDEN_FILE) {
+          push(
+            "output",
+            <p className="text-violet-400">🔒 nothing to see here. unless you know the magic words (try: sudo hire-me)</p>
+          );
+        } else if (FILES[file]) {
+          push("output", FILES[file]());
+        } else {
+          push("output", <p className="text-red-400">cat: {file}: No such file or directory</p>);
+        }
+        break;
+      }
+
+      case "history":
+        push(
+          "output",
+          history.length === 0 ? (
+            <p className="text-neutral-500">no history yet</p>
+          ) : (
+            <pre className="whitespace-pre-wrap font-mono">
+              {history.map((h, i) => `  ${i + 1}  ${h}`).join("\n")}
+            </pre>
+          )
+        );
+        break;
+
+      case "neofetch":
+        push("output", <pre className="whitespace-pre-wrap font-mono">{NEOFETCH(mode)}</pre>);
+        break;
+
+      case "matrix":
+        push("output", <MatrixRain />);
+        break;
+
       case "date":
         push("output", <p>{new Date().toString()}</p>);
         break;
 
       case "echo":
-        push("output", <p>{arg || " "}</p>);
+        push("output", <p>{arg || " "}</p>);
         break;
 
       case "clear":
@@ -307,6 +467,30 @@ const PlaygroundTerminal = () => {
       } else {
         setHistoryIndex(nextIndex);
         setInput(history[nextIndex]);
+      }
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+
+      const hasSpace = input.includes(" ");
+      if (!hasSpace) {
+        const matches = COMMAND_NAMES.filter((c) => c.startsWith(input.toLowerCase()));
+        if (matches.length === 1) {
+          setInput(matches[0] + " ");
+        } else if (matches.length > 1) {
+          push("output", <p className="text-neutral-500 font-mono">{matches.join("  ")}</p>);
+        }
+        return;
+      }
+
+      const [head, ...rest] = input.split(" ");
+      const partial = rest.join(" ").toLowerCase();
+      const pool = head === "cat" ? FILE_NAMES : head === "skills" ? CATEGORIES.filter((c) => c !== "All") : null;
+      if (!pool) return;
+      const matches = pool.filter((p) => normalize(p).startsWith(normalize(partial)));
+      if (matches.length === 1) {
+        setInput(`${head} ${matches[0]}`);
+      } else if (matches.length > 1) {
+        push("output", <p className="text-neutral-500 font-mono">{matches.join("  ")}</p>);
       }
     }
   };
